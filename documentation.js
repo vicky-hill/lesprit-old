@@ -58,6 +58,7 @@ const Languages
 
 const All
 // GET api/words
+// RESPONSE 
 
 const Single
 // GET api/words/:id

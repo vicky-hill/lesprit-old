@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     }, 
     languages: {
         type: Array,
-        default: [{native: 'english', foreign: 'spanish'}],
+        default: [{foreign: 'spanish', native: 'english'}],
         required: true
     }
 });
