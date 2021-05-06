@@ -5,6 +5,8 @@
 /* ===================================
    Routes
 =================================== */
+const Defaults
+// ERROR {msg: String}
 
 const Auth
 // POST api/user/register
@@ -25,6 +27,7 @@ const Lists
 // POST api/lists/:id
 // PUT api/lists/:id
 // DELETE api/lists/:id
+
 
 
 
@@ -58,19 +61,27 @@ const Languages
 
 const All
 // GET api/words
-// RESPONSE 
+// RESPONSE [{rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: {_id: MongoId, title: String}}]
+// ERROR {msg: String}
 
 const Single
 // GET api/words/:id
+// RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, dueDate: Date, user: MongoId, list: MongoId}
 
 const Save
 // POST api/words/:id
+// PAYLOAD {foreign: String, native: String, user: MongoId, list: MongoId}
+// RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: {_id: MongoId, title: String}}
 
 const Update
 // PUT api/words/:id
+// PAYLOAD {rating: Number || _id: MongoId || foreign: String || native: String || dueDate: Date || user: MongoId || list: MongoId}
+// RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: {_id: MongoId, title: String}
 
 const Delete
 // DELETE api/words/:id
+// RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, dueDate: Date, user: MongoId, list: MongoId}
+
 
 
 
@@ -80,15 +91,24 @@ const Delete
 
 const All
 // GET api/lists
+// RESPONSE [{_id: MongoId, user: MongoId, title: String, slug: String}]
 
 const Single
 // GET api/lists/:id
+// RESPONSE {_id: MongoId, user: MongoId, title: String, slug: String}
 
 const Save
 // POST api/lists/:id
+// PAYLOAD {title: String, user: MongoId}
+// RESPONSE {_id: MongoId, user: MongoId, title: String, slug: String}
+
 
 const Update
 // PUT api/lists/:id
+// PAYLOAD {title: String || user: MongoId}
+// RESPONSE {_id: MongoId, user: MongoId, title: String, slug: String}
+
 
 const Delete
 // DELETE api/lists/:id
+// RESPONSE {_id: MongoId, user: MongoId, title: String, slug: String}

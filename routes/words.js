@@ -14,6 +14,7 @@ router.get('/', protect, async (req, res) => {
         res.status(200).json(words);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
@@ -25,6 +26,7 @@ router.get('/review', protect, async (req, res) => {
         res.status(200).json(words);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
@@ -36,6 +38,7 @@ router.get('/:id', async (req, res) => {
         res.status(200).json(word);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
@@ -61,6 +64,7 @@ router.post('/', protect, async (req, res) => {
         res.status(201).json(word);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
@@ -82,19 +86,24 @@ router.put('/:id', async (req, res) => {
         res.status(200).json(word);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
 
 // DELETE api/words/:id  [Delete a word]
 router.delete('/:id', async (req, res) => {
-    const word = await Word.findByIdAndDelete(req.params.id);
+    try {
+        const word = await Word.findByIdAndDelete(req.params.id);
 
-    if(!word) {
-        return res.status(404).json({msg: "Word not found"});
+        if(!word) {
+            return res.status(404).json({msg: "Word not found"});
+        }
+    
+        res.status(200).json(word)
+    } catch (err) {
+        res.status(500).json({msg: 'Something went wrong'});
     }
-
-    res.status(200).json(word)
 })
 
 
@@ -114,6 +123,7 @@ router.put('/devtools/all', async (req, res) => {
         res.status(200).json(allWords);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 

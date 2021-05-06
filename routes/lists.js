@@ -11,6 +11,7 @@ router.get('/', protect, async (req, res) => {
         res.status(200).json(lists);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
@@ -22,6 +23,7 @@ router.get('/:id', async (req, res) => {
         res.status(200).json(list);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
@@ -38,6 +40,7 @@ router.post('/', protect, async (req, res) => {
         res.status(201).json(list);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
@@ -54,20 +57,26 @@ router.put('/:id', async (req, res) => {
         res.status(200).json(list);
     } catch (err) {
         console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
 })
 
 // DELETE api/lists/:id  [Delete a list]
 router.delete('/:id', async (req, res) => {
-    const list = await List.findById(req.params.id);
+    try {
+        const list = await List.findById(req.params.id);
 
-    if(!list) {
-        return res.status(404).json({msg: "List not found"});
+        if(!list) {
+            return res.status(404).json({msg: "List not found"});
+        }
+    
+        list.remove();
+    
+        res.status(200).json(list)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
     }
-
-    list.remove();
-
-    res.status(200).json(list)
 })
 
 
