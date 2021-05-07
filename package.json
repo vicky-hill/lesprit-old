@@ -3,11 +3,15 @@
   "version": "1.2.0",
   "description": "",
   "main": "server.js",
+  "jest": {
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["./test/config/setup.js"]
+  },
   "scripts": {
     "start": "nodemon server",
     "server": "nodemon server.js",
     "dev": "concurrently \" npm run server \" \" npm run client \"",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "author": "vicky",
   "license": "ISC",

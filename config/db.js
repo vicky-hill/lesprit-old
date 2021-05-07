@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const uri = process.env.DB_URI;
+const uri = process.env.NODE_ENV === 'development' ? process.env.DB_URI : process.env.DB_TEST_URI;
 
 const connectDB = async () => {
     const conn = await mongoose.connect(uri, {
@@ -11,7 +11,10 @@ const connectDB = async () => {
         useUnifiedTopology: true
     });
  
-    console.log(`MongoDB connected ...`);
+    const db = process.env.NODE_ENV === 'testing' ? 'TestingDB connected ...' : 'MongoDB connected ...';
+    console.log(db)
+
+    return db;
 };
 
 module.exports = connectDB;

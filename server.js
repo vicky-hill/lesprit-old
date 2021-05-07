@@ -4,6 +4,10 @@ const path = require('path');
 const cors = require('cors');
 require('dotenv').config();
 
+const auth = require('./routes/auth');
+const words = require('./routes/words');
+const lists = require('./routes/lists');
+
 const app = express();
 const PORT =  5000;
 
@@ -16,9 +20,9 @@ app.use(cors());
 
 
 // Mount routers
-app.use('/api/user', require('./routes/auth'));
-app.use('/api/words', require('./routes/words'));
-app.use('/api/lists', require('./routes/lists'));
+app.use('/api/user', auth);
+app.use('/api/words', words);
+app.use('/api/lists', lists);
 
 
 // Set react as static folder
@@ -29,3 +33,4 @@ app.use('/api/lists', require('./routes/lists'));
 
 
 app.listen(PORT, console.log('Server running on ' + PORT));
+

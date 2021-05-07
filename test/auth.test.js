@@ -2,29 +2,14 @@ const supertest = require('supertest');
 const host = 'http://localhost:5000';
 const request = supertest(host);
 
-let testUser = {};
+const userFactory = require('./factories/userFactory');
+
+let testUser;
 
 beforeAll(async () => {
-
-    // Register test user and save token
-    const res1 = await request
-        .post('/api/user/register')
-        .send({
-            name: "test_user",
-            email: "test@mymail.com",
-            password: "1234"
-        })
-
-    testUser.token = res1.body.token;
-
-    // Get test user info and save id
-    const res2 = await request
-        .get('/api/user')
-        .set('x-auth-token', testUser.token)
-
-    testUser._id = res2.body._id
-
+    testUser = await userFactory()
 });
+
 
 
 afterAll(async () => {
