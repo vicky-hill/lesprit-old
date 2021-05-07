@@ -62,16 +62,19 @@ const Languages
 const All
 // GET api/words
 // RESPONSE [{rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: {_id: MongoId, title: String}}]
-// ERROR {msg: String}
 
 const Single
 // GET api/words/:id
 // RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, dueDate: Date, user: MongoId, list: MongoId}
 
+const Review
+// GET api/words/review
+// RESPONSE [{rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: MongoId}]
+
 const Save
 // POST api/words/:id
 // PAYLOAD {foreign: String, native: String, user: MongoId, list: MongoId}
-// RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: {_id: MongoId, title: String}}
+// RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: MongoId}
 
 const Update
 // PUT api/words/:id

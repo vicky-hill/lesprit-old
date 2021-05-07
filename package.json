@@ -11,7 +11,7 @@
     "start": "nodemon server",
     "server": "nodemon server.js",
     "dev": "concurrently \" npm run server \" \" npm run client \"",
-    "test": "jest --detectOpenHandles"
+    "test": "jest ./test/words.test.js"
   },
   "author": "vicky",
   "license": "ISC",
