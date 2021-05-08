@@ -117,106 +117,106 @@ describe('Word endpoints', () => {
                 user: testUser._id
             }));
     });
-})
 
-test('deletes a word', async () => {
-    const res = await request
-        .delete('/api/words/' + word1._id)
-        .set('x-auth-token', testUser.token);
 
-    expect(res.body._id).toBe(word1._id);
+    test('deletes a word', async () => {
+        const res = await request
+            .delete('/api/words/' + word1._id)
+            .set('x-auth-token', testUser.token);
 
-    const resGetAll = await request
-        .get('/api/words')
-        .set('x-auth-token', testUser.token);
+        expect(res.body._id).toBe(word1._id);
 
-    expect(resGetAll.body.length).toBe(3);
+        const resGetAll = await request
+            .get('/api/words')
+            .set('x-auth-token', testUser.token);
 
-    const resGetOne = await request
-        .get('/api/words/' + word1._id)
-        .set('x-auth-token', testUser.token);
+        expect(resGetAll.body.length).toBe(3);
 
-    expect(resGetOne.body).toEqual({
-        msg: 'Word not found'
+        const resGetOne = await request
+            .get('/api/words/' + word1._id)
+            .set('x-auth-token', testUser.token);
+
+        expect(resGetOne.body).toEqual({
+            msg: 'Word not found'
+        });
     });
-});
-
-
-/* ===================================
-   Not Found Error Handling 
-=================================== */
-describe('word not found responds with msg', () => {
-
-    test('when fetching', async () => {
-        const res = await request
-            .get('/api/words/6095b6214829cbe546b1f3b2')
-            .set('x-auth-token', testUser.token);
-
-        expect(res.body).toEqual({
-            msg: 'Word not found'
-        });
-    })
-
-    test('when updating', async () => {
-        const res = await request
-            .put('/api/words/6095b6214829cbe546b1f3b2')
-            .set('x-auth-token', testUser.token);
-
-        expect(res.body).toEqual({
-            msg: 'Word not found'
-        });
-    })
-
-    test('when deleting', async () => {
-        const res = await request
-            .delete('/api/words/6095b6214829cbe546b1f3b2')
-            .set('x-auth-token', testUser.token);
-
-        expect(res.body).toEqual({
-            msg: 'Word not found'
-        });
-    })
-
 
 
     /* ===================================
-       Not Authorized Error Handling
+       Not Found Error Handling 
     =================================== */
-    describe('unauthorized request responds with msg', () => {
+    describe('word not found responds with msg', () => {
+
         test('when fetching', async () => {
             const res = await request
-                .get('/api/words/' + word2._id);
+                .get('/api/words/6095b6214829cbe546b1f3b2')
+                .set('x-auth-token', testUser.token);
 
-            const res2 = await request
-                .get('/api/words');
-
-            const res3 = await request
-                .get('/api/words/review');
-
-            expect(res.body && res2.body && res3.body).toEqual({
-                msg: 'No token, authorization denied'
+            expect(res.body).toEqual({
+                msg: 'Word not found'
             });
         })
 
         test('when updating', async () => {
             const res = await request
-                .put('/api/words/' + word2._id)
-                .send({ foreign: 'Wort 2' });
+                .put('/api/words/6095b6214829cbe546b1f3b2')
+                .set('x-auth-token', testUser.token);
 
             expect(res.body).toEqual({
-                msg: 'No token, authorization denied'
+                msg: 'Word not found'
             });
         })
 
         test('when deleting', async () => {
             const res = await request
-                .delete('/api/words/' + word2._id);
+                .delete('/api/words/6095b6214829cbe546b1f3b2')
+                .set('x-auth-token', testUser.token);
 
             expect(res.body).toEqual({
-                msg: 'No token, authorization denied'
+                msg: 'Word not found'
             });
         })
-    })
 
 
+
+        /* ===================================
+           Not Authorized Error Handling
+        =================================== */
+        describe('unauthorized request responds with msg', () => {
+            test('when fetching', async () => {
+                const res = await request
+                    .get('/api/words/' + word2._id);
+
+                const res2 = await request
+                    .get('/api/words');
+
+                const res3 = await request
+                    .get('/api/words/review');
+
+                expect(res.body && res2.body && res3.body).toEqual({
+                    msg: 'No token, authorization denied'
+                });
+            })
+
+            test('when updating', async () => {
+                const res = await request
+                    .put('/api/words/' + word2._id)
+                    .send({ foreign: 'Wort 2' });
+
+                expect(res.body).toEqual({
+                    msg: 'No token, authorization denied'
+                });
+            })
+
+            test('when deleting', async () => {
+                const res = await request
+                    .delete('/api/words/' + word2._id);
+
+                expect(res.body).toEqual({
+                    msg: 'No token, authorization denied'
+                });
+            })
+        })
+
+    });
 });
