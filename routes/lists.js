@@ -17,10 +17,16 @@ router.get('/', protect, async (req, res) => {
 
 
 // GET api/lists/:id  [Get a single list]
-router.get('/:id', async (req, res) => {
+router.get('/:id', protect, async (req, res) => {
     try {
         const list = await List.findById(req.params.id);
+
+        if(!list) {
+            res.status(404).json({msg: 'List not found'})
+        }
+
         res.status(200).json(list);
+
     } catch (err) {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
@@ -46,7 +52,7 @@ router.post('/', protect, async (req, res) => {
 
 
 // PUT api/lists/:id  [Update a list]
-router.put('/:id', async (req, res) => {
+router.put('/:id', protect, async (req, res) => {
     try {
         const list = await List.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
@@ -62,7 +68,7 @@ router.put('/:id', async (req, res) => {
 })
 
 // DELETE api/lists/:id  [Delete a list]
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', protect, async (req, res) => {
     try {
         const list = await List.findById(req.params.id);
 

@@ -12,7 +12,7 @@ let testUser;
 
 beforeAll(async () => {
     // Create a test user and list
-    testUser = await userFactory();
+    testUser = await userFactory('words_user', 'words@mymail.com', '4567');
     testList = await listFactory('First Chapter', testUser._id, testUser.token);
 });
 
@@ -50,7 +50,7 @@ describe('Word endpoints', () => {
         expect(res.body.length).toBe(3);
     });
 
-    test('gets a single word', async () => {
+    test('gets one word', async () => {
         const res = await request
             .get('/api/words/' + word1._id)
             .set('x-auth-token', testUser.token);
@@ -117,67 +117,66 @@ describe('Word endpoints', () => {
                 user: testUser._id
             }));
     });
+})
 
-    
-    test('deletes a word', async () => {
+test('deletes a word', async () => {
+    const res = await request
+        .delete('/api/words/' + word1._id)
+        .set('x-auth-token', testUser.token);
+
+    expect(res.body._id).toBe(word1._id);
+
+    const resGetAll = await request
+        .get('/api/words')
+        .set('x-auth-token', testUser.token);
+
+    expect(resGetAll.body.length).toBe(3);
+
+    const resGetOne = await request
+        .get('/api/words/' + word1._id)
+        .set('x-auth-token', testUser.token);
+
+    expect(resGetOne.body).toEqual({
+        msg: 'Word not found'
+    });
+});
+
+
+/* ===================================
+   Not Found Error Handling 
+=================================== */
+describe('word not found responds with msg', () => {
+
+    test('when fetching', async () => {
         const res = await request
-            .delete('/api/words/' + word1._id)
+            .get('/api/words/6095b6214829cbe546b1f3b2')
             .set('x-auth-token', testUser.token);
 
-        expect(res.body._id).toBe(word1._id);
-
-        const resGetAll = await request
-            .get('/api/words')
-            .set('x-auth-token', testUser.token);
-
-        expect(resGetAll.body.length).toBe(3);
-
-        const resGetOne = await request
-            .get('/api/words/' + word1._id)
-            .set('x-auth-token', testUser.token);
-
-        expect(resGetOne.body).toEqual({
+        expect(res.body).toEqual({
             msg: 'Word not found'
         });
-
-    });
-
-
-    /* ===================================
-       Not Found Error Handling 
-    =================================== */
-    describe('word not found responds with msg', () => {
-
-        test('when fetching', async () => {
-            const res = await request
-                .get('/api/words/6095b6214829cbe546b1f3b2')
-                .set('x-auth-token', testUser.token);
-
-            expect(res.body).toEqual({
-                msg: 'Word not found'
-            });
-        })
-
-        test('when updating', async () => {
-            const res = await request
-                .put('/api/words/6095b6214829cbe546b1f3b2')
-                .set('x-auth-token', testUser.token);
-
-            expect(res.body).toEqual({
-                msg: 'Word not found'
-            });
-        })
-
-        test('when deleting', async () => {
-            const res = await request
-                .delete('/api/words/6095b6214829cbe546b1f3b2')
-                .set('x-auth-token', testUser.token);
-
-            expect(res.body).toEqual({
-                msg: 'Word not found'
-            });
-        })
     })
+
+    test('when updating', async () => {
+        const res = await request
+            .put('/api/words/6095b6214829cbe546b1f3b2')
+            .set('x-auth-token', testUser.token);
+
+        expect(res.body).toEqual({
+            msg: 'Word not found'
+        });
+    })
+
+    test('when deleting', async () => {
+        const res = await request
+            .delete('/api/words/6095b6214829cbe546b1f3b2')
+            .set('x-auth-token', testUser.token);
+
+        expect(res.body).toEqual({
+            msg: 'Word not found'
+        });
+    })
+
 
 
     /* ===================================
@@ -218,5 +217,6 @@ describe('Word endpoints', () => {
             });
         })
     })
-})
 
+
+});

@@ -105,12 +105,10 @@ const Save
 // PAYLOAD {title: String, user: MongoId}
 // RESPONSE {_id: MongoId, user: MongoId, title: String, slug: String}
 
-
 const Update
 // PUT api/lists/:id
 // PAYLOAD {title: String || user: MongoId}
 // RESPONSE {_id: MongoId, user: MongoId, title: String, slug: String}
-
 
 const Delete
 // DELETE api/lists/:id
