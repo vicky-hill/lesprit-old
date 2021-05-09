@@ -5,11 +5,14 @@
   "main": "server.js",
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["./test/config/setup.js"]
+    "setupFilesAfterEnv": [
+      "./test/config/setup.js"
+    ]
   },
   "scripts": {
     "start": "nodemon server",
     "server": "nodemon server.js",
+    "client": "npm start --prefix client",
     "dev": "concurrently \" npm run server \" \" npm run client \"",
     "test": "jest"
   },
@@ -27,7 +30,6 @@
     "slugify": "^1.5.0"
   },
   "devDependencies": {
-    "jest": "^26.6.3",
     "supertest": "^6.1.3"
   }
 }
