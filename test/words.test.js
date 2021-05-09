@@ -16,12 +16,12 @@ beforeAll(async () => {
     testList = await listFactory('First Chapter', testUser._id, testUser.token);
 });
 
-
+    
 
 afterAll(async () => {
     // Delete test user and list
     await request.delete(`/api/user/${testUser._id}`);
-    await request.delete(`/api/lists/${testList._id}`);
+    await request.delete(`/api/lists/${testList._id}`).set('x-auth-token', testUser.token);
 });
 
 
@@ -217,6 +217,5 @@ describe('Word endpoints', () => {
                 });
             })
         })
-
     });
 });

@@ -11,9 +11,7 @@ beforeAll(async () => {
 });
 
 
-
 afterAll(async () => {
-
     // Delete test user
     await request.delete(`/api/user/${testUser._id}`);
 });

@@ -11,7 +11,7 @@
     "start": "nodemon server",
     "server": "nodemon server.js",
     "dev": "concurrently \" npm run server \" \" npm run client \"",
-    "test": "jest ./test/lists.test.js"
+    "test": "jest"
   },
   "author": "vicky",
   "license": "ISC",

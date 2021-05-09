@@ -50,7 +50,6 @@ router.get('/:id', protect, async (req, res) => {
 
 // POST api/words  [Save a new word]
 router.post('/', protect, async (req, res) => {
-   
     try {
         const reqWord = {
             foreign: req.body.foreign,

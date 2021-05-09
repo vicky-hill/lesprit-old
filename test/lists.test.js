@@ -17,7 +17,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
     // Delete test user
-    await request.delete(`/api/user/${testUser._id}`);
+    await request.delete(`/api/user/${testUser._id}`).set('x-auth-token', testUser.token);;
 });
 
 
@@ -44,10 +44,9 @@ describe('List endpoints', () => {
     });
 
     afterAll(async () => {
-        await request.delete(`/api/lists/${list1._id}`);
-        await request.delete(`/api/lists/${list2._id}`);
-        await request.delete(`/api/lists/${list3._id}`);
-        await request.delete(`/api/lists/${list4._id}`);
+        await request.delete(`/api/lists/${list2._id}`).set('x-auth-token', testUser.token);
+        await request.delete(`/api/lists/${list3._id}`).set('x-auth-token', testUser.token);
+        await request.delete(`/api/lists/${list4._id}`).set('x-auth-token', testUser.token);
     })
 
 
