@@ -1,13 +1,12 @@
 import React from 'react';
 import chevronright from '../../assets/icons/chevron-right-icon.png';
-import speechbubble from '../../assets/icons/speechbubble-icon.png';
 
-function MenuCard() {
+function MenuCard({ icon, title, bigger }) {
     return (
         <div className="menu-card">
-            <img className="menu-card--icon" id="speechbubble" src={speechbubble} alt="speech bubble icon" />
-                <h5>Conjugation</h5>
-            <img className="chevron" src={chevronright} alt="chevron right" />
+            <img className={`menu-card--icon ${bigger && 'menu-card--bigger'}`} src={icon} alt="card icon" />
+                <h5>{title}</h5>
+            <img className="menu-card--chevron" src={chevronright} alt="chevron right" />
         </div>
     )
 }

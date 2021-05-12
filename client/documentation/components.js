@@ -1,5 +1,6 @@
 // Navbar
     // Drawer
+// MenuCard
 
 /* ===================================
    Navbar
@@ -17,3 +18,13 @@ const Props
     const Props
     // authenticated: Boolean
     // username: String
+
+
+/* ===================================
+   Menu Card
+=================================== */
+
+const Props
+// icon: String
+// title: String
+// bigger: Bolean

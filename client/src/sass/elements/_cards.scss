@@ -4,15 +4,13 @@
 
 .menu-card {      
     background-color: #fff;
-    margin-right: auto;
     border: 1px solid $grey-light;
     border-radius: 9px;
     display: flex;
     align-items: center;
     padding: 3rem 5rem;
     padding-right: 3rem;
-    margin: 2rem;
-    margin-left: 30rem;
+    margin: 1rem;
 
     h5 {
         font-size: 1.6rem;
@@ -32,7 +30,7 @@
         justify-self: flex-end;
     }
 
-    #speechbubble {
+    &--bigger {
         margin-left: 1px;
         height: 2.8rem;
     }
