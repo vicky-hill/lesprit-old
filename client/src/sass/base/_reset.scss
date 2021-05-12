@@ -22,8 +22,13 @@ body {
     color: #212529;
     background-color: #fff;
 }
-    
 
+.window {
+    width: 100vw;
+    overflow-x: hidden !important;
+    min-height: 100vh;
+}
+    
 a {
     text-decoration: none;
 }

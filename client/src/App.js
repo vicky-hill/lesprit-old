@@ -5,16 +5,18 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/elements/Navbar';
 
 import './main.scss';
+import MenuCard from './components/elements/MenuCard';
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
+        <div className="window">
           <Navbar authenticated={true} username="username" />
-            <Switch>
-              {/* <Route exact path='/register' component={Register} /> */}
-              {/* <Route exact path='/register' component={Login} /> */}
-            </Switch>
+          <Switch>
+
+          </Switch>
+        </div>
       </Router>
     </Provider>
   );

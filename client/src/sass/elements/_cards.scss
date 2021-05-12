@@ -1,0 +1,39 @@
+/* ===================================
+   Menu Card
+==================================== */
+
+.menu-card {      
+    background-color: #fff;
+    margin-right: auto;
+    border: 1px solid $grey-light;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    padding: 3rem 5rem;
+    padding-right: 3rem;
+    margin: 2rem;
+    margin-left: 30rem;
+
+    h5 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-right: auto;
+        color: $grey-black;
+    }
+
+    &--icon {
+        height: 2.5rem;
+        margin-right: 2rem;
+    }
+
+    &--chevron {
+        margin-left: 10rem;
+        height: 2rem;
+        justify-self: flex-end;
+    }
+
+    #speechbubble {
+        margin-left: 1px;
+        height: 2.8rem;
+    }
+}
