@@ -1,24 +1,28 @@
 /* ===================================
-   Desktop landing
+   Desktop Home
 ==================================== */
 
-.desktop-landing {
+.desktop-home {
     background-color: $grey-white;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 15rem;
-    padding-bottom: 10rem;
+    justify-content: space-evenly;
+    // padding: 0 15rem;
+    // padding-bottom: 10rem;
     height: 88vh;    
     width: 100vw;
+    // padding-left: 22rem;
+    padding: 0 15rem;
+    padding-bottom: 10rem;
 }
 
 
 /* ===================================
-   Mobile landing
+   Mobile home
 ==================================== */
 
-.mobile-landing {
+.mobile-home {
     display: grid;
     grid-template-rows: 1fr min-content 2fr 70px 70px;
     height: 88vh;    

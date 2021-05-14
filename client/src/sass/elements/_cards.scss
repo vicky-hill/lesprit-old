@@ -1,6 +1,9 @@
 /* ===================================
    Menu Card
 ==================================== */
+.desktop-home_menu {
+    transform: translateX(2rem);
+}
 
 .menu-card {      
     background-color: #fff;
@@ -10,7 +13,7 @@
     align-items: center;
     padding: 3rem 5rem;
     padding-right: 3rem;
-    margin: 1rem;
+    margin: 2rem;
 
     h5 {
         font-size: 1.6rem;

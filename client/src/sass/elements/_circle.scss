@@ -2,7 +2,7 @@
    Desktop Circle
 ==================================== */
 
-.desktop-landing {
+.desktop-home {
 
     &_review {
         position: relative;
@@ -10,7 +10,7 @@
         flex-direction: column;
         height: 25rem;
         width: 21vw;
-        transform: translateX(11rem);
+        transform: translateX(5rem);
 
         &:hover {
             cursor: pointer;
@@ -71,7 +71,7 @@
    Mobile Circle
 ==================================== */
 
-.mobile-landing {
+.mobile-home {
 
     &_review {
         grid-row: 2/2;
@@ -137,11 +137,11 @@
 
 @media only screen and (min-width : 700px) {
     
-   .mobile-landing_review--circle {
+   .mobile-home_review--circle {
        width: 40vw;
    }
 
-   .mobile-landing_review--tag {
+   .mobile-home_review--tag {
         right: 30%;
    }
     
@@ -150,7 +150,7 @@
 
 @media only screen and (min-width : 900px) {
     
-   .mobile-landing_review--circle {
+   .mobile-home_review--circle {
        width: 30vw;
    }
     

@@ -14,10 +14,8 @@ function App() {
       <Router>
         <div className="window">
           <Navbar authenticated={true} username="username" />
-
-          <Home />
           <Switch>
-
+            <Home />
           </Switch>
         </div>
       </Router>
