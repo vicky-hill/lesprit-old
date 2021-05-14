@@ -2,6 +2,7 @@
     // Drawer
 // MenuCard
 // Circle
+// Slide
 
 /* ===================================
    Navbar
@@ -33,7 +34,19 @@ const Props
 =================================== */
 const Props
 // windowClass: String | 'desktop', 'mobile'
-// openRanking: Function
+// onClick: Function
 // circleImage: String
 // circleTitle: String | 'All done!', 'Study'
 // count: Number
+
+
+/* ===================================
+   Slide
+=================================== */
+const Props 
+// open: useState for open/close
+
+const Functions
+// closeByClick(setState, id)
+   // setState: useState for open/close
+   // id: id of closing element

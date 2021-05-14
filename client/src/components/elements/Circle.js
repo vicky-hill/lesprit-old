@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Circle({ windowClass, openRanking, circleImage, circleTitle, count }) {
+function Circle({ windowClass, onClick, circleImage, circleTitle, count }) {
 
 
     return (
-            <div className={windowClass + "-home_review"} onClick={openRanking}>
+            <div className={windowClass + "-home_review"} onClick={onClick}>
                 <h2 className={windowClass + "-home_review--title"}>{circleTitle}</h2>
                 <img className={windowClass + "-home_review--circle"} src={circleImage} alt="circle" />
                 <div className={windowClass + "-home_review--tag"} >

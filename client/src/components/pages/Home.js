@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Circle from '../elements/Circle';
 import goldCircle from '../../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';
 import silverCircle from '../../assets/graphics/silver-circle.png';
 import MenuCard from '../elements/MenuCard';
+import Slide from '../elements/Slide';
+import Review from '../elements/Review';
+import { closeSlide, closeByClick } from '../elements/Slide';
 
 import speechbubble from '../../assets/icons/speechbubble-icon.png';
 import book from '../../assets/icons/book-icon.png';
@@ -12,6 +15,12 @@ function Home() {
 
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    
+    closeByClick(setIsOpen, 'closing-x');
+
+
     return (
         <div className="container">
             
@@ -19,8 +28,8 @@ function Home() {
             <div className={windowClass + '-home'}>
                 <Circle
                     windowClass={windowClass}
-                    openRanking={() => console.log('open ranking')}
                     circleImage={goldCircle}
+                    onClick={() => setIsOpen(true)}
                     circleTitle="All done!"
                     count={34}
                 />
@@ -39,7 +48,10 @@ function Home() {
                 }
             </div>
 
-            
+            {/* Review Page */}
+            <Slide open={isOpen} >
+                <Review />
+            </Slide>
 
 
         </div>
