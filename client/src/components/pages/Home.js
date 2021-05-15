@@ -10,6 +10,7 @@ import { closeSlide, closeByClick } from '../elements/Slide';
 
 import speechbubble from '../../assets/icons/speechbubble-icon.png';
 import book from '../../assets/icons/book-icon.png';
+import Footer from '../elements/Footer';
 
 function Home() {
 
@@ -17,13 +18,13 @@ function Home() {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    
+
     closeByClick(setIsOpen, 'closing-x');
 
 
     return (
         <div className="container">
-            
+
             {/* Landing page */}
             <div className={windowClass + '-home'}>
                 <Circle
@@ -46,7 +47,12 @@ function Home() {
                         </div>
                     )
                 }
+
+                {/* Footer */}
+                <Footer />
             </div>
+
+
 
             {/* Review Page */}
             <Slide open={isOpen} >

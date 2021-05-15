@@ -1,8 +1,11 @@
-// Navbar
-    // Drawer
-// MenuCard
-// Circle
-// Slide
+/* ===================================
+   Navbar
+      Drawer
+   MenuCard
+   Circle
+   Slide
+=================================== */
+
 
 /* ===================================
    Navbar
