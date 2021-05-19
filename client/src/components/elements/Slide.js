@@ -1,5 +1,14 @@
 import React from 'react';
 
+/* Props
+=================================================== */
+// open: Boolean
+
+/* Functions
+=================================================== */
+// closeByClick(setState, id)
+
+
 function Slide({ open, children }) {
 
     return (

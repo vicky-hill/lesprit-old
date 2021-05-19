@@ -4,6 +4,8 @@
 // Base
 @import "sass/base/variables";
 @import "sass/base/reset";
+@import "sass/base/helpers";
+@import "sass/base/layout";
 
 // Elements
 @import "sass/elements/navbar";
@@ -11,6 +13,9 @@
 @import "sass/elements/circle";
 @import "sass/elements/slide";
 @import "sass/elements/footer";
+@import "sass/elements/buttons";
+@import "sass/elements/forms";
+@import "sass/elements/hidden";
 
 // Pages
 @import "sass/pages/home";

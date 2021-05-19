@@ -1,3 +1,9 @@
+// Menu card
+// Stitched card
+// Panel card
+
+
+
 /* ===================================
    Menu Card
 ==================================== */
@@ -36,5 +42,106 @@
     &--bigger {
         margin-left: 1px;
         height: 2.8rem;
+    }
+}
+
+
+/* ===================================
+   Stitched Card
+==================================== */
+
+.stitched-card {
+    position: relative;
+    background-color: #fff;
+    padding: 7rem 6rem;
+    margin-top: 2rem;
+}
+
+
+// Desktop
+@media only screen and (min-width : $desktop) { 
+    .stitched-card {
+        border: 2px dashed #f8cd41c5;
+        padding: 7rem 6rem;
+        border-radius: 7px;
+    }
+}
+
+/* ===================================
+   Panel Card
+==================================== */
+
+.panel-card {
+    padding: 2rem 3rem;
+    overflow: hidden;
+    position: relative;
+
+    &_group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1.5rem 0 1rem;
+        padding: 0 1rem;
+
+        &--bundle {
+            margin-top: 2rem;
+            padding-bottom: 3rem;
+        }
+
+        &--title {
+            color: #eebf3d;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-right: 2rem;
+        }
+
+        &--subtitle {
+            padding: .7rem 0;
+            font-size: 1.4rem;
+            color: #7c7982;
+            font-weight: 400;
+        }
+
+
+        & + button {
+            margin-top: 1.5rem;
+            position: absolute;
+            right: 3rem;
+            bottom: 0;
+        }
+    }
+
+}
+
+@media only screen and (min-width : $desktop) { 
+    .panel-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba($color: #f2f2f2, $alpha: .43);
+        margin-top: 6rem;
+        margin-bottom: 2rem;
+        width: 100%;
+        border-radius: 5px;
+
+        &_group {
+            display: flex;
+            margin-bottom: 1rem;
+
+            &--title {
+                font-size: 2.5rem;
+            }
+
+            &--bundle {
+                margin-top: 0;
+                padding-bottom: 0;
+            }
+
+            & + button {
+                position: relative;
+                align-self: flex-start;
+            }
+
+        }
     }
 }

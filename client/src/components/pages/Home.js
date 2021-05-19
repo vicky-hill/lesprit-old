@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import Circle from '../elements/Circle';
+import Circle from '../blocks/Circle';
 import goldCircle from '../../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';
 import silverCircle from '../../assets/graphics/silver-circle.png';
-import MenuCard from '../elements/MenuCard';
+import MenuCard from '../blocks/MenuCard';
 import Slide from '../elements/Slide';
-import Review from '../elements/Review';
+import Review from '../blocks/Review';
 import { closeSlide, closeByClick } from '../elements/Slide';
 
 import speechbubble from '../../assets/icons/speechbubble-icon.png';
 import book from '../../assets/icons/book-icon.png';
 import Footer from '../elements/Footer';
+import Container from '../layout/Container';
 
 function Home() {
 
@@ -19,11 +20,11 @@ function Home() {
     const [isOpen, setIsOpen] = useState(false);
 
 
-    closeByClick(setIsOpen, 'closing-x');
+    closeByClick(setIsOpen);
 
 
     return (
-        <div className="container">
+        <Container>
 
             {/* Landing page */}
             <div className={windowClass + '-home'}>
@@ -60,8 +61,7 @@ function Home() {
             </Slide>
 
 
-        </div>
-
+        </Container>
     )
 }
 

@@ -1,0 +1,33 @@
+.window {
+    width: 100vw;
+    overflow-x: hidden !important;
+    min-height: 100vh;
+}  
+
+.container {
+    height: 88vh;
+    position: relative;
+    width: 100vw;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.scroll-container {
+    height: 100%;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow: scroll;
+}
+
+.main-content {
+    margin: 0;
+}
+
+
+
+// Desktop
+@media only screen and (min-width : $desktop) {
+    .main-content {
+        margin: 6rem 26vw;
+    }
+}

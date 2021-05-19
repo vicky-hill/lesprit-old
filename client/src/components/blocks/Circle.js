@@ -1,7 +1,14 @@
 import React from 'react';
 
-function Circle({ windowClass, onClick, circleImage, circleTitle, count }) {
+/* Props
+=================================================== */
+// windowClass: String | 'desktop', 'mobile'
+// circleTitle: String | 'All done!', 'Study'
+// circleImage: String
+// onClick: Function
+// count: Number
 
+function Circle({ windowClass, onClick, circleImage, circleTitle, count }) {
 
     return (
             <div className={windowClass + "-home_review"} onClick={onClick}>

@@ -4,6 +4,7 @@
    MenuCard
    Circle
    Slide
+   Card
 =================================== */
 
 
@@ -48,8 +49,17 @@ const Props
 =================================== */
 const Props 
 // open: useState for open/close
+// children
 
 const Functions
 // closeByClick(setState, id)
    // setState: useState for open/close
    // id: id of closing element
+
+/* ===================================
+   Card
+=================================== */
+const Props
+// radius: String | 'soft', 'hard'
+// type: String | 'stitched', 'panel'
+// children

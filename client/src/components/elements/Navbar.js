@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import pineapple from '../../assets/graphics/pineapple.png';
 import Drawer from '../elements/Drawer';
 
+/* Props
+=================================================== */
+// authenticatd: Boolean
+// username: String
+
+
 function Navbar({ authenticated, username }) {
 
     const [currentURL, setCurrentURL] = useState('register');

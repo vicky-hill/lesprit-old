@@ -1,6 +1,13 @@
 import React from 'react';
 import chevronright from '../../assets/icons/chevron-right-icon.png';
 
+/* Props
+=================================================== */
+// icon: String
+// title: String
+// bigger: Bolean
+
+
 function MenuCard({ icon, title, bigger }) {
     return (
         <div className="menu-card">

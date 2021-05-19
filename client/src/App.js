@@ -1,8 +1,9 @@
 import { Provider } from 'react-redux';
 import { store } from './store';
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Navbar from './components/elements/Navbar';
+import Vocabulary from './components/pages/Vocabulary';
 
 import './main.scss';
 
@@ -15,7 +16,8 @@ function App() {
         <div className="window">
           <Navbar authenticated={true} username="username" />
           <Switch>
-            <Home />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/vocabulary' component={Vocabulary} />
           </Switch>
         </div>
       </Router>
