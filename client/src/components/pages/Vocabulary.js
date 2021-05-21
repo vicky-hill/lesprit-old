@@ -3,9 +3,12 @@ import Card from '../elements/Card';
 import ScrollContainer from '../layout/ScrollContainer';
 import Container from '../layout/Container';
 import MainContent from '../layout/MainContent';
-import WordsPanel from '../blocks/WordsPanel';
-import VocabularyPanel from '../blocks/VocabularyPanel';
+import VocabularyPanel from '../blocks/vocabulary/VocabularyPanel';
+import VocabularyItem from '../blocks/vocabulary/VocabularyItem';
+import WordsPanel from '../blocks/words/WordsPanel';
 import Hide from '../elements/Hide';
+import ListContainer from '../layout/ListContainer';
+import WordItem from '../blocks/words/WordItem';
 
 function Vocabulary() {
     const [hidden, setHidden] = useState(true);
@@ -22,6 +25,8 @@ function Vocabulary() {
         <Container>
             <ScrollContainer>
                 <MainContent>
+
+                    {/* Hidden form */}
                     <Hide hidden={hidden}>
                         <Card type="stitched">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, odit.</p>
@@ -29,10 +34,25 @@ function Vocabulary() {
                         </Card>
                     </Hide>
 
-                    
-                    
+                    {/* Header and vocabulary panel */}
                     <VocabularyPanel openForm={openForm} />
+
+                    {/* Vocabulary List */}
+                    <ListContainer>
+                        <VocabularyItem />
+                        <VocabularyItem />
+                    </ListContainer>
+
+                    {/* Header and word panel */}
                     <WordsPanel openForm={openForm} />
+
+                    {/* Word List */}
+                    <ListContainer flex>
+                        <WordItem />
+                        <WordItem />
+                        <WordItem />
+                        <WordItem />
+                    </ListContainer>
                 </MainContent>
             </ScrollContainer>
         </Container>

@@ -4,7 +4,7 @@ function Searchbar() {
     return (
         <form>
             <i className="fas fa-search input-icon"></i>
-            <input className="searchbar rounded-input" type="text" placeholder="Search Vocabulary" value="" onChange="" />
+            <input className="searchbar rounded-input" type="text" placeholder="Search Vocabulary" />
         </form>
     )
 }

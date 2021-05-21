@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../elements/Button';
-import Card from '../elements/Card';
-import InputText from '../elements/InputText';
+import Button from '../../elements/Button';
+import Card from '../../elements/Card';
+import InputText from '../../elements/InputText';
 
 /* Props
 =================================================== */

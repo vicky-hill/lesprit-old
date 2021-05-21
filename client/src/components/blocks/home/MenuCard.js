@@ -1,5 +1,5 @@
 import React from 'react';
-import chevronright from '../../assets/icons/chevron-right-icon.png';
+import chevronright from '../../../assets/icons/chevron-right-icon.png';
 
 /* Props
 =================================================== */

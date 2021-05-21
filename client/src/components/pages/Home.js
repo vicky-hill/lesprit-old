@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Circle from '../blocks/Circle';
+import Circle from '../blocks/home/Circle';
 import goldCircle from '../../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';
 import silverCircle from '../../assets/graphics/silver-circle.png';
-import MenuCard from '../blocks/MenuCard';
+import MenuCard from '../blocks/home/MenuCard';
 import Slide from '../elements/Slide';
-import Review from '../blocks/Review';
+import Review from '../blocks/home/Review';
 import { closeSlide, closeByClick } from '../elements/Slide';
 
 import speechbubble from '../../assets/icons/speechbubble-icon.png';
@@ -36,6 +36,7 @@ function Home() {
                     count={34}
                 />
 
+                {/* Menu items for desktop */}
                 {
                     windowClass === 'desktop' && (
                         <div className="desktop-home_menu">
@@ -49,7 +50,7 @@ function Home() {
                     )
                 }
 
-                {/* Footer */}
+                {/* Footer for mobile */}
                 <Footer />
             </div>
 
