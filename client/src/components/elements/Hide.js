@@ -28,6 +28,15 @@ export const hide = (setState) => {
     setState(true);
 }   
 
+// Hide by clicking on element with id
+export const hideByClick = (setState, id = 'closing-x') => {
+    document.addEventListener('click', function (e) {
+        if (e.target.id === id) {
+            setState(true);
+        }
+    });
+}
+
 
 
 /* Props

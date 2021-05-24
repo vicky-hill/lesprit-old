@@ -4,12 +4,22 @@
     align-items: center;
     margin: 0 auto;
     z-index: 100;
+    width: 22rem;
+
+    &.half {
+        width: 29rem;
+    }
+
+    &.full {
+        width: 22rem;
+    }
 
     .form-heading {
         font-size: 1.6rem;
         font-weight: 700;
-        margin-bottom: 4rem;
         color: $grey-black;
+        margin-bottom: 3rem;
+        text-align: center;
     }
 
     form {
@@ -56,12 +66,6 @@
             color: #d1cfcf;
         }
     }
-    
-    .form-heading {
-        font-size: 1.7rem;
-        margin-bottom: 4rem;
-        text-align: center;
-    }
 
 }
 
@@ -75,7 +79,7 @@
 
         input[type=text], input[type=password] {
             padding: 0.7rem 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         button {

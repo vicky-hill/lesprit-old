@@ -1,6 +1,12 @@
 import React from 'react';
 
-const WordItem = () => {
+/* Props
+=================================================== */
+// onEdit: useState Function to open form
+
+
+
+const WordItem = ({ onEdit }) => {
 
     const toggleOptions = (e) => {
 
@@ -35,7 +41,7 @@ const WordItem = () => {
                 <p>twice as</p>
             </div>
             <div className="word-card--edits">
-                <i className="far fa-edit"></i>
+                <i className="far fa-edit" onClick={onEdit}></i>
                 <i className="far fa-trash-alt"></i>
             </div>
         </div>

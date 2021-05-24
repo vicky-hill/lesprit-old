@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Card from '../elements/Card';
 import ScrollContainer from '../layout/ScrollContainer';
 import Container from '../layout/Container';
 import MainContent from '../layout/MainContent';
@@ -9,17 +8,18 @@ import WordsPanel from '../blocks/words/WordsPanel';
 import Hide from '../elements/Hide';
 import ListContainer from '../layout/ListContainer';
 import WordItem from '../blocks/words/WordItem';
+import { closeByClick } from '../elements/Slide';
+import { hideByClick } from '../elements/Hide';
+import Slide from '../elements/Slide';
+import EditForm from '../blocks/utils/EditForm';
 
 function Vocabulary() {
-    const [hidden, setHidden] = useState(true);
+    const [hidden, setHidden] = useState(true);    // Half screen form
+    const [isOpen, setIsOpen] = useState(false);   // Full screen form 
 
-    function openForm() {
-        setHidden(false);
-    }
+    closeByClick(setIsOpen, 'closing-x');
+    hideByClick(setHidden, 'closing-x');
 
-    function closeForm() {
-        setHidden(true)
-    }
 
     return (
         <Container>
@@ -28,14 +28,11 @@ function Vocabulary() {
 
                     {/* Hidden form */}
                     <Hide hidden={hidden}>
-                        <Card type="stitched">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, odit.</p>
-                            <i onClick={closeForm} className="fas fa-times closing-x"></i>
-                        </Card>
+                            <EditForm format="half" heading="Add new list:" submit="Save list" inputs={[{ placeholder: "List name", value: "" }]} />
                     </Hide>
 
                     {/* Header and vocabulary panel */}
-                    <VocabularyPanel openForm={openForm} />
+                    <VocabularyPanel openForm={() => setHidden(false)} />
 
                     {/* Vocabulary List */}
                     <ListContainer>
@@ -44,17 +41,23 @@ function Vocabulary() {
                     </ListContainer>
 
                     {/* Header and word panel */}
-                    <WordsPanel openForm={openForm} />
+                    <WordsPanel openForm={() => setHidden(false)} />
 
                     {/* Word List */}
                     <ListContainer flex>
-                        <WordItem />
+                        <WordItem onEdit={() => setIsOpen(true)} />
                         <WordItem />
                         <WordItem />
                         <WordItem />
                     </ListContainer>
+
                 </MainContent>
             </ScrollContainer>
+
+            {/* Slide Form */}
+            <Slide open={isOpen}>
+                <EditForm format="full" heading="Add new word:" submit="Save word" inputs={[{ placeholder: "Spanish", value: "" }, { placeholder: "English", value:""}]} />
+            </Slide>
         </Container>
     )
 }
