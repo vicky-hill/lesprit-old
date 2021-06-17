@@ -53,8 +53,9 @@ class Page {
         }, method, path, data, token)
     }
 
-    async createUser() {
-        const { token } = await this.request('POST', '/api/user/register', { name: 'test_user', password: '1234' });
+    // Create test user
+    async createUser(name = 'test_user', password = '1234') {
+        const { token } = await this.request('POST', '/api/user/register', { name, password });
 
         const { _id } = await this.request('GET', '/api/user', null, token);
 
@@ -63,7 +64,7 @@ class Page {
 
 
     // CleanUpUser
-    async cleanUpUser(token) {
+    async clearUser(token) {
         if (!token) {
             // Get token from local storage if not passed in
             token = await this.page.evaluate(() => {
