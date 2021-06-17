@@ -13,6 +13,7 @@ function Navbar({ authenticated, username }) {
 
     const [currentURL, setCurrentURL] = useState('register');
 
+
     // Toggle between Sign in and sign up
     function changeURL() {
         setCurrentURL(window.location.href);

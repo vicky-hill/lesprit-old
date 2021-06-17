@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ScrollContainer from '../layout/ScrollContainer';
 import Container from '../layout/Container';
-import MainContent from '../layout/MainContent';
+import MainContainer from '../layout/MainContainer';
 import VocabularyPanel from '../blocks/vocabulary/VocabularyPanel';
 import VocabularyItem from '../blocks/vocabulary/VocabularyItem';
 import WordsPanel from '../blocks/words/WordsPanel';
@@ -12,6 +12,7 @@ import { closeByClick } from '../elements/Slide';
 import { hideByClick } from '../elements/Hide';
 import Slide from '../elements/Slide';
 import EditForm from '../blocks/utils/EditForm';
+import Alert from '../elements/Alert';
 
 function Vocabulary() {
     const [hidden, setHidden] = useState(true);    // Half screen form
@@ -24,11 +25,13 @@ function Vocabulary() {
     return (
         <Container>
             <ScrollContainer>
-                <MainContent>
+                <MainContainer>
+
+                    <Alert message="some alert" type="danger" />
 
                     {/* Hidden form */}
                     <Hide hidden={hidden}>
-                            <EditForm format="half" heading="Add new list:" submit="Save list" inputs={[{ placeholder: "List name", value: "" }]} />
+                        <EditForm format="half" heading="Add new list:" submit="Save list" inputs={[{ placeholder: "List name", value: "" }]} />
                     </Hide>
 
                     {/* Header and vocabulary panel */}
@@ -46,12 +49,12 @@ function Vocabulary() {
                     {/* Word List */}
                     <ListContainer flex>
                         <WordItem onEdit={() => setIsOpen(true)} />
-                        <WordItem />
-                        <WordItem />
-                        <WordItem />
+                        <WordItem onEdit={() => setIsOpen(true)} />
+                        <WordItem onEdit={() => setIsOpen(true)}/>
+                        <WordItem onEdit={() => setIsOpen(true)}/>
                     </ListContainer>
 
-                </MainContent>
+                </MainContainer>
             </ScrollContainer>
 
             {/* Slide Form */}

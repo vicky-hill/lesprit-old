@@ -10,13 +10,20 @@
     width: 100vw;
     overflow: hidden;
     transition: all 0.2s;
+
+    &.auth-container {
+        margin: 0 auto;
+        text-align: center;
+    }
 }
+
 
 .scroll-container {
     height: 100%;
     width: 100vw;
     overflow-x: hidden;
     overflow: scroll;
+    background-color: $grey-white;
 }
 
 .list-container {
@@ -31,25 +38,37 @@
 }
 
 
-.main-content {
+
+
+.main-container {
     margin: 0;
 }
 
 
 
+
 // Desktop
 @media only screen and (min-width : $desktop) {
-    .main-content {
-        margin: 6rem 25vw;
+
+    .container {
+        &.auth-container {
+            width: 38rem;
+            padding-top: 9vh;
+        }
+    }
+
+    .main-container {
+        margin: 6rem 26vw;
     }
 
     .list-container {
         height: auto;
-        width: auto;
         background-color: transparent;
         border: none;
         justify-content: space-between;
         flex-wrap: wrap;
+        width: calc(100% + 2rem);
+        transform: translateX(-1rem);
 
         &.flex {
             display: flex;

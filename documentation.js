@@ -16,7 +16,7 @@ const Auth
 
 const Words
 // GET api/words
-// GET api/words/:id
+// GET api/words
 // POST api/words/:id
 // PUT api/words/:id
 // DELETE api/words/:id
@@ -72,7 +72,7 @@ const Review
 // RESPONSE [{rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: MongoId}]
 
 const Save
-// POST api/words/:id
+// POST api/words
 // PAYLOAD {foreign: String, native: String, user: MongoId, list: MongoId}
 // RESPONSE {rating: Number, _id: MongoId, foreign: String, native: String, user: MongoId, dueDate: Date, list: MongoId}
 

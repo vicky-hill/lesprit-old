@@ -1,8 +1,13 @@
 import React from 'react';
 
+/* Props
+=========================================== */
+// children
+
+
 function Container({ children }) {
     return (
-        <div className="container">
+        <div className={`container`}>
             { children }
         </div>
     )

@@ -14,7 +14,7 @@ function Button({ children, type, onClick }) {
     )
 }
 
- Button.defaultProps = {    
+Button.defaultProps = {    
     type: "regular"
 }
 

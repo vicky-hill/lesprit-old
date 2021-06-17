@@ -1,6 +1,35 @@
 import api from '../utils/api';
+import { setError } from './alerts';
+import {
+    REGISTER_SUCCESS, 
+    REGISTER_FAIL,
+    GET_USER
+} from './types';
 
-export const GET_USER = 'GET_USER';
+/* ===================================
+   Register
+=================================== */
+
+export const register = (name, password) => async dispatch => {
+    try {
+        const body = JSON.stringify({ name, password });
+
+        const res = await api.post('/api/user/register', body);
+
+        dispatch({
+            type: REGISTER_SUCCESS,
+            payload: res.data
+        })
+
+    } catch (err) {
+        dispatch(setError(err.response.data.msg))
+        
+        dispatch({
+            type: REGISTER_FAIL
+        })
+    }
+}   
+
 
 
 /* ===================================

@@ -1,8 +1,8 @@
 import React from 'react';
-import MainContent from '../../layout/MainContent';
+import MainContainer from '../../layout/MainContainer';
 import Card from '../../elements/Card';
 import Form from '../../elements/Form';
-import { Heading, Input, SubmitButton } from '../../elements/Form';
+import { FormContainer, Heading, Input, SubmitButton } from '../../elements/Form';
 
 
 /* Props
@@ -15,18 +15,19 @@ import { Heading, Input, SubmitButton } from '../../elements/Form';
 
 const EditForm = ({ format, heading, submit, inputs }) => {
 
-
     const form = (
         <>
-            <Form format={format}>
-                <Heading>{heading}</Heading>
-                {
-                    inputs && inputs.map((input, index) => (
-                        <Input key={index} placeholder={input.placeholder} />
-                    ))
-                }
-                <SubmitButton title={submit} />
-            </Form>
+            <FormContainer format={format}>
+                <Form>
+                    <Heading>{heading}</Heading>
+                    {
+                        inputs && inputs.map((input, index) => (
+                            <Input key={index} placeholder={input.placeholder} />
+                        ))
+                    }
+                    <SubmitButton title={submit} />
+                </Form>
+            </FormContainer>
             <i className="fas fa-times closing-x" id="closing-x"></i>
         </>
     )
@@ -38,11 +39,11 @@ const EditForm = ({ format, heading, submit, inputs }) => {
     )
 
     const fullScreenForm = (
-        <MainContent>
+        <MainContainer>
             <Card type="stitched">
                 {form}
             </Card>
-        </MainContent>
+        </MainContainer>
     )
 
     return (

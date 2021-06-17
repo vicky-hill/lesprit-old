@@ -3,14 +3,32 @@ import React from 'react';
 /* Props
 =================================================== */
 // onSubmit: Function
-// format: String | half
+// format: String | half, full
+// type: String
+// name: String
 
-const Form = ({ onSubmit, format, children }) => {
+
+/* Sub Components
+=========================================== */
+// FormContainer
+// Heading
+// Input
+// SubmitButton
+
+
+
+const Form = ({ onSubmit, children }) => {
+    return (
+        <form onSubmit={onSubmit}>
+            {children}
+        </form>
+    )
+}
+
+export const FormContainer = ({ children, format }) => {
     return (
         <div className={`form-container ${format && format}`}>
-            <form onSubmit={onSubmit}>
-                {children}
-            </form>
+            { children}
         </div>
     )
 }
@@ -23,9 +41,9 @@ export const Heading = ({ children }) => {
     )
 }
 
-export const Input = ({ placeholder, value, onChange }) => {
+export const Input = ({ placeholder, value, onChange, type, name }) => {
     return (
-        <input autoComplete="off" autoCapitalize="none" type="text" placeholder={placeholder} value={value} onChange={onChange} />
+        <input id={name} name={name} autoComplete="off" autoCapitalize="none" type="text" placeholder={placeholder} value={value} onChange={onChange} type={type} />
     )
 }
 
@@ -33,6 +51,10 @@ export const SubmitButton = ({ title }) => {
     return (
         <button type="submit">{title}</button>
     )
+}
+
+Input.defaultProps = {
+    type: "text"
 }
 
 export default Form;
