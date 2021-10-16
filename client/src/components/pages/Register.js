@@ -12,15 +12,14 @@ import { register, getUser } from 'actions/auth';
 import { setError } from 'actions/alerts';
 
 
-function Register(props) {
-    const { history } = props;
-
-    // actions
-    const { register, getUser, setError } = props;
-    
-    // mapStateToProps
-    const { isAuthenticated, error } = props;
-
+function Register({
+    history,
+    register,
+    getUser,
+    setError,
+    isAuthenticated,
+    error
+}) {
 
     // Check if there's a user to load
     useEffect(() => {

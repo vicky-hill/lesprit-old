@@ -16,22 +16,16 @@ import Container from '../layout/Container';
 import { connect } from 'react-redux';
 import { getWords } from 'actions/words';
 
-function Home(props) {
-
-    // mapStateToProps
-    const {  } = props;
-
-    // actions
-    const { getWords } = props;
-
-    useEffect(() => {
-        getWords()
-    }, [])
-
+function Home({ getWords }) {
 
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
 
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        getWords()
+    }, [])
+  
     closeByClick(setIsOpen);
 
 
@@ -71,7 +65,6 @@ function Home(props) {
             <Slide open={isOpen} >
                 <Review />
             </Slide>
-
 
         </Container>
     )

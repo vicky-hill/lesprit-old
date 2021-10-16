@@ -9,18 +9,16 @@ import { login, getUser } from '../../actions/auth';
 import { setError } from 'actions/alerts';
 import Alert from 'components/elements/Alert';
 
-function Login(props) {
+function Login({ 
+    history, 
+    isAuthenticated, 
+    user,
+    error,
+    login,
+    getUser,
+    setError
+}) {
 
-    // higher component
-    const { history } = props;
-
-    // mapStateToProps
-    const { isAuthenticated, user, error } = props;
-
-    // actions
-    const { login, getUser, setError } = props;
-
-    
     // Check user isn't logged out
     useEffect(() => {
         if (user !== 'loggedOut') {

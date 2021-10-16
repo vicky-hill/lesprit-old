@@ -51,8 +51,6 @@ function Vocabulary({ getLists, getWords, count, lists }) {
                                 <VocabularyItem key={list._id} title={list.title} />
                             ))
                         }
-
-
                     </ListContainer>
 
 
