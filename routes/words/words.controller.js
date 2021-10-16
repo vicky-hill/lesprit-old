@@ -1,11 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const Word = require('../models/Word');
-const { protect } = require('../middleware/auth');
+const Word = require('./words.model');
 
-
-// GET api/words  [Get all words from logged in user]
-router.get('/', protect, async (req, res) => {
+/* ===================================
+   Get all words
+=================================== */
+async function getWords (req, res) {
     try {
         const words = await Word.find({ user: req.user.id}).populate({
             path: 'list',
@@ -16,23 +14,12 @@ router.get('/', protect, async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
-
-// GET api/words/review  [Get all words to be reviewed]
-router.get('/review', protect, async (req, res) => {
-    try {
-        const words = await Word.find({ dueDate: { $lte: Date.now() }, user: req.user.id });
-        res.status(200).json(words);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({msg: 'Something went wrong'});
-    }
-})
-
-
-// GET api/words/:id  [Get a single word]
-router.get('/:id', protect, async (req, res) => {
+/* ===================================
+   Get one word
+=================================== */
+async function getWord (req, res) {
     try {
         const word = await Word.findById(req.params.id);
 
@@ -45,11 +32,27 @@ router.get('/:id', protect, async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
 
-// POST api/words  [Save a new word]
-router.post('/', protect, async (req, res) => {
+/* ===================================
+   Get review
+=================================== */
+async function getReview (req, res) {
+    try {
+        const words = await Word.find({ dueDate: { $lte: Date.now() }, user: req.user.id });
+        res.status(200).json(words);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
+    }
+}
+
+
+/* ===================================
+   Save word
+=================================== */
+async function saveWord (req, res) {
     try {
         const reqWord = {
             foreign: req.body.foreign,
@@ -70,11 +73,12 @@ router.post('/', protect, async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
-
-// PUT api/words/:id  [Update a word]
-router.put('/:id', protect, async (req, res) => {
+/* ===================================
+   Update word
+=================================== */
+async function updateWord (req, res) {
     try {
         const updateWord = await Word.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
@@ -92,11 +96,12 @@ router.put('/:id', protect, async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
-
-// DELETE api/words/:id  [Delete a word]
-router.delete('/:id', protect, async (req, res) => {
+/* ===================================
+   Delete word
+=================================== */
+async function deleteWord (req,res) {
     try {
         const word = await Word.findByIdAndDelete(req.params.id);
 
@@ -108,15 +113,16 @@ router.delete('/:id', protect, async (req, res) => {
     } catch (err) {
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
+
+
+
 
 
 /* ===================================
    Dev Routes
 =================================== */
-
-// UPDATE api/words/devtools/all
-router.put('/devtools/all', async (req, res) => {
+async function devAll (req, res) {
     try {
         const allWords = await Word.updateMany({}, {$rename: {'spanish': 'foreign'}});
 
@@ -129,7 +135,15 @@ router.put('/devtools/all', async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
 
-module.exports = router;
+module.exports = {
+    getWords, 
+    getWord, 
+    getReview, 
+    saveWord, 
+    updateWord, 
+    deleteWord, 
+    devAll
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Circle from '../blocks/home/Circle';
 import goldCircle from '../../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';
@@ -13,13 +13,25 @@ import book from '../../assets/icons/book-icon.png';
 import Footer from '../elements/Footer';
 import Container from '../layout/Container';
 
-function Home() {
+import { connect } from 'react-redux';
+import { getWords } from 'actions/words';
+
+function Home(props) {
+
+    // mapStateToProps
+    const {  } = props;
+
+    // actions
+    const { getWords } = props;
+
+    useEffect(() => {
+        getWords()
+    }, [])
+
 
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
 
     const [isOpen, setIsOpen] = useState(false);
-
-
     closeByClick(setIsOpen);
 
 
@@ -55,7 +67,6 @@ function Home() {
             </div>
 
 
-
             {/* Review Page */}
             <Slide open={isOpen} >
                 <Review />
@@ -66,4 +77,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default connect(null, { getWords })(Home);

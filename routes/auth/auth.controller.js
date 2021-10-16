@@ -1,14 +1,13 @@
-const express = require('express');
+const User = require('./auth.model');
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const { protect } = require('../middleware/auth');
-const router = express.Router();
-require('dotenv').config();
 
 
-// POST api/user/register  [Register new user]
-router.post('/register', async (req, res) => {
+/* ===================================
+   Register
+=================================== */
+async function register (req, res) {
     try {
         const { name, email, password } = req.body;
 
@@ -40,11 +39,13 @@ router.post('/register', async (req, res) => {
         console.log(err);
         res.status(500).json({ msg: 'Something didnt work right' });
     }
-})
+}
 
 
-// POST api/user/login  [Login user]
-router.post('/login', async (req, res) => {
+/* ===================================
+   Login
+=================================== */
+async function login (req, res) {
     try {
         const { name, password } = req.body;
 
@@ -69,11 +70,19 @@ router.post('/login', async (req, res) => {
     } catch (err) {
         res.status(500).json({ msg: 'Something didnt work right'});
     }
-})
+}
+
+async function getUser (req, res) {
+    const user = await User.findById(req.user.id).select('-password');
+
+    res.status(200).json(user);
+}
 
 
-// PUT api/user/:id/languages
-router.put('/:id/languages', protect, async (req, res) => {
+/* ===================================
+   Change Languages
+=================================== */
+async function changeLanguages (req, res) {
     try {
 
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -87,20 +96,13 @@ router.put('/:id/languages', protect, async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-})
+}
 
 
-// GET api/user  [Get logged in user info]
-router.get('/', protect, async (req, res) => {
-
-    const user = await User.findById(req.user.id).select('-password');
-
-    res.status(200).json(user);
-})
-
-
-// DELETE api/user/id   [Delete a user] 
-router.delete('/:id', async (req, res) => {
+/* ===================================
+   Delete User
+=================================== */
+async function deleteUser (req, res) {
     const user = await User.findByIdAndDelete(req.params.id);
 
     if(!user) {
@@ -108,7 +110,12 @@ router.delete('/:id', async (req, res) => {
     }
 
     res.status(200).json(user);
-});
+}
 
-module.exports = router;
-
+module.exports = {
+    register, 
+    login, 
+    getUser,
+    deleteUser,
+    changeLanguages
+}

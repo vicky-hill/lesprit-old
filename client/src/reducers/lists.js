@@ -1,5 +1,5 @@
 import {
-    GET_WORDS
+    GET_LISTS
 } from 'actions/types';
 
 const initialState = {
@@ -11,7 +11,7 @@ export default function(state = initialState, action) {
 
     switch(type) {
 
-        case GET_WORDS:  
+        case GET_LISTS:  
             return {
                 ...state,
                 all: payload

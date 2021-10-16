@@ -1,41 +1,24 @@
-const express = require('express');
-const router = express.Router();
-const List = require('../models/List');
-const { protect } = require('../middleware/auth');
+const List = require('./lists.model');
 
-
-// GET api/lists  [Get all lists from logged in user]
-router.get('/', protect, async (req, res) => {
+/* ===================================
+   Get all lists
+=================================== */
+async function getLists (req, res) {
     try {
         const lists = await List.find({ user: req.user.id });
+
         res.status(200).json(lists);
     } catch (err) {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
 
-// GET api/lists/:id  [Get a single list]
-router.get('/:id', protect, async (req, res) => {
-    try {
-        const list = await List.findById(req.params.id);
-
-        if(!list) {
-            res.status(404).json({msg: 'List not found'})
-        }
-
-        res.status(200).json(list);
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({msg: 'Something went wrong'});
-    }
-})
-
-
-// POST api/lists  [Save a new list]
-router.post('/', protect, async (req, res) => {
+/* ===================================
+   Save list
+=================================== */
+async function saveList (req, res) {
     try {
         const reqList = { 
             title: req.body.title,
@@ -48,11 +31,12 @@ router.post('/', protect, async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
-
-// PUT api/lists/:id  [Update a list]
-router.put('/:id', protect, async (req, res) => {
+/* ===================================
+   Get one list
+=================================== */
+async function getList (req, res) {
     try {
         const list = await List.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
@@ -65,10 +49,31 @@ router.put('/:id', protect, async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
-// DELETE api/lists/:id  [Delete a list]
-router.delete('/:id', protect, async (req, res) => {
+/* ===================================
+   Update list
+=================================== */
+async function updateList (req, res) {
+    try {
+        const list = await List.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+        if(!list) {
+            return res.status(404).json({msg: "List not found"});
+        }
+
+        res.status(200).json(list);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
+    }
+}
+
+
+/* ===================================
+   Delete list
+=================================== */
+async function deleteList (req, res) {
     try {
         const list = await List.findById(req.params.id);
 
@@ -83,7 +88,8 @@ router.delete('/:id', protect, async (req, res) => {
         console.log(err);
         res.status(500).json({msg: 'Something went wrong'});
     }
-})
+}
 
-
-module.exports = router;
+module.exports = {
+    getLists, saveList, getList, updateList, deleteList
+}

@@ -5,7 +5,8 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    GET_USER
+    GET_USER,
+    LOGIN_CHECK
 } from './types';
 
 
@@ -70,6 +71,21 @@ export const login = (name, password) => async dispatch => {
 }
 
 
+/* ===================================
+   Login Check to prevent login flash  
+=================================== */
+
+export const loginCheck = () => async dispatch => {
+
+    // Set loginCheck to true after one second
+    setTimeout(function(){
+        console.log('wait a second')
+        dispatch({
+            type: LOGIN_CHECK
+        })
+
+    }, 1000);
+}
 
 /* ===================================
    Get User

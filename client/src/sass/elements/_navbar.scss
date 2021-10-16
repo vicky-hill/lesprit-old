@@ -14,12 +14,15 @@
     z-index: 100;
 
     h1 {
-        font-family: Lobster Two;
+        font-family: Mustafa Script W05 Regular;
         color: white;
         color: $grey-black;
         font-weight: 400;
         margin: auto;
         transition: all .5s;
+        font-size: 6rem !important;
+        line-height: .8;
+        transform: translateY(10%);
     }
 }
 
