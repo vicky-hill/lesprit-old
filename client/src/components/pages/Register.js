@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import pineapple from '../../assets/graphics/pineapple.png';
 
-import ScrollContainer from '../layout/ScrollContainer';
-import AuthContainer from '../layout/AuthContainer';
+import ScrollContainer from '../containers/ScrollContainer';
+import AuthContainer from '../containers/AuthContainer';
 import Card from '../elements/Card';
 import Alert from 'components/elements/Alert';
 import Form, { Heading, Input, SubmitButton} from '../elements/Form';

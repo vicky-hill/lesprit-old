@@ -6,9 +6,6 @@ import {
 } from './types';
 
 
-// getLists() :: null :: [{ _id, title, user, slug }]
-// saveList() :: {  } :: 
-
 
 /* ===================================
    Get Lists
@@ -41,6 +38,6 @@ export const saveList = (data) => async dispatch => {
             payload: res.data
         })
     } catch (err) {
-        
+        console.log(err)
     }
 }

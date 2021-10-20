@@ -8,6 +8,7 @@ import Button from '../../elements/Button';
 // openForm: Function
 // count: Number 
 
+
 function VocabularyPanel({ openForm, count }) {
 
     return (
@@ -22,3 +23,4 @@ function VocabularyPanel({ openForm, count }) {
 }
 
 export default VocabularyPanel;
+ 

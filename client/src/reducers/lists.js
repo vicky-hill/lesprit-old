@@ -1,9 +1,10 @@
 import {
-    GET_LISTS
+    GET_LISTS,
+    SAVE_LIST
 } from 'actions/types';
 
 const initialState = {
-    all: []
+    lists: []
 }
 
 export default function(state = initialState, action) {
@@ -14,7 +15,13 @@ export default function(state = initialState, action) {
         case GET_LISTS:  
             return {
                 ...state,
-                all: payload
+                lists: payload
+            }
+
+        case SAVE_LIST:  
+            return {
+                ...state,
+                lists: [...state.lists, payload]
             }
 
         default:     
@@ -23,3 +30,4 @@ export default function(state = initialState, action) {
             }
     }
 }
+

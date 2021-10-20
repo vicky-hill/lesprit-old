@@ -11,7 +11,7 @@ import { closeSlide, closeByClick } from '../elements/Slide';
 import speechbubble from '../../assets/icons/speechbubble-icon.png';
 import book from '../../assets/icons/book-icon.png';
 import Footer from '../elements/Footer';
-import Container from '../layout/Container';
+import Container from '../containers/Container';
 
 import { connect } from 'react-redux';
 import { getWords } from 'actions/words';

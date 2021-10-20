@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import ScrollContainer from '../layout/ScrollContainer';
-import Container from '../layout/Container';
-import MainContainer from '../layout/MainContainer';
+import ScrollContainer from '../container/ScrollContainer';
+import Container from '../containers/Container';
+import MainContainer from '../container/MainContainer';
 import VocabularyPanel from '../blocks/vocabulary/VocabularyPanel';
 import VocabularyItem from '../blocks/vocabulary/VocabularyItem';
 import WordsPanel from '../blocks/words/WordsPanel';
 import Hide from '../elements/Hide';
-import ListContainer from '../layout/ListContainer';
+import ListContainer from '../container/ListContainer';
 import WordItem from '../blocks/words/WordItem';
 import { closeByClick } from '../elements/Slide';
 import { hideByClick } from '../elements/Hide';
@@ -38,7 +38,12 @@ function Vocabulary({ getLists, getWords, count, lists }) {
 
                     {/* Hidden form */}
                     <Hide hidden={hidden}>
-                        <EditForm format="half" heading="Add new list:" submit="Save list" inputs={[{ placeholder: "List name", value: "" }]} />
+                        <EditForm 
+                            format="half" 
+                            heading="Add new list:" 
+                            submit="Save list" 
+                            inputs={[{ placeholder: "List name", value: "" }]} 
+                        />
                     </Hide>
 
                     {/* Header and vocabulary panel */}
@@ -62,30 +67,30 @@ function Vocabulary({ getLists, getWords, count, lists }) {
 
 
                     {/* Header and word panel */}
-                    <WordsPanel openForm={() => setHidden(false)} />
+                    {/* <WordsPanel openForm={() => setHidden(false)} /> */}
 
                     {/* Word List */}
-                    <ListContainer flex>
+                    {/* <ListContainer flex>
                         <WordItem onEdit={() => setIsOpen(true)} />
                         <WordItem onEdit={() => setIsOpen(true)} />
                         <WordItem onEdit={() => setIsOpen(true)} />
                         <WordItem onEdit={() => setIsOpen(true)} />
-                    </ListContainer>
+                    </ListContainer> */}
 
                 </MainContainer>
             </ScrollContainer>
 
             {/* Slide Form */}
-            <Slide open={isOpen}>
+            {/* <Slide open={isOpen}>
                 <EditForm format="full" heading="Add new word:" submit="Save word" inputs={[{ placeholder: "Spanish", value: "" }, { placeholder: "English", value: "" }]} />
-            </Slide>
+            </Slide> */}
         </Container>
     )
 }
 
 const mapStateToProps = (state) => ({
-    count: state.words.all.length,
-    lists: state.lists.all
+    count: state.words.lists.length,
+    lists: state.lists.lists
 })
 
 const mapDispatchToProps = {

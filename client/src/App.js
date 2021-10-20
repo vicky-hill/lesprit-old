@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './main.scss';
 
 import Navbar from './components/elements/Navbar';
-import Vocabulary from './components/pages/Vocabulary';
+import Vocabulary from './pages/Vocabulary';
 import Login from './components/pages/Login';
 import Home from './components/pages/Home';
 import Register from './components/pages/Register';

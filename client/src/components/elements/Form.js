@@ -28,7 +28,7 @@ const Form = ({ onSubmit, children }) => {
 export const FormContainer = ({ children, format }) => {
     return (
         <div className={`form-container ${format && format}`}>
-            { children}
+            {children}
         </div>
     )
 }
@@ -36,14 +36,17 @@ export const FormContainer = ({ children, format }) => {
 export const Heading = ({ children }) => {
     return (
         <h1 className="form-heading">
-            { children}
+            {children}
         </h1>
     )
 }
 
-export const Input = ({ placeholder, value, onChange, type, name }) => {
+export const Input = ({ placeholder, value, onChange, type, name, validation }) => {
     return (
-        <input id={name} name={name} autoComplete="off" autoCapitalize="none" type="text" placeholder={placeholder} value={value} onChange={onChange} type={type} />
+        <div className="input-container">
+            <input id={name} name={name} autoComplete="off" autoCapitalize="none" type="text" placeholder={placeholder} value={value} onChange={onChange} type={type} />
+            <small className="invalid">{ validation }</small>
+        </div>
     )
 }
 
