@@ -10,6 +10,7 @@ router
     .route('/')
     .get(protect, listCtrl.getLists)
     .post(protect, listCtrl.saveList)
+    .delete(protect, listCtrl.deleteUserLists)
 
 router
     .route('/:id')
@@ -30,6 +31,9 @@ module.exports = router;
     POST @ api/lists
         Payload { title, user(_id) }
         Response { _id, title, slug, user(_id) }
+
+    DELETE @ api/lists
+        Response { deleted: # }
 
     GET @ api/lists/:id
         Response { _id, title, slug, user(_id) }

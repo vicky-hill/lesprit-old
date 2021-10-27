@@ -1,4 +1,5 @@
 const List = require('./lists.model');
+const Word = require('../words/words.model')
 
 /* ===================================
    Get all lists
@@ -90,6 +91,31 @@ async function deleteList (req, res) {
     }
 }
 
+/* ===================================
+   Delete all lists from user
+=================================== */
+async function deleteUserLists (req, res) {
+    try {
+
+        const words = await Word.deleteMany({ user: req.user.id })
+        const lists = await List.deleteMany({ user: req.user.id })
+
+        res.status(200).json({ 
+            deleted: lists.deletedCount
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({msg: 'Something went wrong'});
+    }
+}
+
+
 module.exports = {
-    getLists, saveList, getList, updateList, deleteList
+    getLists, 
+    saveList, 
+    getList, 
+    updateList, 
+    deleteList,
+    deleteUserLists
 }
