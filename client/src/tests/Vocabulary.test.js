@@ -1,24 +1,47 @@
-test('adds 1 + 2 to equal 3', () => {
-    expect(1+2).toBe(3);
-});
+const Page = require('./helpers/page');
+const Auth = require('./helpers/auth');
+jest.setTimeout(30000);
+
+let page;
+
+beforeAll(async () => {
+    page = await Page.build();
+    await Auth.login(page);
+})
+
+afterAll(async () => {
+    // await Auth.logout(page);
+})
 
 
+test('Open vocabulary', async () => {
 
+    await page.evaluate( async (token) => {
+        localStorage.setItem('token', token);
+    }, Auth.token);
 
+    await page.click('#menu-card-Vocabulary');
+    const vocabTitle = await page.getContentOf('.panel-card_group--title');
+    
 
+    expect(vocabTitle).toContain('Word');
+})
 
-// import React from 'react';
-// import { shallow } from 'enzyme';
-// import Vocabulary from 'components/pages/Vocabulary';
-// import VocabularyPanel from 'components/blocks/vocabulary/VocabularyPanel';
-// import VocabularyItem from 'components/blocks/vocabulary/VocabularyItem';
+test('Add a new list', async () => {
+    
+    await page.goto('http://localhost:3000/vocabulary');
 
-// let wrapper;
+    await page.click('#add-list-btn');
 
-// beforeEach(() => {
-//     wrapper = shallow(<Vocabulary />);
-// });
+    await page.type('#vocabulary-form #title', 'Testing with jest');
+    await page.click('#vocabulary-form button')
 
-// it('shows the Vocabulary Panel', () => {
-//     expect(wrapper.find(VocabularyPanel).length).toEqual(1);
-// });
+    // await page.waitForTimeout(5000);
+
+    const listTitle = await page.getContentOf('.vocabulary-card .vocabulary-card--text h3');
+
+    console.log(listTitle)
+
+    expect(1).toEqual(1)
+})
+

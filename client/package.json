@@ -29,7 +29,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "test": "jest -i tests/Login.test.js -t"
+    "test": "jest -i tests/Vocabulary.test.js -t"
   },
   "eslintConfig": {
     "extends": [

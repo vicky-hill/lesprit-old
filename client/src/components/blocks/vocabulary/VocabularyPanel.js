@@ -15,7 +15,7 @@ function VocabularyPanel({ openForm, count }) {
         <Card type="panel" radius="medium">
             <div className="panel-card_group">
                 <h1 className="panel-card_group--title">{ count } Words</h1>
-                <Button type="transparent" onClick={openForm}><p>+</p> Add new list</Button>
+                <Button id="add-list-btn" type="transparent" onClick={openForm}><p>+</p> Add new list</Button>
             </div>
             <Searchbar />
         </Card>

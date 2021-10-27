@@ -58,7 +58,7 @@ class Page {
         const { token } = await this.request('POST', '/api/user/register', { name, password });
 
         const { _id } = await this.request('GET', '/api/user', null, token);
-
+            
         return { token, _id }
     }
 

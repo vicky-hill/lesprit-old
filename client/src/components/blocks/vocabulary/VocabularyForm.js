@@ -62,7 +62,7 @@ const VocabularyForm = ({ saveList }) => {
     return (
         <Card type="stitched">
             <FormContainer format="half">
-                <Form onSubmit={onSubmit}>
+                <Form onSubmit={onSubmit} id="vocabulary-form" >
                     <Heading>Add new list:</Heading>
                         <Input validation={validation.title} placeholder="List name" name="title" value={title} onChange={onChange} />
                         <SubmitButton title="Save list" />

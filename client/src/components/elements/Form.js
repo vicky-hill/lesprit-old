@@ -17,9 +17,9 @@ import React from 'react';
 
 
 
-const Form = ({ onSubmit, children }) => {
+const Form = ({ onSubmit, children, id }) => {
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} id={id}>
             {children}
         </form>
     )
@@ -57,7 +57,8 @@ export const SubmitButton = ({ title }) => {
 }
 
 Input.defaultProps = {
-    type: "text"
+    type: "text",
+    id: ""
 }
 
 export default Form;
