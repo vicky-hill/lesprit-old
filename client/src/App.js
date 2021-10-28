@@ -14,13 +14,13 @@ import { getUser, loginCheck } from './actions/auth';
 import { store } from './store';
 
 
-
-function App({ isAuthenticated }) {
+function App({ isAuthenticated, token }) {
   
   useEffect(() => {
-    store.dispatch(loginCheck());
-    store.dispatch(getUser());
-  }, [])
+      store.dispatch(getUser());
+      store.dispatch(loginCheck());
+  }, [token])
+
 
   return (
       <Router>
@@ -38,7 +38,8 @@ function App({ isAuthenticated }) {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  token: state.auth.token
 })
 
 export default connect(mapStateToProps, {})(App);

@@ -26,6 +26,10 @@ const WordSchema = new mongoose.Schema({
     dueDate: {
         type: Date,
         default: Date.now
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 })
 

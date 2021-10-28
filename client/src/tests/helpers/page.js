@@ -54,7 +54,7 @@ class Page {
     }
 
     // Create test user
-    async createUser(name = 'test_user', password = '1234') {
+    async createUser(name = 'test', password = '1234') {
         const { token } = await this.request('POST', '/api/user/register', { name, password });
 
         const { _id } = await this.request('GET', '/api/user', null, token);
@@ -63,7 +63,7 @@ class Page {
     }
 
 
-    // CleanUpUser
+    // Clean Up User
     async clearUser(token) {
         if (!token) {
             // Get token from local storage if not passed in
@@ -77,6 +77,19 @@ class Page {
 
         // Delete test user
         await this.request('DELETE', `/api/user/${_id}`, null, token);
+    }
+
+    // Clean Up Lists
+    async clearLists(token) {
+        if (!token) {
+            // Get token from local storage if not passed in
+            token = await this.page.evaluate(() => {
+                return localStorage.getItem('token');
+            });
+        }
+
+        // Delete all users lists
+        await this.request('DELETE', `/api/lists`, null, token);
     }
 
 }

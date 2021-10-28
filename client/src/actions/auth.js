@@ -1,7 +1,8 @@
 import api from '../utils/api';
+
 import { setError } from './alerts';
 import {
-    REGISTER_SUCCESS, 
+    REGISTER_SUCCESS,
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -27,12 +28,12 @@ export const register = (name, password) => async dispatch => {
 
     } catch (err) {
         dispatch(setError(err.response.data.msg))
-        
+
         dispatch({
             type: REGISTER_FAIL
         })
     }
-} 
+}
 
 
 /* ===================================
@@ -53,8 +54,8 @@ export const login = (name, password) => async dispatch => {
     try {
 
         const res = await api.post(`/api/user/login`, body, config);
-        
-        
+
+
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
@@ -63,12 +64,13 @@ export const login = (name, password) => async dispatch => {
 
     } catch (err) {
         dispatch(setError(err.response.data.msg))
-        
+
         dispatch({
             type: LOGIN_FAIL
         })
     }
 }
+
 
 
 /* ===================================
@@ -78,8 +80,7 @@ export const login = (name, password) => async dispatch => {
 export const loginCheck = () => async dispatch => {
 
     // Set loginCheck to true after one second
-    setTimeout(function(){
-        console.log('wait a second')
+    setTimeout(function () {
         dispatch({
             type: LOGIN_CHECK
         })
@@ -92,6 +93,8 @@ export const loginCheck = () => async dispatch => {
 =================================== */
 
 export const getUser = () => async dispatch => {
+    
+
     try {
         const res = await api.get('/api/user');
 

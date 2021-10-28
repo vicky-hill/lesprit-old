@@ -15,15 +15,17 @@ import Container from '../containers/Container';
 
 import { connect } from 'react-redux';
 import { getWords } from 'actions/words';
+import { getLists } from 'actions/lists';
 
-function Home({ getWords }) {
+function Home({ getWords, getLists }) {
 
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
 
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        getWords()
+        getWords();
+        getLists();
     }, [])
   
     closeByClick(setIsOpen);
@@ -67,7 +69,8 @@ function Home({ getWords }) {
             </Slide>
 
         </Container>
+
     )
 }
 
-export default connect(null, { getWords })(Home);
+export default connect(null, { getWords, getLists })(Home);

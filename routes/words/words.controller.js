@@ -8,7 +8,7 @@ async function getWords (req, res) {
         const words = await Word.find({ user: req.user.id}).populate({
             path: 'list',
             select: 'title'
-        });
+        }).sort({ createdAt: -1 });
         res.status(200).json(words);
     } catch (err) {
         console.log(err);

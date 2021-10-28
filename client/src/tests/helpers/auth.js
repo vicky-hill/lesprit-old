@@ -4,19 +4,20 @@ const login = async (page) => {
     await page.setViewport({ width: 1280, height: 800 });
     await page.goto('http://localhost:3000/login');
 
-    // await page.createUser();
-
     await page.type('form #name', 'test_user');
     await page.type('form #password', '1234');
     await page.click('form button');
 
     await page.waitForNavigation();
+
+    await page.evaluate( async (token) => {
+        localStorage.setItem('token', token);
+    }, token);
 }
 
 const logout = async (page) => {
-    // await page.clearUser();
+    await page.clearLists(token);
     await page.close();
-    console.log('logout')
 }
 
 module.exports = {

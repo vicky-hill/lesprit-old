@@ -6,7 +6,7 @@ const Word = require('../words/words.model')
 =================================== */
 async function getLists (req, res) {
     try {
-        const lists = await List.find({ user: req.user.id });
+        const lists = await List.find({ user: req.user.id }).sort({ createdAt: -1 });
 
         res.status(200).json(lists);
     } catch (err) {

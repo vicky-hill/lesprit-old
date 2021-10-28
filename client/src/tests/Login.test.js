@@ -14,7 +14,7 @@ afterEach(async () => {
 })
 
 const loginUser = async (name, password) => {
-    await page.type('form #name', 'name');
+    await page.type('form #name', name);
     await page.type('form #password', password);
 
     await page.click('form button');

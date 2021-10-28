@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
         case SAVE_LIST:  
             return {
                 ...state,
-                lists: [...state.lists, payload]
+                lists: [payload, ...state.lists]
             }
 
         default:     

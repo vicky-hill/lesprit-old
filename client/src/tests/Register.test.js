@@ -49,7 +49,7 @@ test('Register redirects to home page', async () => {
 test('Register with username that is taken', async () => {
     const testUser = await page.createUser();
 
-    await registerUser('test_user');
+    await registerUser('test');
 
     await page.waitForSelector('.alert-danger');
     

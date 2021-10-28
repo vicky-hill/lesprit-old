@@ -7,28 +7,33 @@ let page;
 beforeAll(async () => {
     page = await Page.build();
     await Auth.login(page);
+   
+    await page.request('POST', `/api/lists`, { title: 'Factory list 1' }, Auth.token);
+    await page.request('POST', `/api/lists`, { title: 'Factory list 2' }, Auth.token);
+    await page.request('POST', `/api/lists`, { title: 'Factory list 3' }, Auth.token);
 })
 
 afterAll(async () => {
-    // await Auth.logout(page);
+    await Auth.logout(page);
 })
 
 
-test('Open vocabulary', async () => {
-
-    await page.evaluate( async (token) => {
-        localStorage.setItem('token', token);
-    }, Auth.token);
+test('Load vocabulary lists', async () => {
 
     await page.click('#menu-card-Vocabulary');
     const vocabTitle = await page.getContentOf('.panel-card_group--title');
+    await page.waitForTimeout(1000);
     
+    const lists = await page.$$('.vocabulary-card');
 
+    console.log('lists', lists.length)
+    
+    expect(lists.length).toEqual(3);
     expect(vocabTitle).toContain('Word');
 })
 
+
 test('Add a new list', async () => {
-    
     await page.goto('http://localhost:3000/vocabulary');
 
     await page.click('#add-list-btn');
@@ -36,12 +41,10 @@ test('Add a new list', async () => {
     await page.type('#vocabulary-form #title', 'Testing with jest');
     await page.click('#vocabulary-form button')
 
-    // await page.waitForTimeout(5000);
+    await page.waitForTimeout(2000);
 
     const listTitle = await page.getContentOf('.vocabulary-card .vocabulary-card--text h3');
 
-    console.log(listTitle)
-
-    expect(1).toEqual(1)
+    expect(listTitle).toEqual('Testing with jest')
 })
 
