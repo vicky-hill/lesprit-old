@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainContainer from '../../layout/MainContainer';
 import Card from '../../elements/Card';
 import Form from '../../elements/Form';
@@ -7,13 +7,16 @@ import { FormContainer, Heading, Input, SubmitButton } from '../../elements/Form
 
 /* Props
 =================================================== */
-// format: String  | half, full
+// format: String | half, full
 // heading: String
 // submit: String
 // inputs: Array | [{ placeholder: String, value: useState, onChange: Function}]
 
 
 const EditForm = ({ format, heading, submit, inputs }) => {
+
+    const [formData, setFormDate] = useState();
+    
 
     const form = (
         <>

@@ -81,7 +81,7 @@ function Navbar({ authenticated, username }) {
 
             {/* Logo */}
             <Link to="">
-                <h1>Linguar</h1>
+                <h1>lesprit</h1>
             </Link>
 
 

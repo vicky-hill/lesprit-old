@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MainContainer({ children }) {
+function AuthContainer({ children }) {
     return (
         <div className="container auth-container">
             { children }
@@ -8,4 +8,4 @@ function MainContainer({ children }) {
     )
 }
 
-export default MainContainer;
+export default AuthContainer;

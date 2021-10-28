@@ -6,14 +6,16 @@ import Button from '../../elements/Button';
 /* Props
 =================================================== */
 // openForm: Function
+// count: Number 
 
-function VocabularyPanel({ openForm }) {
+
+function VocabularyPanel({ openForm, count }) {
 
     return (
         <Card type="panel" radius="medium">
             <div className="panel-card_group">
-                <h1 className="panel-card_group--title">1044 Words</h1>
-                <Button type="transparent" onClick={openForm}><p>+</p> Add new list</Button>
+                <h1 className="panel-card_group--title">{ count } Words</h1>
+                <Button id="add-list-btn" type="transparent" onClick={openForm}><p>+</p> Add new list</Button>
             </div>
             <Searchbar />
         </Card>
@@ -21,3 +23,4 @@ function VocabularyPanel({ openForm }) {
 }
 
 export default VocabularyPanel;
+ 

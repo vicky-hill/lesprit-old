@@ -1,6 +1,10 @@
 import api from '../utils/api';
 
-export const GET_WORDS = 'GET_WORDS';
+import {
+    GET_WORDS
+} from './types';
+
+// getWords() :: null :: [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
 
 
 /* ===================================

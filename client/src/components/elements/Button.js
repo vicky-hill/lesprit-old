@@ -3,19 +3,23 @@ import React from 'react';
 /* Props
 =================================================== */
 // type: String | transparent, regular
+// id: optional #
+// onClick: Function
 
 
 
-function Button({ children, type, onClick }) {
+
+function Button({ children, type, onClick, id }) {
     return (
-        <button className={`${type}-btn`} onClick={onClick}>
+        <button id={id} className={`${type}-btn`} onClick={onClick}>
             { children }
         </button>
     )
 }
 
 Button.defaultProps = {    
-    type: "regular"
+    type: "regular",
+    id: ""
 }
 
 export default Button;

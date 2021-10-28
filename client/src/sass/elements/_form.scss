@@ -62,21 +62,42 @@ input[type=text], input[type=password] {
     color: $grey-black;
     -webkit-appearance: none;
 
-    &:focus {
-        outline: none;
-        border: 1px solid   #d1d0d0;
+        &:focus {
+            outline: none;
+            border: 1px solid   #d1d0d0;
+        }
+
+        &::placeholder {
+            color: #d1cfcf;
+        }  
+        
+        // Validation
+        &.invalid {
+            border-color: #dd3444;
+
+            &:focus, &:active {
+                box-shadow: 0 0 0 3px rgba(221, 52, 68, 0.25);
+            }
+        }
     }
 
-    &::placeholder {
-        color: #d1cfcf;
+    small {
+        position: relative;
+        top: -20px;
+        left: 5px;
     }
-    }
+
+    .invalid {
+        color: #DD3444;
+    } 
+
 }
 
 
 
-// Desktop
 
+
+// Desktop
 @media only screen and (min-width : $desktop) {
 
     form {
@@ -141,7 +162,7 @@ input[type=text], input[type=password] {
 
     .input-icon {
         top: 0px;
-        left: 5.9rem;
+        left: 2.9rem;
         font-size: 1.4rem;
     }
 }

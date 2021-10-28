@@ -12,7 +12,6 @@ const connectDB = async () => {
     });
  
     const db = process.env.NODE_ENV === 'testing' ? 'TestingDB connected ...' : 'MongoDB connected ...';
-    console.log(db)
 
     return db;
 };

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import pineapple from '../../assets/graphics/pineapple.png';
 
-import ScrollContainer from '../layout/ScrollContainer';
-import AuthContainer from '../layout/AuthContainer';
+import ScrollContainer from '../containers/ScrollContainer';
+import AuthContainer from '../containers/AuthContainer';
 import Card from '../elements/Card';
 import Alert from 'components/elements/Alert';
 import Form, { Heading, Input, SubmitButton} from '../elements/Form';
@@ -12,15 +12,14 @@ import { register, getUser } from 'actions/auth';
 import { setError } from 'actions/alerts';
 
 
-function Register(props) {
-    const { history } = props;
-
-    // actions
-    const { register, getUser, setError } = props;
-    
-    // mapStateToProps
-    const { isAuthenticated, error } = props;
-
+function Register({
+    history,
+    register,
+    getUser,
+    setError,
+    isAuthenticated,
+    error
+}) {
 
     // Check if there's a user to load
     useEffect(() => {

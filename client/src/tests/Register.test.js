@@ -22,8 +22,6 @@ const registerUser = async (name) => {
 }
 
 test('The register page is loading', async () => {
-    page.login();
-
     const url = await page.url();
     const text = await page.getContentOf('a.nav-link');
     const heading = await page.getContentOf('.form-heading');
@@ -44,14 +42,14 @@ test('Register redirects to home page', async () => {
 
     expect(user).toEqual('username');
 
-    await page.cleanUpUser();
+    await page.clearUser();
 });
 
 
 test('Register with username that is taken', async () => {
     const testUser = await page.createUser();
 
-    await registerUser('test_user');
+    await registerUser('test');
 
     await page.waitForSelector('.alert-danger');
     
@@ -59,7 +57,7 @@ test('Register with username that is taken', async () => {
 
     expect(alert).toEqual('Username is taken!');
     
-    await page.cleanUpUser(testUser.token);
+    await page.clearUser(testUser.token);
 });
 
 

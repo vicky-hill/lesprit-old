@@ -1,16 +1,20 @@
-const puppeteer = require('puppeteer');
+const Page = require('./helpers/page');
+const Auth = require('./helpers/auth');
+jest.setTimeout(30000);
 
-test('We can launch a browser', async () => {
-    const browser = await puppeteer.launch({
-        headless: true
-    });
+let page;
 
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 800 })
+beforeEach(async () => {
+    page = await Page.build();
+    await Auth.login(page);
+})
+
+afterEach(async () => {
+    await Auth.logout(page);
+})
 
 
-    await page.goto('http://localhost:3000');
-
+test('Login and go to home', async () => {
 
     const reviewText = await page.$eval('h2.desktop-home_review--title', el => el.innerHTML);
 

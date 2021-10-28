@@ -1,9 +1,10 @@
 import {
-    GET_WORDS
+    GET_LISTS,
+    SAVE_LIST
 } from 'actions/types';
 
 const initialState = {
-    all: []
+    lists: []
 }
 
 export default function(state = initialState, action) {
@@ -11,10 +12,16 @@ export default function(state = initialState, action) {
 
     switch(type) {
 
-        case GET_WORDS:  
+        case GET_LISTS:  
             return {
                 ...state,
-                all: payload
+                lists: payload
+            }
+
+        case SAVE_LIST:  
+            return {
+                ...state,
+                lists: [payload, ...state.lists]
             }
 
         default:     
@@ -23,3 +30,4 @@ export default function(state = initialState, action) {
             }
     }
 }
+
