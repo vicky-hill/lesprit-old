@@ -19,7 +19,6 @@ import { getWords } from 'actions/words'
 
 
 function Vocabulary({ getLists, getWords, count, lists }) {
-
     useEffect(() => {
         getLists();
         getWords();
@@ -47,7 +46,7 @@ function Vocabulary({ getLists, getWords, count, lists }) {
                     <ListContainer>
                         {
                             lists.map(list => (
-                                <VocabularyItem key={list._id} title={list.title} />
+                                <VocabularyItem key={list._id} title={list.title} slug={list.slug} />
                             ))
                         }
                     </ListContainer>

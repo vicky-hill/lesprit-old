@@ -7,6 +7,8 @@ export const GET_USER = 'GET_USER';
 export const SET_ERROR = 'SET_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 
-export const GET_WORDS = 'GET_WORDS';
 export const GET_LISTS = 'GET_LISTS';
 export const SAVE_LIST = 'SAVE_LIST';
+
+export const GET_WORDS = 'GET_WORDS';
+export const SAVE_WORD = 'SAVE_WORD';

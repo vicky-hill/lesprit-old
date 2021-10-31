@@ -1,7 +1,8 @@
 import api from '../utils/api';
 
 import {
-    GET_WORDS
+    GET_WORDS,
+    SAVE_WORD
 } from './types';
 
 // getWords() :: null :: [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
@@ -22,5 +23,22 @@ export const getWords = () => async dispatch => {
 
     } catch (err) {
         console.log(err.message);
+    }
+}
+
+/* ===================================
+   Save Word
+=================================== */
+
+export const saveWord = (data) => async dispatch => {
+    try {
+        const res = await api.post('/api/words', data);
+
+        dispatch({
+            type: SAVE_WORD,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err)
     }
 }

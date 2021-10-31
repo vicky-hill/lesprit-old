@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ScrollContainer from '../containers/ScrollContainer';
-import AuthContainer from '../containers/AuthContainer';
-import Card from '../elements/Card';
-import Form, { Heading, Input, SubmitButton} from '../elements/Form';
-import pineapple from '../../assets/graphics/pineapple.png';
+import ScrollContainer from '../components/containers/ScrollContainer';
+import AuthContainer from '../components/containers/AuthContainer';
+import Card from '../components/elements/Card';
+import Form, { Heading, Input, SubmitButton} from '../components/elements/Form';
+import pineapple from '../assets/graphics/pineapple.png';
 import { connect } from 'react-redux';
-import { login, getUser } from '../../actions/auth';
+import { login, getUser } from '../actions/auth';
 import { setError } from 'actions/alerts';
 import Alert from 'components/elements/Alert';
 
