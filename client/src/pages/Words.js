@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
 import { connect } from 'react-redux'
+import { getLists, displayList } from 'actions/lists'
+import { getWords } from 'actions/words'
+import wordlistSelector from 'selectors/wordlistSelector'
 
 import Container from 'components/containers/Container';
 import ScrollContainer from 'components/containers/ScrollContainer';
@@ -16,12 +19,27 @@ import WordItem from 'components/blocks/words/WordItem'
 import WordsPanel from 'components/blocks/words/WordsPanel';
 
 
-const Words = () => {
+
+const Words = ({ displayList, match, wordList, getWords, getLists }) => {
     const [hidden, setHidden] = useState(true);    // Half screen form
+     // eslint-disable-next-line
     const [isOpen, setIsOpen] = useState(false);   // Full screen form 
 
     closeByClick(setIsOpen, 'closing-x');
     hideByClick(setHidden, 'closing-x');
+
+    useEffect(() => {
+        loadData();
+        // eslint-disable-next-line
+    }, [])
+
+    const loadData = async () => {
+        await getWords();
+        await getLists();
+        await displayList(match.params.title)
+    }
+
+    console.log(wordList)
 
     return (
         <Container>
@@ -56,8 +74,8 @@ const Words = () => {
 }
 
 const mapStateToProps = state => ({
-
+    wordList: wordlistSelector(state)
 })
 
-export default connect(mapStateToProps, {  })(Words);
+export default connect(mapStateToProps, { displayList, getLists, getWords })(Words);
 

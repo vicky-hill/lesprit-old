@@ -11,7 +11,7 @@ import Register from './pages/Register';
 import Words from './pages/Words';
 
 import PrivateRoute from './components/elements/PrivateRoute';
-import { getUser, loginCheck } from './actions/auth'; 
+import { getUser, loginCheck } from 'actions/auth'; 
 import { store } from './store';
 
 
@@ -21,6 +21,7 @@ function App({ isAuthenticated, token }) {
       store.dispatch(getUser());
       store.dispatch(loginCheck());
   }, [token])
+
 
 
   return (

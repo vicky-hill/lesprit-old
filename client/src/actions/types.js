@@ -9,6 +9,8 @@ export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 export const GET_LISTS = 'GET_LISTS';
 export const SAVE_LIST = 'SAVE_LIST';
+export const DISPLAY_LIST = 'DISPLAY_LIST';
 
 export const GET_WORDS = 'GET_WORDS';
 export const SAVE_WORD = 'SAVE_WORD';
+

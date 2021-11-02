@@ -2,7 +2,8 @@ import api from '../utils/api';
 
 import {
     GET_LISTS,
-    SAVE_LIST
+    SAVE_LIST,
+    DISPLAY_LIST
 } from './types';
 
 
@@ -41,3 +42,17 @@ export const saveList = (data) => async dispatch => {
         console.log(err)
     }
 }
+
+
+/* ===================================
+   Display list
+=================================== */
+
+export const displayList = (slug) => async dispatch => {
+    dispatch({
+        type: DISPLAY_LIST,
+        payload: slug
+    })
+}
+
+

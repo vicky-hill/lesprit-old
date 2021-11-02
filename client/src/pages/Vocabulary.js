@@ -22,6 +22,7 @@ function Vocabulary({ getLists, getWords, count, lists }) {
     useEffect(() => {
         getLists();
         getWords();
+        // eslint-disable-next-line
     }, [])
 
     const [hidden, setHidden] = useState(true);    // Half screen form
@@ -59,7 +60,7 @@ function Vocabulary({ getLists, getWords, count, lists }) {
 }
 
 const mapStateToProps = (state) => ({
-    count: state.words.all.length,
+    count: state.words.words.length,
     lists: state.lists.lists
 })
 

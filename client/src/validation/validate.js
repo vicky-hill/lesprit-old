@@ -1,6 +1,6 @@
 import Joi from 'joi-browser'
 
-export default (data, schema) => {
+const validate = (data, schema) => {
     const options = { abortEarly: false }
     const { error } = Joi.validate(data, schema, options);
 
@@ -18,3 +18,5 @@ export default (data, schema) => {
     console.log(errors)
     return errors;
 }
+
+export default validate;

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 function VocabularyItem({ title, slug }) {
 
     return (
-        <Link to={`/vocabulary/${slug}`} >
+        <Link to={`/vocabulary/${slug}`}>
             <Card type="vocabulary">
                 {/* <img className="vocabulary-list_item--art hide-mobile" src={chapterArt01} alt="" /> */}
 

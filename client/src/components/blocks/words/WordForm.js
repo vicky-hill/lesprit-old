@@ -5,7 +5,7 @@ import Card from 'components/elements/Card'
 import { FormContainer, Heading, Input, SubmitButton } from 'components/elements/Form'
 
 import { connect } from 'react-redux'
-import { saveList } from 'actions/lists';
+// import { saveList } from 'actions/lists';
 
 import validate from 'validation/validate';
 import { vocabularyForm as schema } from 'validation/schemas'
