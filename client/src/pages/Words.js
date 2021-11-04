@@ -56,10 +56,11 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
 
                     {/* Word List */}
                     <ListContainer flex>
-                        <WordItem onEdit={() => setIsOpen(true)} />
-                        <WordItem onEdit={() => setIsOpen(true)} />
-                        <WordItem onEdit={() => setIsOpen(true)} />
-                        <WordItem onEdit={() => setIsOpen(true)} />
+                        {
+                            wordList.map(word => (
+                                <WordItem key={word._id} word={word} onEdit={() => setIsOpen(true)} />
+                            ))
+                        }
                     </ListContainer>
 
                 </MainContainer>

@@ -3,10 +3,10 @@ import React from 'react';
 /* Props
 =================================================== */
 // onEdit: useState Function to open form
+// word: Object
 
 
-
-const WordItem = ({ onEdit }) => {
+const WordItem = ({ onEdit, word }) => {
 
     // Toggle edit icons
     const toggleOptions = (e) => {
@@ -38,8 +38,8 @@ const WordItem = ({ onEdit }) => {
     return (
         <div className="word-card" onClick={toggleOptions}>
             <div className="word-card--text">
-                <h3>el doble de</h3>
-                <p>twice as</p>
+                <h3>{word.foreign}</h3>
+                <p>{word.native}</p>
             </div>
             <div className="word-card--edits">
                 <i className="far fa-edit" onClick={onEdit}></i>
