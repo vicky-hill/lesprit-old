@@ -39,8 +39,6 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
         await displayList(match.params.title)
     }
 
-    console.log(wordList)
-
     return (
         <Container>
             <ScrollContainer>
