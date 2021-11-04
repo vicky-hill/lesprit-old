@@ -1,13 +1,15 @@
 import {
+    DISPLAY_LIST,
     GET_LISTS,
     SAVE_LIST
 } from 'actions/types';
 
 const initialState = {
-    lists: []
+    lists: [],
+    displayList: ''
 }
 
-export default function(state = initialState, action) {
+export default function listReducer (state = initialState, action) {
     const { type, payload } = action;
 
     switch(type) {
@@ -22,6 +24,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 lists: [payload, ...state.lists]
+            }
+        
+        case DISPLAY_LIST:
+            return {
+                ...state,
+                displayList: state.lists.filter(list => list.slug === payload)[0]
             }
 
         default:     

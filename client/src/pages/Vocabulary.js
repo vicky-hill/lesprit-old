@@ -19,10 +19,10 @@ import { getWords } from 'actions/words'
 
 
 function Vocabulary({ getLists, getWords, count, lists }) {
-
     useEffect(() => {
         getLists();
         getWords();
+        // eslint-disable-next-line
     }, [])
 
     const [hidden, setHidden] = useState(true);    // Half screen form
@@ -47,7 +47,7 @@ function Vocabulary({ getLists, getWords, count, lists }) {
                     <ListContainer>
                         {
                             lists.map(list => (
-                                <VocabularyItem key={list._id} title={list.title} />
+                                <VocabularyItem key={list._id} title={list.title} slug={list.slug} />
                             ))
                         }
                     </ListContainer>
@@ -60,7 +60,7 @@ function Vocabulary({ getLists, getWords, count, lists }) {
 }
 
 const mapStateToProps = (state) => ({
-    count: state.words.all.length,
+    count: state.words.words.length,
     lists: state.lists.lists
 })
 

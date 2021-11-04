@@ -44,7 +44,7 @@ export const Heading = ({ children }) => {
 export const Input = ({ placeholder, value, onChange, type, name, validation }) => {
     return (
         <div className="input-container">
-            <input id={name} name={name} autoComplete="off" autoCapitalize="none" type="text" placeholder={placeholder} value={value} onChange={onChange} type={type} />
+            <input id={name} name={name} autoComplete="off" autoCapitalize="none" type="text" placeholder={placeholder} value={value} onChange={onChange} />
             <small className="invalid">{ validation }</small>
         </div>
     )

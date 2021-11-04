@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import Circle from '../blocks/home/Circle';
-import goldCircle from '../../assets/graphics/gold-circle.png';
+import Circle from '../components/blocks/home/Circle';
+import goldCircle from '../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';
-import silverCircle from '../../assets/graphics/silver-circle.png';
-import MenuCard from '../blocks/home/MenuCard';
-import Slide from '../elements/Slide';
-import Review from '../blocks/home/Review';
-import { closeSlide, closeByClick } from '../elements/Slide';
+// import silverCircle from '../assets/graphics/silver-circle.png';
+import MenuCard from '../components/blocks/home/MenuCard';
+import Slide from '../components/elements/Slide';
+import Review from '../components/blocks/home/Review';
+import { closeByClick } from '../components/elements/Slide';
 
-import speechbubble from '../../assets/icons/speechbubble-icon.png';
-import book from '../../assets/icons/book-icon.png';
-import Footer from '../elements/Footer';
-import Container from '../containers/Container';
+import speechbubble from '../assets/icons/speechbubble-icon.png';
+import book from '../assets/icons/book-icon.png';
+import Footer from '../components/elements/Footer';
+import Container from '../components/containers/Container';
 
 import { connect } from 'react-redux';
 import { getWords } from 'actions/words';
@@ -26,6 +26,7 @@ function Home({ getWords, getLists }) {
     useEffect(() => {
         getWords();
         getLists();
+        // eslint-disable-next-line
     }, [])
   
     closeByClick(setIsOpen);
