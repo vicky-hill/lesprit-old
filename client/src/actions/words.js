@@ -5,8 +5,8 @@ import {
     SAVE_WORD
 } from './types';
 
-// getWords() :: null :: [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
-
+// getWords()                               :: [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
+// saveWord({ foreign, native, list })      :: { _id, rating, foreign, native, user, dueDate, list {  _id, title } }
 
 /* ===================================
    Get Words
