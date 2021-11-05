@@ -11,6 +11,7 @@ import MainContainer from 'components/containers/MainContainer';
 import ListContainer from 'components/containers/ListContainer';
 
 import Hide from 'components/elements/Hide';
+import Slide from 'components/elements/Slide';
 import { closeByClick } from 'components/elements/Slide';
 import { hideByClick } from 'components/elements/Hide';
 
@@ -46,7 +47,7 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
 
                     {/* Hidden form */}
                     <Hide hidden={hidden}>
-                        <WordForm />
+                        <WordForm format="half" />
                     </Hide>
 
                     {/* Header and word panel */}
@@ -65,9 +66,9 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
             </ScrollContainer>
 
             {/* Slide Form */}
-            {/* <Slide open={isOpen}>
-                <EditForm format="full" heading="Add new word:" submit="Save word" inputs={[{ placeholder: "Spanish", value: "" }, { placeholder: "English", value: "" }]} />
-            </Slide> */}
+            <Slide open={isOpen}>
+                <WordForm format="full" />
+            </Slide>
         </Container>
     )
 }
