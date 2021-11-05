@@ -5,13 +5,13 @@ import Card from 'components/elements/Card'
 import { FormContainer, Heading, Input, SubmitButton } from 'components/elements/Form'
 
 import { connect } from 'react-redux'
-// import { saveList } from 'actions/lists';
+import { saveWord } from 'actions/words';
 
 import validate from 'validation/validate';
-import { vocabularyForm as schema } from 'validation/schemas'
+import { wordForm as schema } from 'validation/schemas'
 
 
-const WordForm = ({ saveList }) => {
+const WordForm = ({ saveWord, wordList, list }) => {
 
     const [form, setForm] = useState({
         foreign: '',
@@ -51,10 +51,12 @@ const WordForm = ({ saveList }) => {
             return checkValidation(errors);
         };
     
-        saveList(form);
+        saveWord({ ...form, list: list._id});
+        
         setForm({
             title: ''
         })
+
         setValidation({
             title: ''
         })
@@ -67,7 +69,7 @@ const WordForm = ({ saveList }) => {
                     <Heading>Add new word:</Heading>
                         <Input validation={validation.foreign} placeholder="Foreign" name="foreign" value={foreign} onChange={onChange} />
                         <Input validation={validation.native} placeholder="Native" name="native" value={native} onChange={onChange} />
-                        <SubmitButton title="Save list" />
+                        <SubmitButton title="Save word" />
                 </Form>
             </FormContainer>
             <i className="fas fa-times closing-x" id="closing-x"></i>
@@ -75,5 +77,9 @@ const WordForm = ({ saveList }) => {
     )
 }
 
+const mapStateToProps = state => ({
+    list: state.lists.displayList
+})
 
-export default connect(null, {  })(WordForm);
+export default connect(mapStateToProps, { saveWord })(WordForm);
+

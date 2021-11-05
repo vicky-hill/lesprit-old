@@ -1,5 +1,6 @@
 import {
-    GET_WORDS
+    GET_WORDS, 
+    SAVE_WORD
 } from 'actions/types';
 
 const initialState = {
@@ -16,6 +17,13 @@ export default function wordReducer (state = initialState, action) {
                 ...state,
                 words: payload
             }
+
+        case SAVE_WORD:  
+            return {
+                ...state,
+                words: [...state.words, payload]
+            }
+        
 
         default:     
             return {
