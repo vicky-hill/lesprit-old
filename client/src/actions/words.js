@@ -2,11 +2,13 @@ import api from '../utils/api';
 
 import {
     GET_WORDS,
-    SAVE_WORD
+    SAVE_WORD,
+    OPEN_EDIT,
+    ON_CHANGE
 } from './types';
 
-// getWords()                               :: [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
-// saveWord({ foreign, native, list })      :: { _id, rating, foreign, native, user, dueDate, list {  _id, title } }
+// getWords()                                [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
+// saveWord({ foreign, native, list })       { _id, rating, foreign, native, user, dueDate, list {  _id, title } }
 
 /* ===================================
    Get Words
@@ -40,5 +42,23 @@ export const saveWord = (data) => async dispatch => {
         })
     } catch (err) {
         console.log(err)
+    }
+}
+
+
+/* ===================================
+   Open Edit
+=================================== */
+
+// formData: { foreign: '', native: '' }
+export const openEdit = (formData) => async dispatch => {
+    try {
+        dispatch({
+            type: OPEN_EDIT,
+            payload: formData
+        })
+
+    } catch (err) {
+        console.log(err.message);
     }
 }

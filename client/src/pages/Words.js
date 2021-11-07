@@ -40,6 +40,10 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
         await displayList(match.params.title)
     }
 
+    const onEdit = () => {
+        setIsOpen(true);
+    }
+
     return (
         <Container>
             <ScrollContainer>
@@ -57,7 +61,7 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
                     <ListContainer flex>
                         {
                             wordList.map(word => (
-                                <WordItem key={word._id} word={word} onEdit={() => setIsOpen(true)} />
+                                <WordItem key={word._id} word={word} onEdit={onEdit} />
                             ))
                         }
                     </ListContainer>

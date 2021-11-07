@@ -14,16 +14,16 @@ import { wordForm as schema } from 'validation/schemas'
 
 /* Props
 =========================================== */
-// saveWord :: action
-// wordList :: state
-// list :: state
-// format :: string | half, full
+// saveWord: action
+// formData: state
+// list: state
+// format: string | half, full
 
-const WordForm = ({ saveWord, wordList, list, format }) => {
+const WordForm = ({ saveWord, list, format, formData }) => {
 
     const [form, setForm] = useState({
-        foreign: '',
-        native: ''
+        foreign: formData.foreign,
+        native: formData.native,
     })
 
     const { foreign, native } = form;
@@ -42,13 +42,13 @@ const WordForm = ({ saveWord, wordList, list, format }) => {
         return setValidation(updatedValidation)
     }
 
-
     const onChange = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
         })
     }
+    
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -62,11 +62,8 @@ const WordForm = ({ saveWord, wordList, list, format }) => {
         saveWord({ ...form, list: list._id });
 
         setForm({
-            title: ''
-        })
-
-        setValidation({
-            title: ''
+            foreign: '',
+            native: ''
         })
     }
 
@@ -104,7 +101,8 @@ const WordForm = ({ saveWord, wordList, list, format }) => {
 }
 
 const mapStateToProps = state => ({
-    list: state.lists.displayList
+    list: state.lists.displayList,
+    formData: state.words.form
 })
 
 export default connect(mapStateToProps, { saveWord })(WordForm);
