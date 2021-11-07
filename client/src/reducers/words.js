@@ -1,12 +1,13 @@
 import {
-    GET_WORDS
+    GET_WORDS, 
+    SAVE_WORD
 } from 'actions/types';
 
 const initialState = {
-    all: []
+    words: []
 }
 
-export default function(state = initialState, action) {
+export default function wordReducer (state = initialState, action) {
     const { type, payload } = action;
 
     switch(type) {
@@ -14,8 +15,15 @@ export default function(state = initialState, action) {
         case GET_WORDS:  
             return {
                 ...state,
-                all: payload
+                words: payload
             }
+
+        case SAVE_WORD:  
+            return {
+                ...state,
+                words: [...state.words, payload]
+            }
+        
 
         default:     
             return {

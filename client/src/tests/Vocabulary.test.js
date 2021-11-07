@@ -25,8 +25,6 @@ test('Load vocabulary lists', async () => {
     await page.waitForTimeout(1000);
     
     const lists = await page.$$('.vocabulary-card');
-
-    console.log('lists', lists.length)
     
     expect(lists.length).toEqual(3);
     expect(vocabTitle).toContain('Word');
