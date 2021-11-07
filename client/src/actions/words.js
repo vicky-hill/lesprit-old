@@ -2,11 +2,15 @@ import api from '../utils/api';
 
 import {
     GET_WORDS,
-    SAVE_WORD
+    SAVE_WORD,
+    OPEN_CREATE,
+    OPEN_EDIT,
+    CLOSE_EDIT,
+    UPDATE_WORD
 } from './types';
 
-// getWords()                               :: [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
-// saveWord({ foreign, native, list })      :: { _id, rating, foreign, native, user, dueDate, list {  _id, title } }
+// getWords()                                [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
+// saveWord({ foreign, native, list })       { _id, rating, foreign, native, user, dueDate, list {  _id, title } }
 
 /* ===================================
    Get Words
@@ -42,3 +46,57 @@ export const saveWord = (data) => async dispatch => {
         console.log(err)
     }
 }
+
+/* ===================================
+   Update Word
+=================================== */
+
+export const updateWord = (id, data) => async dispatch => {
+    try {
+        const res = await api.put(`/api/words/${id}`, data);
+
+        dispatch({
+            type: UPDATE_WORD,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+
+
+/* ===================================
+   Open Create
+=================================== */
+export const openCreate = () => async dispatch => {
+    try {
+        dispatch({
+            type: OPEN_CREATE,
+        })
+
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
+/* ===================================
+   Open Edit
+=================================== */
+export const openEdit = (id, foreign, native) => async dispatch => {
+    try {
+        dispatch({
+            type: OPEN_EDIT,
+            payload: {
+                id,
+                data: {
+                    foreign, 
+                    native
+                }
+            }
+        })
+
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+

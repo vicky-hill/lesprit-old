@@ -49,7 +49,7 @@ class Page {
                 req.headers['x-auth-token'] = _token;
             }
 
-            return fetch('http://localhost:5000' + _path, req).then(res => res.json())
+            return fetch('http://localhost:4000' + _path, req).then(res => res.json())
         }, method, path, data, token)
     }
 
