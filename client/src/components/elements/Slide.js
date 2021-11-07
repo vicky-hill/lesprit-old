@@ -1,15 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { closeSlide } from 'actions/utils'
 
 /* Props
 =================================================== */
-// open: Boolean
+// open: state
+// closeSlide: action
 
-/* Functions
-=================================================== */
-// closeByClick(setState, id)
-
-
-function Slide({ open, children }) {
+function Slide({ open, closeSlide, children }) {
 
     return (
         <div className={`window slide-container ${open && 'slide-in'}`} id="slide-container">
@@ -18,14 +16,9 @@ function Slide({ open, children }) {
     )
 }
 
-// Close slide by clicking on element with id
-export const closeByClick = (setState, id = 'slide-container') => {
-    document.addEventListener('click', function (e) {
-        if (e.target.id === id) {
-            setState(false);
-        }
-    });
-}
+const mapStateToProps = state => ({
+    open: state.utils.slide
+})
 
+export default connect(mapStateToProps, { closeSlide })(Slide);
 
-export default Slide;
