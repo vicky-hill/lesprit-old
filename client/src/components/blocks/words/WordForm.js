@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Form from 'components/elements/Form'
 import Card from 'components/elements/Card'
@@ -19,14 +19,23 @@ import { wordForm as schema } from 'validation/schemas'
 // list: state
 // format: string | half, full
 
-const WordForm = ({ saveWord, list, format, formData }) => {
+const WordForm = ({ saveWord, list, format, formData, mode }) => {
 
     const [form, setForm] = useState({
-        foreign: formData.foreign,
-        native: formData.native,
+        foreign: '',
+        native: '',
     })
 
+    // Load edit data from state
+    useEffect(() => {
+        setForm({
+            foreign: formData.foreign,
+            native: formData.native,
+        });
+    }, [formData])
+
     const { foreign, native } = form;
+
 
     const [validation, setValidation] = useState({
         foreign: '', native: ''
@@ -48,7 +57,7 @@ const WordForm = ({ saveWord, list, format, formData }) => {
             [e.target.name]: e.target.value
         })
     }
-    
+
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -83,14 +92,14 @@ const WordForm = ({ saveWord, list, format, formData }) => {
 
     const halfScreenForm = (
         <Card type="stitched">
-            { formComponent }
+            {formComponent}
         </Card>
     )
 
     const fullScreenForm = (
         <MainContainer>
             <Card type="stitched">
-                { formComponent }
+                {formComponent}
             </Card>
         </MainContainer>
     )
@@ -102,7 +111,8 @@ const WordForm = ({ saveWord, list, format, formData }) => {
 
 const mapStateToProps = state => ({
     list: state.lists.displayList,
-    formData: state.words.form
+    formData: state.words.form.data,
+    mode: state.words.form.mode
 })
 
 export default connect(mapStateToProps, { saveWord })(WordForm);

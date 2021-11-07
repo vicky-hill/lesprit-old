@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { connect } from 'react-redux'
 import { getLists, displayList } from 'actions/lists'
-import { getWords } from 'actions/words'
+import { getWords, openEdit, openCreate } from 'actions/words'
 import wordlistSelector from 'selectors/wordlistSelector'
 
 import Container from 'components/containers/Container';
@@ -21,9 +21,8 @@ import WordsPanel from 'components/blocks/words/WordsPanel';
 
 
 
-const Words = ({ displayList, match, wordList, getWords, getLists }) => {
+const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, openCreate }) => {
     const [hidden, setHidden] = useState(true);    // Half screen form
-     // eslint-disable-next-line
     const [isOpen, setIsOpen] = useState(false);   // Full screen form 
 
     closeByClick(setIsOpen, 'closing-x');
@@ -40,8 +39,14 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
         await displayList(match.params.title)
     }
 
-    const onEdit = () => {
+    const onCreate = () => {
+        setHidden(false);
+        openCreate();
+    }
+
+    const onEdit = (word) => {
         setIsOpen(true);
+        openEdit(word._id, word.foreign, word.native);
     }
 
     return (
@@ -55,13 +60,13 @@ const Words = ({ displayList, match, wordList, getWords, getLists }) => {
                     </Hide>
 
                     {/* Header and word panel */}
-                    <WordsPanel openForm={() => setHidden(false)} />
+                    <WordsPanel openForm={onCreate} />
 
                     {/* Word List */}
                     <ListContainer flex>
                         {
                             wordList.map(word => (
-                                <WordItem key={word._id} word={word} onEdit={onEdit} />
+                                <WordItem key={word._id} word={word} onEdit={() => onEdit(word)} />
                             ))
                         }
                     </ListContainer>
@@ -81,5 +86,5 @@ const mapStateToProps = state => ({
     wordList: wordlistSelector(state)
 })
 
-export default connect(mapStateToProps, { displayList, getLists, getWords })(Words);
+export default connect(mapStateToProps, { displayList, getLists, getWords, openEdit, openCreate })(Words);
 

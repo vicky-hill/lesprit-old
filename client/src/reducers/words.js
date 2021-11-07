@@ -1,51 +1,66 @@
 import {
-    GET_WORDS, 
+    GET_WORDS,
     SAVE_WORD,
-    OPEN_EDIT
+    OPEN_EDIT,
+    OPEN_CREATE
 } from 'actions/types';
 
 const initialState = {
     words: [],
     form: {
         // create, edit
-        mode: 'create', 
+        id: null,
+        mode: 'create',
         data: {
             foreign: '',
             native: ''
         }
-    }, 
+    },
     loading: true,
     error: {}
 }
 
-export default function wordReducer (state = initialState, action) {
+export default function wordReducer(state = initialState, action) {
     const { type, payload } = action;
 
-    switch(type) {
+    switch (type) {
 
-        case GET_WORDS:  
+        case GET_WORDS:
             return {
                 ...state,
                 words: payload
             }
 
-        case SAVE_WORD:  
+        case SAVE_WORD:
             return {
                 ...state,
                 words: [...state.words, payload]
             }
 
-        case OPEN_EDIT:  
+        case OPEN_CREATE:
+            return {
+                ...state,
+                form: {
+                    mode: 'create',
+                    id: null,
+                    data: {
+                        foreign: '',
+                        native: ''
+                    }
+                }
+            }
+
+        case OPEN_EDIT:
             return {
                 ...state,
                 form: {
                     mode: 'edit',
-                    data: payload
+                    id: payload.id,
+                    data: payload.data
                 }
             }
-        
 
-        default:     
+        default:
             return {
                 ...state
             }

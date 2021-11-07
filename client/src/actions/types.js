@@ -14,4 +14,4 @@ export const DISPLAY_LIST = 'DISPLAY_LIST';
 export const GET_WORDS = 'GET_WORDS';
 export const SAVE_WORD = 'SAVE_WORD';
 export const OPEN_EDIT = 'OPEN_EDIT';
-export const ON_CHANGE = 'ON_CHANGE';
+export const OPEN_CREATE = 'OPEN_CREATE';
