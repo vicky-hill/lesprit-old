@@ -2,7 +2,8 @@ import {
     GET_WORDS,
     SAVE_WORD,
     OPEN_EDIT,
-    OPEN_CREATE
+    OPEN_CREATE,
+    UPDATE_WORD
 } from 'actions/types';
 
 const initialState = {
@@ -35,6 +36,17 @@ export default function wordReducer(state = initialState, action) {
             return {
                 ...state,
                 words: [...state.words, payload]
+            }
+
+        case UPDATE_WORD:  
+            return {
+                ...state,
+                words: state.words.map(word => {
+                    if (word._id === payload._id) {
+                        return payload;
+                    }
+                    return word;
+                })
             }
 
         case OPEN_CREATE:

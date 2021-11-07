@@ -6,7 +6,7 @@ import MainContainer from 'components/containers/MainContainer'
 import { FormContainer, Heading, Input, SubmitButton } from 'components/elements/Form'
 
 import { connect } from 'react-redux'
-import { saveWord } from 'actions/words';
+import { saveWord, updateWord } from 'actions/words';
 
 import validate from 'validation/validate';
 import { wordForm as schema } from 'validation/schemas'
@@ -15,11 +15,14 @@ import { wordForm as schema } from 'validation/schemas'
 /* Props
 =========================================== */
 // saveWord: action
+// updateWord: action
 // formData: state
 // list: state
+// mode: state
+// id: state
 // format: string | half, full
 
-const WordForm = ({ saveWord, list, format, formData, mode }) => {
+const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id }) => {
 
     const [form, setForm] = useState({
         foreign: '',
@@ -68,7 +71,12 @@ const WordForm = ({ saveWord, list, format, formData, mode }) => {
             return checkValidation(errors);
         };
 
-        saveWord({ ...form, list: list._id });
+        if(mode === 'edit') {
+            updateWord(id, { ...form });
+        } else {
+            saveWord({ ...form, list: list._id });
+        }
+        
 
         setForm({
             foreign: '',
@@ -112,8 +120,9 @@ const WordForm = ({ saveWord, list, format, formData, mode }) => {
 const mapStateToProps = state => ({
     list: state.lists.displayList,
     formData: state.words.form.data,
-    mode: state.words.form.mode
+    mode: state.words.form.mode,
+    id: state.words.form.id
 })
 
-export default connect(mapStateToProps, { saveWord })(WordForm);
+export default connect(mapStateToProps, { saveWord, updateWord })(WordForm);
 

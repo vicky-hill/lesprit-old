@@ -5,7 +5,8 @@ import {
     SAVE_WORD,
     OPEN_CREATE,
     OPEN_EDIT,
-    CLOSE_EDIT
+    CLOSE_EDIT,
+    UPDATE_WORD
 } from './types';
 
 // getWords()                                [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
@@ -46,9 +47,26 @@ export const saveWord = (data) => async dispatch => {
     }
 }
 
+/* ===================================
+   Update Word
+=================================== */
+
+export const updateWord = (id, data) => async dispatch => {
+    try {
+        const res = await api.put(`/api/words/${id}`, data);
+
+        dispatch({
+            type: UPDATE_WORD,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+
 
 /* ===================================
-   Open Creat
+   Open Create
 =================================== */
 export const openCreate = () => async dispatch => {
     try {
