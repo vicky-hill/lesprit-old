@@ -77,7 +77,7 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
     const formComponent = (
         <>
             <FormContainer format="half">
-                <Form onSubmit={onSubmit} id="word-form" >
+                <Form onSubmit={onSubmit} id={ mode === 'create' ? 'new-word-form' : 'edit-word-form'} >
                     <Heading>{ mode === 'create' ? 'Add new word:' : 'Update word'}</Heading>
                     <Input validation={validation.foreign} placeholder="Foreign" name="foreign" value={foreign} onChange={onChange} />
                     <Input validation={validation.native} placeholder="Native" name="native" value={native} onChange={onChange} />
