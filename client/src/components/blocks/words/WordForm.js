@@ -30,7 +30,6 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
 
     const { foreign, native } = form;
 
-
     const [validation, setValidation] = useState({
         foreign: '', native: ''
     })
@@ -64,11 +63,11 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
 
         if(mode === 'edit') {
             updateWord(id, { ...form });
+            closeSlide();
         } else {
             saveWord({ ...form, list: list._id });
         }
         
-
         setForm({
             foreign: '',
             native: ''
@@ -79,7 +78,7 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
         <>
             <FormContainer format="half">
                 <Form onSubmit={onSubmit} id="word-form" >
-                    <Heading>Add new word:</Heading>
+                    <Heading>{ mode === 'create' ? 'Add new word:' : 'Update word'}</Heading>
                     <Input validation={validation.foreign} placeholder="Foreign" name="foreign" value={foreign} onChange={onChange} />
                     <Input validation={validation.native} placeholder="Native" name="native" value={native} onChange={onChange} />
                     <SubmitButton title="Save word" />
