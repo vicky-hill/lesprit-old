@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import MenuCard from '../components/blocks/home/MenuCard';
 import Slide from '../components/elements/Slide';
 import Review from '../components/blocks/home/Review';
-import { closeByClick } from '../components/elements/Slide';
 
 import speechbubble from '../assets/icons/speechbubble-icon.png';
 import book from '../assets/icons/book-icon.png';
@@ -16,12 +15,11 @@ import Container from '../components/containers/Container';
 import { connect } from 'react-redux';
 import { getWords } from 'actions/words';
 import { getLists } from 'actions/lists';
+import { openSlide, closeSlide } from 'actions/utils'
 
-function Home({ getWords, getLists }) {
+function Home({ getWords, getLists, openSlide, closeSlide }) {
 
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
-
-    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         getWords();
@@ -29,9 +27,6 @@ function Home({ getWords, getLists }) {
         // eslint-disable-next-line
     }, [])
   
-    closeByClick(setIsOpen);
-
-
     return (
         <Container>
 
@@ -40,7 +35,7 @@ function Home({ getWords, getLists }) {
                 <Circle
                     windowClass={windowClass}
                     circleImage={goldCircle}
-                    onClick={() => setIsOpen(true)}
+                    onClick={openSlide}
                     circleTitle="All done!"
                     count={34}
                 />
@@ -65,8 +60,8 @@ function Home({ getWords, getLists }) {
 
 
             {/* Review Page */}
-            <Slide open={isOpen} >
-                <Review />
+            <Slide >
+                <Review close={closeSlide} />
             </Slide>
 
         </Container>
@@ -74,4 +69,4 @@ function Home({ getWords, getLists }) {
     )
 }
 
-export default connect(null, { getWords, getLists })(Home);
+export default connect(null, { getWords, getLists, openSlide, closeSlide })(Home);

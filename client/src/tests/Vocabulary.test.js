@@ -19,7 +19,6 @@ afterAll(async () => {
 
 
 test('Load vocabulary lists', async () => {
-
     await page.click('#menu-card-Vocabulary');
     const vocabTitle = await page.getContentOf('.panel-card_group--title');
     await page.waitForTimeout(1000);
