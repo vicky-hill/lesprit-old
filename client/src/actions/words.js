@@ -6,11 +6,10 @@ import {
     OPEN_CREATE,
     OPEN_EDIT,
     CLOSE_EDIT,
-    UPDATE_WORD
+    UPDATE_WORD,
+    DELETE_WORD
 } from './types';
 
-// getWords()                                [{ _id, rating, foreign, native, user, dueDate, list {  _id, title } }]
-// saveWord({ foreign, native, list })       { _id, rating, foreign, native, user, dueDate, list {  _id, title } }
 
 /* ===================================
    Get Words
@@ -57,6 +56,23 @@ export const updateWord = (id, data) => async dispatch => {
 
         dispatch({
             type: UPDATE_WORD,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+
+/* ===================================
+   Delete Word
+=================================== */
+
+export const deleteWord = id => async dispatch => {
+    try {
+        const res = await api.delete(`/api/words/${id}`);
+
+        dispatch({
+            type: DELETE_WORD,
             payload: res.data
         })
     } catch (err) {

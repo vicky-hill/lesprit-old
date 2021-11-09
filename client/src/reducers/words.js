@@ -3,7 +3,8 @@ import {
     SAVE_WORD,
     OPEN_EDIT,
     OPEN_CREATE,
-    UPDATE_WORD
+    UPDATE_WORD, 
+    DELETE_WORD
 } from 'actions/types';
 
 const initialState = {
@@ -47,6 +48,14 @@ export default function wordReducer(state = initialState, action) {
                     }
                     return word;
                 })
+            }
+
+        case DELETE_WORD:  
+            return {
+                ...state,
+                words: state.words.filter(word => (
+                    word._id !== payload._id
+                ))
             }
 
         case OPEN_CREATE:
