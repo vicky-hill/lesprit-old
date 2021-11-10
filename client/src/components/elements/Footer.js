@@ -1,7 +1,7 @@
 import React from 'react';
-import book from '../../assets/icons/book-icon.png';
-import speechbubble from '../../assets/icons/speechbubble-icon.png';
-import chevronright from '../../assets/icons/chevron-right-icon.png';
+import book from '../../assets/iconsImg/book-icon.png';
+import speechbubble from '../../assets/iconsImg/speechbubble-icon.png';
+import chevronright from '../../assets/iconsImg/chevron-right-icon.png';
 import { Link } from 'react-router-dom';
 
 function Footer() {

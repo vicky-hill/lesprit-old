@@ -7,8 +7,8 @@ import MenuCard from '../components/blocks/home/MenuCard';
 import Slide from '../components/elements/Slide';
 import Review from '../components/blocks/home/Review';
 
-import speechbubble from '../assets/icons/speechbubble-icon.png';
-import book from '../assets/icons/book-icon.png';
+import speechbubble from '../assets/iconsImg/speechbubble-icon.png';
+import book from '../assets/iconsImg/book-icon.png';
 import Footer from '../components/elements/Footer';
 import Container from '../components/containers/Container';
 
