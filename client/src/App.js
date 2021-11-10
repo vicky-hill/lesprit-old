@@ -11,7 +11,7 @@ import Register from './pages/Register';
 import Words from './pages/Words';
 
 import PrivateRoute from './components/elements/PrivateRoute';
-import { getUser, loginCheck } from 'actions/auth'; 
+import { getUser, loginCheck, logout } from 'actions/auth'; 
 import { store } from './store';
 
 
@@ -27,7 +27,7 @@ function App({ isAuthenticated, token }) {
   return (
       <Router>
         <div className="window">
-          <Navbar authenticated={isAuthenticated} username="username" />
+          <Navbar authenticated={isAuthenticated} username="username" logout={() => store.dispatch(logout())} />
           <Switch>
             <PrivateRoute exact path='/' component={Home} />
             <Route exact path='/vocabulary' component={Vocabulary} />

@@ -7,7 +7,8 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     GET_USER,
-    LOGIN_CHECK
+    LOGIN_CHECK,
+    LOGOUT_USER
 } from './types';
 
 
@@ -89,11 +90,21 @@ export const loginCheck = () => async dispatch => {
 }
 
 /* ===================================
+   Logout user
+=================================== */
+
+export const logout = () => async dispatch => {
+    dispatch({
+        type: LOGOUT_USER
+    })
+}
+
+/* ===================================
    Get User
 =================================== */
 
 export const getUser = () => async dispatch => {
-    
+
 
     try {
         const res = await api.get('/api/user');
