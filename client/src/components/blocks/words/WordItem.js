@@ -6,7 +6,7 @@ import React from 'react';
 // word: Object
 
 
-const WordItem = ({ onEdit, word }) => {
+const WordItem = ({ onEdit, onDelete, word }) => {
 
     // Toggle edit icons
     const toggleOptions = (e) => {
@@ -43,7 +43,7 @@ const WordItem = ({ onEdit, word }) => {
             </div>
             <div className="word-card--edits">
                 <i className="far fa-edit" onClick={onEdit}></i>
-                <i className="far fa-trash-alt"></i>
+                <i className="far fa-trash-alt" onClick={onDelete}></i>
             </div>
         </div>
     )

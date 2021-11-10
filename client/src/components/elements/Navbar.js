@@ -9,7 +9,7 @@ import Drawer from '../elements/Drawer';
 // username: String
 
 
-function Navbar({ authenticated, username }) {
+function Navbar({ authenticated, username, logout }) {
 
     const [currentURL, setCurrentURL] = useState('register');
 
@@ -47,7 +47,7 @@ function Navbar({ authenticated, username }) {
             <div className="logout-box" onClick={showLogOut}>
                 <Link to="" className="nav-link nav-link--user">{username}</Link>
                 <div className="logout" id="logout">
-                    <p className="logout-button" >Logout</p>
+                    <p className="logout-button" onClick={logout} >Logout</p>
                 </div>
             </div>
         </div>
