@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const listSelector = state => state.lists.displayList;
+const listSelector = state => state.lists.activeList;
 const wordsSelector = state => state.words.words;
 
 const getWordList = (list, words) => {

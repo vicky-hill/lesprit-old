@@ -6,7 +6,8 @@ import {
 
 const initialState = {
     lists: [],
-    displayList: ''
+    activeList: '',
+    loading: true
 }
 
 export default function listReducer (state = initialState, action) {
@@ -17,19 +18,22 @@ export default function listReducer (state = initialState, action) {
         case GET_LISTS:  
             return {
                 ...state,
-                lists: payload
+                lists: payload,
+                loading: false
             }
 
         case SAVE_LIST:  
             return {
                 ...state,
-                lists: [payload, ...state.lists]
+                lists: [payload, ...state.lists],
+                loading: false
             }
         
         case DISPLAY_LIST:
             return {
                 ...state,
-                displayList: state.lists.filter(list => list.slug === payload)[0]
+                activeList: state.lists.filter(list => list.slug === payload)[0],
+                loading: false
             }
 
         default:     

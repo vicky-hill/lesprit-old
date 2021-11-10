@@ -18,7 +18,7 @@ import { getWords } from 'actions/words'
 
 
 
-function Vocabulary({ getLists, getWords, count, lists }) {
+function Vocabulary({ getLists, getWords, count, lists, loading }) {
     useEffect(() => {
         getLists();
         getWords();
@@ -29,39 +29,45 @@ function Vocabulary({ getLists, getWords, count, lists }) {
 
     hideByClick(setHidden, 'closing-x');
 
-
     return (
         <Container>
             <ScrollContainer>
                 <MainContainer>
 
-                    {/* Hidden form */}
-                    <Hide hidden={hidden}>
-                        <VocabularyForm />
-                    </Hide>
+                    {
+                        loading ? <p> Loading...</p> : (
+                            <>
+                                {/* Hidden form */}
+                                <Hide Hide hidden={hidden}>
+                                    <VocabularyForm />
+                                </Hide>
 
-                    {/* Header and vocabulary panel */}
-                    <VocabularyPanel count={count} openForm={() => setHidden(false)} />
+                                {/* Header and vocabulary panel */}
+                                <VocabularyPanel count={count} openForm={() => setHidden(false)} />
 
-                    {/* Vocabulary List */}
-                    <ListContainer>
-                        {
-                            lists.map(list => (
-                                <VocabularyItem key={list._id} title={list.title} slug={list.slug} />
-                            ))
-                        }
-                    </ListContainer>
+                                {/* Vocabulary List */}
+                                <ListContainer >
+                                    {
+                                        lists.map(list => (
+                                            <VocabularyItem key={list._id} title={list.title} slug={list.slug} />
+                                        ))
+                                    }
+                                </ListContainer>
+
+                            </>
+                        )
+                    }
 
                 </MainContainer>
             </ScrollContainer>
-
-        </Container>
+        </Container >
     )
 }
 
 const mapStateToProps = (state) => ({
     count: state.words.words.length,
-    lists: state.lists.lists
+    lists: state.lists.lists,
+    loading: state.lists.loading
 })
 
 const mapDispatchToProps = {
@@ -70,3 +76,6 @@ const mapDispatchToProps = {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vocabulary);
+
+
+

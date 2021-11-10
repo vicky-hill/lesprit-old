@@ -21,7 +21,19 @@ import WordsPanel from 'components/blocks/words/WordsPanel';
 
 
 
-const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, openCreate, openSlide, deleteWord }) => {
+const Words = ({
+    loading,
+    displayList,
+    activeList,
+    match,
+    wordList,
+    getWords,
+    getLists,
+    openEdit,
+    openCreate,
+    openSlide,
+    deleteWord }) => {
+
     const [hidden, setHidden] = useState(true);    // Half screen form
 
     hideByClick(setHidden, 'closing-x');
@@ -49,8 +61,8 @@ const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, ope
 
     const onDelete = (id) => {
         const c = window.confirm("Delete this word?");
-        
-        if(c) {
+
+        if (c) {
             deleteWord(id);
         }
     }
@@ -72,11 +84,11 @@ const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, ope
                     <ListContainer flex>
                         {
                             wordList.map(word => (
-                                <WordItem 
-                                    key={word._id} 
-                                    word={word} 
-                                    onEdit={() => onEdit(word)} 
-                                    onDelete={() => onDelete(word._id)} 
+                                <WordItem
+                                    key={word._id}
+                                    word={word}
+                                    onEdit={() => onEdit(word)}
+                                    onDelete={() => onDelete(word._id)}
                                 />
                             ))
                         }
@@ -94,7 +106,8 @@ const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, ope
 }
 
 const mapStateToProps = state => ({
-    wordList: wordlistSelector(state)
+    wordList: wordlistSelector(state),
+    activeList: state.lists.activeList
 })
 
 export default connect(mapStateToProps, { displayList, getLists, getWords, openEdit, openCreate, openSlide, deleteWord })(Words);
