@@ -1,7 +1,7 @@
 import React from 'react';
-import Searchbar from '../../elements/Searchbar';
-import Card from '../../elements/Card';
-import Button from '../../elements/Button';
+import Searchbar from 'components/elements/Searchbar';
+import Card from 'components/elements/Card';
+import Button from 'components/elements/Button';
 
 /* Props
 =================================================== */

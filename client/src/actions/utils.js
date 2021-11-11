@@ -1,5 +1,3 @@
-import api from '../utils/api';
-
 import {
     OPEN_SLIDE,
     CLOSE_SLIDE
