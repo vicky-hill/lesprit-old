@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Circle from '../components/blocks/home/Circle';
 import goldCircle from '../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';

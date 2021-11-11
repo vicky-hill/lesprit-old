@@ -5,7 +5,6 @@ import {
     SAVE_WORD,
     OPEN_CREATE,
     OPEN_EDIT,
-    CLOSE_EDIT,
     UPDATE_WORD,
     DELETE_WORD
 } from './types';

@@ -7,8 +7,8 @@ const initialState = {
     slide: false
 }
 
-export default function(state = initialState, action) {
-    const { type, payload } = action;
+export default function utilsReducer (state = initialState, action) {
+    const { type } = action;
 
     switch(type) {
 

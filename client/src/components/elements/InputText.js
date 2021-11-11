@@ -12,13 +12,13 @@ function InputText({ text, onSubmit }) {
         onSubmit(e.target.value);
     }
 
+
     useEffect(() => {
-        const url = window.location.pathname;
-        url.includes(text) ? setInput(text) : setInput('')
+        setInput(text)
     }, [text])
 
     return (
-        <input type="text" className="input-text" value={input} onChange={onChange} onBlur={onBlur} />
+        <input type="text" className="input-text" value={input || "" } onChange={onChange} onBlur={onBlur} />
     )
 }
 
