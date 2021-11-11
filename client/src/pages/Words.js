@@ -15,9 +15,9 @@ import Hide from 'components/elements/Hide';
 import Slide from 'components/elements/Slide';
 import { hideByClick } from 'components/elements/Hide';
 
-import WordForm from 'components/blocks/words/WordForm';
-import WordItem from 'components/blocks/words/WordItem'
-import WordsPanel from 'components/blocks/words/WordsPanel';
+import WordForm from 'components/words/WordForm';
+import WordItem from 'components/words/WordItem'
+import WordsPanel from 'components/words/WordsPanel';
 
 
 

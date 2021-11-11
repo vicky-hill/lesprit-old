@@ -5,9 +5,9 @@ import ScrollContainer from 'components/containers/ScrollContainer';
 import MainContainer from 'components/containers/MainContainer';
 import ListContainer from 'components/containers/ListContainer';
 
-import VocabularyPanel from 'components/blocks/vocabulary/VocabularyPanel';
-import VocabularyItem from 'components/blocks/vocabulary/VocabularyItem';
-import VocabularyForm from 'components/blocks/vocabulary/VocabularyForm';
+import VocabularyPanel from 'components/vocabulary/VocabularyPanel';
+import VocabularyItem from 'components/vocabulary/VocabularyItem';
+import VocabularyForm from 'components/vocabulary/VocabularyForm';
 
 import Hide from 'components/elements/Hide';
 import { hideByClick } from 'components/elements/Hide';

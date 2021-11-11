@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../../elements/Button';
-import Card from '../../elements/Card';
-import InputText from '../../elements/InputText';
+import Button from 'components/elements/Button';
+import Card from 'components/elements/Card';
+import InputText from 'components/elements/InputText';
 import { connect } from 'react-redux'
 import { updateList } from 'actions/lists';
 
