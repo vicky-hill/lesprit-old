@@ -152,6 +152,11 @@
             right: 3rem;
             bottom: 0;
         }
+
+        &.higher {
+            position: relative;
+            top: -12px;
+        }
     }
 
 }
