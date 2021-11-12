@@ -2,7 +2,7 @@
 // Transparent button
 
 /* ===================================
-   Regular Button
+   Regular button
 ==================================== */
 .btn {
     font-family: inherit;
@@ -14,10 +14,7 @@
     border-radius: 9px;
     margin-top: 1.5rem;
     border: 2px solid white;
-
-    &:hover {
-        cursor: pointer;
-    }
+    cursor: pointer;
 
     &:active, &:focus {
         outline: none;
@@ -25,21 +22,64 @@
     }
 }
 
+
 /* ===================================
-   Transparent Button
+   Outline button
+==================================== */
+
+.outline-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+
+    background-color: transparent;
+    border: none;
+    color: $gold-primary;
+    color: #514F55;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    font-family: Lato;
+    border: 1px solid $gold-primary;
+    border: 1px solid #514F55;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 5px;
+    line-height: 0;
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+        margin-right: 10px;
+    }
+
+
+    span {
+        position: relative;
+        top: -1px;
+    }
+}
+
+/* ===================================
+   Transparent button
 ==================================== */
 .transparent-btn {
-    padding: 0px;
+    height: 12px;
     background-color: transparent;
     border: none;
     color: $gold-primary;
     vertical-align: middle;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    font-family: Lato;
                   
     p {
         display: inline-block;
         font-size: 2rem;
         transform: translateY(2px);
+    }
+
+    span {
+        position: relative;
+        top: -2px;
     }
 
     &:hover {

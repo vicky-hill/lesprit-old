@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Route } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { getLists, displayList } from 'actions/lists'
@@ -22,6 +23,7 @@ import WordsPanel from 'components/words/WordsPanel';
 
 
 const Words = ({
+    history,
     loading,
     displayList,
     activeList,
@@ -32,7 +34,13 @@ const Words = ({
     openEdit,
     openCreate,
     openSlide,
-    deleteWord }) => {
+    deleteWord
+    }) => {
+
+    useEffect(() => {
+        console.log(window.location.pathname);
+        console.log(history)
+    })
 
     const [hidden, setHidden] = useState(true);    // Half screen form
 
@@ -78,7 +86,7 @@ const Words = ({
                     </Hide>
 
                     {/* Header and word panel */}
-                    <WordsPanel openForm={onCreate} />
+                    <WordsPanel history={history} openForm={onCreate} />
 
                     {/* Word List */}
                     <ListContainer flex>

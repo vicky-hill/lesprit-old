@@ -121,7 +121,7 @@
 
     &_group {
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
         align-items: center;
         margin: 1.5rem 0 1rem;
         padding: 0 1rem;
@@ -151,6 +151,11 @@
             position: absolute;
             right: 3rem;
             bottom: 0;
+        }
+
+        &.higher {
+            position: relative;
+            top: -12px;
         }
     }
 
