@@ -2,7 +2,8 @@ import {
     DISPLAY_LIST,
     GET_LISTS,
     SAVE_LIST,
-    UPDATE_LIST
+    UPDATE_LIST, 
+    DELETE_LIST
 } from 'actions/types';
 
 const initialState = {
@@ -46,6 +47,14 @@ export default function listReducer (state = initialState, action) {
                 ...state,
                 activeList: state.lists.filter(list => list.slug === payload)[0],
                 loading: false
+            }
+
+        case DELETE_LIST:  
+            return {
+                ...state,
+                lists: state.lists.filter(list => (
+                    list._id !== payload._id
+                ))
             }
 
         default:     
