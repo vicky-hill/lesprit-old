@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../../elements/Card';
+import Card from 'components/elements/Card';
 import { Link } from 'react-router-dom';
 
 /* Props 

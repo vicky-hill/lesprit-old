@@ -3,7 +3,9 @@ import api from '../utils/api';
 import {
     GET_LISTS,
     SAVE_LIST,
-    DISPLAY_LIST
+    DISPLAY_LIST,
+    UPDATE_LIST,
+    DELETE_LIST
 } from './types';
 
 
@@ -43,6 +45,39 @@ export const saveList = (data) => async dispatch => {
     }
 }
 
+/* ===================================
+   Update List
+=================================== */
+
+export const updateList = (id, data) => async dispatch => {
+    try {
+        const res = await api.put(`/api/lists/${id}`, data);
+
+        dispatch({
+            type: UPDATE_LIST,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err.message)
+    }
+}
+
+/* ===================================
+   Delete List
+=================================== */
+
+export const deleteList = id => async dispatch => {
+    try {
+        const res = await api.delete(`/api/lists/${id}`);
+
+        dispatch({
+            type: DELETE_LIST,
+            payload: res.data
+        })
+    } catch (err) {
+        console.log(err.message)
+    }
+}
 
 /* ===================================
    Display list

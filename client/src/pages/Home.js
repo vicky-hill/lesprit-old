@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import Circle from '../components/blocks/home/Circle';
+import React, { useEffect } from 'react';
+import Circle from '../components/home/Circle';
 import goldCircle from '../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';
 // import silverCircle from '../assets/graphics/silver-circle.png';
-import MenuCard from '../components/blocks/home/MenuCard';
+import MenuCard from '../components/home/MenuCard';
 import Slide from '../components/elements/Slide';
-import Review from '../components/blocks/home/Review';
+import Review from '../components/home/Review';
 
 import speechbubble from '../assets/iconsImg/speechbubble-icon.png';
 import book from '../assets/iconsImg/book-icon.png';

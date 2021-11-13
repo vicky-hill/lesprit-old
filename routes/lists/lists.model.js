@@ -24,6 +24,7 @@ ListSchema.pre('save', function(next){
     next();
 });
 
+
 // Cascade delete words when a list is deleted
 ListSchema.pre('remove', async function(next) {
     await this.model('Word').deleteMany({ list: this._id});

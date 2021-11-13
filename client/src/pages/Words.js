@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Route } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { getLists, displayList } from 'actions/lists'
@@ -15,13 +16,32 @@ import Hide from 'components/elements/Hide';
 import Slide from 'components/elements/Slide';
 import { hideByClick } from 'components/elements/Hide';
 
-import WordForm from 'components/blocks/words/WordForm';
-import WordItem from 'components/blocks/words/WordItem'
-import WordsPanel from 'components/blocks/words/WordsPanel';
+import WordForm from 'components/words/WordForm';
+import WordItem from 'components/words/WordItem'
+import WordsPanel from 'components/words/WordsPanel';
 
 
 
-const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, openCreate, openSlide, deleteWord }) => {
+const Words = ({
+    history,
+    loading,
+    displayList,
+    activeList,
+    match,
+    wordList,
+    getWords,
+    getLists,
+    openEdit,
+    openCreate,
+    openSlide,
+    deleteWord
+    }) => {
+
+    useEffect(() => {
+        console.log(window.location.pathname);
+        console.log(history)
+    })
+
     const [hidden, setHidden] = useState(true);    // Half screen form
 
     hideByClick(setHidden, 'closing-x');
@@ -49,8 +69,8 @@ const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, ope
 
     const onDelete = (id) => {
         const c = window.confirm("Delete this word?");
-        
-        if(c) {
+
+        if (c) {
             deleteWord(id);
         }
     }
@@ -66,17 +86,17 @@ const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, ope
                     </Hide>
 
                     {/* Header and word panel */}
-                    <WordsPanel openForm={onCreate} />
+                    <WordsPanel history={history} openForm={onCreate} />
 
                     {/* Word List */}
                     <ListContainer flex>
                         {
                             wordList.map(word => (
-                                <WordItem 
-                                    key={word._id} 
-                                    word={word} 
-                                    onEdit={() => onEdit(word)} 
-                                    onDelete={() => onDelete(word._id)} 
+                                <WordItem
+                                    key={word._id}
+                                    word={word}
+                                    onEdit={() => onEdit(word)}
+                                    onDelete={() => onDelete(word._id)}
                                 />
                             ))
                         }
@@ -94,7 +114,8 @@ const Words = ({ displayList, match, wordList, getWords, getLists, openEdit, ope
 }
 
 const mapStateToProps = state => ({
-    wordList: wordlistSelector(state)
+    wordList: wordlistSelector(state),
+    activeList: state.lists.activeList
 })
 
 export default connect(mapStateToProps, { displayList, getLists, getWords, openEdit, openCreate, openSlide, deleteWord })(Words);

@@ -108,7 +108,7 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
 }
 
 const mapStateToProps = state => ({
-    list: state.lists.displayList,
+    list: state.lists.activeList,
     formData: state.words.form.data,
     mode: state.words.form.mode,
     id: state.words.form.id
