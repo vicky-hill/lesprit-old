@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import Circle from '../components/home/Circle';
-import goldCircle from '../assets/graphics/gold-circle.png';
 import { Link } from 'react-router-dom';
-// import silverCircle from '../assets/graphics/silver-circle.png';
 import MenuCard from '../components/home/MenuCard';
 import Slide from '../components/elements/Slide';
 import Review from '../components/home/Review';
+import reviewSelector from 'selectors/reviewSelector'
 
 import speechbubble from '../assets/iconsImg/speechbubble-icon.png';
 import book from '../assets/iconsImg/book-icon.png';
@@ -17,7 +16,14 @@ import { getWords } from 'actions/words';
 import { getLists } from 'actions/lists';
 import { openSlide, closeSlide } from 'actions/utils'
 
-function Home({ getWords, getLists, openSlide, closeSlide }) {
+function Home({
+    getWords,
+    getLists,
+    openSlide,
+    closeSlide,
+    wordCount,
+    review
+}) {
 
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
 
@@ -26,7 +32,7 @@ function Home({ getWords, getLists, openSlide, closeSlide }) {
         getLists();
         // eslint-disable-next-line
     }, [])
-  
+
     return (
         <Container>
 
@@ -34,10 +40,9 @@ function Home({ getWords, getLists, openSlide, closeSlide }) {
             <div className={windowClass + '-home'}>
                 <Circle
                     windowClass={windowClass}
-                    circleImage={goldCircle}
+                    review={review.length}     
                     onClick={openSlide}
-                    circleTitle="All done!"
-                    count={34}
+                    count={wordCount}
                 />
 
                 {/* Menu items for desktop */}
@@ -69,4 +74,9 @@ function Home({ getWords, getLists, openSlide, closeSlide }) {
     )
 }
 
-export default connect(null, { getWords, getLists, openSlide, closeSlide })(Home);
+const mapStateToProps = state => ({
+    wordCount: state.words.words.length,
+    review: reviewSelector(state)
+})
+
+export default connect(mapStateToProps, { getWords, getLists, openSlide, closeSlide })(Home);
