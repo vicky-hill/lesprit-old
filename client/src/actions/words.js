@@ -6,7 +6,8 @@ import {
     OPEN_CREATE,
     OPEN_EDIT,
     UPDATE_WORD,
-    DELETE_WORD
+    DELETE_WORD,
+    SELECT_REVIEW
 } from './types';
 
 
@@ -104,7 +105,7 @@ export const openEdit = (id, foreign, native) => async dispatch => {
             payload: {
                 id,
                 data: {
-                    foreign, 
+                    foreign,
                     native
                 }
             }
@@ -114,4 +115,5 @@ export const openEdit = (id, foreign, native) => async dispatch => {
         console.log(err.message);
     }
 }
+
 

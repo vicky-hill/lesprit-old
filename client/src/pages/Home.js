@@ -21,6 +21,7 @@ function Home({
     getLists,
     openSlide,
     closeSlide,
+    loading,
     wordCount,
     review
 }) {
@@ -35,47 +36,52 @@ function Home({
 
     return (
         <Container>
+            {
+                loading ? <p>Loading...</p> : (
+                    <>
+                        {/* Landing page */}
+                        <div className={windowClass + '-home'}>
+                            <Circle
+                                windowClass={windowClass}
+                                review={review.length}
+                                onClick={openSlide}
+                                count={wordCount}
+                            />
 
-            {/* Landing page */}
-            <div className={windowClass + '-home'}>
-                <Circle
-                    windowClass={windowClass}
-                    review={review.length}     
-                    onClick={openSlide}
-                    count={wordCount}
-                />
+                            {/* Menu items for desktop */}
+                            {
+                                windowClass === 'desktop' && (
+                                    <div className="desktop-home_menu">
+                                        <Link to="/vocabulary">
+                                            <MenuCard icon={book} title="Vocabulary" />
+                                        </Link>
+                                        <Link to="/conjugation">
+                                            <MenuCard icon={speechbubble} title="Conjugation" bigger />
+                                        </Link>
+                                    </div>
+                                )
+                            }
 
-                {/* Menu items for desktop */}
-                {
-                    windowClass === 'desktop' && (
-                        <div className="desktop-home_menu">
-                            <Link to="/vocabulary">
-                                <MenuCard icon={book} title="Vocabulary" />
-                            </Link>
-                            <Link to="/conjugation">
-                                <MenuCard icon={speechbubble} title="Conjugation" bigger />
-                            </Link>
+                            {/* Footer for mobile */}
+                            <Footer />
                         </div>
-                    )
-                }
 
-                {/* Footer for mobile */}
-                <Footer />
-            </div>
+                        {/* Review Page */}
+                        <Slide >
+                            <Review close={closeSlide} />
+                        </Slide>
+                    </>
+                )
+            }
 
-
-            {/* Review Page */}
-            <Slide >
-                <Review close={closeSlide} />
-            </Slide>
-
-        </Container>
+        </Container >
 
     )
 }
 
 const mapStateToProps = state => ({
     wordCount: state.words.words.length,
+    loading: state.words.loading,
     review: reviewSelector(state)
 })
 
