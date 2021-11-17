@@ -30,7 +30,8 @@ export default function wordReducer(state = initialState, action) {
         case GET_WORDS:
             return {
                 ...state,
-                words: payload
+                words: payload,
+                loading: false
             }
 
         case SAVE_WORD:
