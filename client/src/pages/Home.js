@@ -43,7 +43,7 @@ function Home({
                         <div className={windowClass + '-home'}>
                             <Circle
                                 windowClass={windowClass}
-                                review={review.length}
+                                review={review}
                                 onClick={openSlide}
                                 count={wordCount}
                             />
