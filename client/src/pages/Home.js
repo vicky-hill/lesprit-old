@@ -68,7 +68,7 @@ function Home({
 
                         {/* Review Page */}
                         <Slide >
-                            <Review close={closeSlide} />
+                            <Review words={review} close={closeSlide} />
                         </Slide>
                     </>
                 )

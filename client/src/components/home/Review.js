@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function Review({ close }) {
+function Review({ close, words }) {
     const [shrink, setShrink] = useState(false);
     const [value, setValue] = useState("");
+    const [current, setCurrent] = useState({});
+
+    useEffect(() => {
+        setCurrent(words[0])
+    }, [])
+
+    const { native, foreign, rating, _id } = current;
 
     const shrinkNative = () => {
         setShrink(true);
@@ -19,9 +26,15 @@ function Review({ close }) {
         };
     }, [])
 
+    const checkAnswer = (typedAnswer) => {
+        if(typedAnswer === foreign) {
+            refInput.current.classList.add('correct');
+        }
+    }
+
     const onChange = async (e) => {
         setValue(e.target.value);
-        // checkAnswer(e.target.value);
+        checkAnswer(e.target.value);
     }
 
     const resetReview = () => {
@@ -38,7 +51,7 @@ function Review({ close }) {
     return (
         <>
             <div className='review' onKeyDown={shrinkNative}>
-                <h1 className={`review-native ${shrink ? ' review-native--small' : ''}`} >word</h1>
+                <h1 className={`review-native ${shrink ? ' review-native--small' : ''}`} >{ native }</h1>
                 <input
                     // readOnly={true}
                     autoCapitalize="none"
@@ -51,8 +64,8 @@ function Review({ close }) {
                     autoComplete="off"
                     ref={refInput}
                 />
-                 <i className="review-close fas fa-times" onClick={closeReview}></i>
-            </div> 
+                <i className="review-close fas fa-times" onClick={closeReview}></i>
+            </div>
         </>
     )
 }
