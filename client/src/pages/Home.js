@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Circle from '../components/home/Circle';
 import { Link } from 'react-router-dom';
 import MenuCard from '../components/home/MenuCard';
@@ -35,6 +35,18 @@ function Home({
         // eslint-disable-next-line
     }, [])
 
+    const [reviewMode, setReviewMode] = useState(false);
+
+    const openReview = () => {
+        setReviewMode(true);
+        openSlide();
+    }
+
+    const closeReview = () => {
+        setReviewMode(false);
+        closeSlide();
+    }
+
     return (
         <Container>
             {
@@ -45,7 +57,7 @@ function Home({
                             <Circle
                                 windowClass={windowClass}
                                 review={review}
-                                onClick={review.length ? openSlide : null}
+                                onClick={review.length ? openReview : null}
                                 count={wordCount}
                             />
 
@@ -69,7 +81,7 @@ function Home({
 
                         {/* Review Page */}
                         <Slide >
-                            <Review updateWord={updateWord} words={review} close={closeSlide} />
+                            <Review review={reviewMode} updateWord={updateWord} words={review} close={closeReview} />
                         </Slide>
                     </>
                 )
