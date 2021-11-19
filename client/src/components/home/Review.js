@@ -1,15 +1,25 @@
+import { updateWord } from 'actions/words';
 import React, { useState, useEffect, useRef } from 'react';
 
-function Review({ close, words }) {
+function Review({ close, words, updateWord }) {
     const [shrink, setShrink] = useState(false);
     const [value, setValue] = useState("");
     const [current, setCurrent] = useState({});
 
-    useEffect(() => {
-        setCurrent(words[0])
-    }, [])
-
     const { native, foreign, rating, _id } = current;
+
+    const getRandomWord = () => {
+        if(words.length === 0) {
+            return { native: "", foreign: "", rating: null, _id: null }
+        } 
+        
+        const index = Math.floor(Math.random() * (words.length)) + 0;
+        return words[index]
+    }
+
+    useEffect(() => {
+        setCurrent(getRandomWord())
+    }, [])
 
     const shrinkNative = () => {
         setShrink(true);
@@ -29,9 +39,29 @@ function Review({ close, words }) {
     const checkAnswer = (typedAnswer) => {
         if(typedAnswer === foreign) {
             refInput.current.classList.add('correct');
+
+            const newDate = addTime();
+
+            updateWord(_id, {
+                rating: rating + 1,
+                dueDate: newDate
+            })
+
+            setTimeout(() => {
+                resetReview();
+                setCurrent(getRandomWord());
+            }, 1000);
+
+
         }
     }
 
+    const addTime = () => {
+        let result = new Date();
+        result.setDate(result.getDate() + 1);
+        return result;
+    }
+ 
     const onChange = async (e) => {
         setValue(e.target.value);
         checkAnswer(e.target.value);

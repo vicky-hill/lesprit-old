@@ -12,12 +12,13 @@ import Footer from '../components/elements/Footer';
 import Container from '../components/containers/Container';
 
 import { connect } from 'react-redux';
-import { getWords } from 'actions/words';
+import { getWords, updateWord } from 'actions/words';
 import { getLists } from 'actions/lists';
 import { openSlide, closeSlide } from 'actions/utils'
 
 function Home({
     getWords,
+    updateWord,
     getLists,
     openSlide,
     closeSlide,
@@ -68,7 +69,7 @@ function Home({
 
                         {/* Review Page */}
                         <Slide >
-                            <Review words={review} close={closeSlide} />
+                            <Review updateWord={updateWord} words={review} close={closeSlide} />
                         </Slide>
                     </>
                 )
@@ -85,4 +86,4 @@ const mapStateToProps = state => ({
     review: reviewSelector(state)
 })
 
-export default connect(mapStateToProps, { getWords, getLists, openSlide, closeSlide })(Home);
+export default connect(mapStateToProps, { getWords, getLists, openSlide, closeSlide, updateWord })(Home);
