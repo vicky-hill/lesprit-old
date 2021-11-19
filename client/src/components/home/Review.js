@@ -15,6 +15,7 @@ function Review({ close, words, updateWord }) {
 
         if (words.length === 0) {
             close();
+            resetReview();            
             return { native: "", foreign: "", rating: null, _id: null }
         }
 
@@ -54,9 +55,8 @@ function Review({ close, words, updateWord }) {
 
             setTimeout(() => {
                 resetReview();
+                setCurrent(getRandomWord(words, current));
             }, 1000);
-
-
         }
     }
 
@@ -73,15 +73,45 @@ function Review({ close, words, updateWord }) {
 
     const resetReview = () => {
         refInput.current.blur();
+        refInput.current.classList.remove('incorrect');
+        refInput.current.classList.remove('correct');
         setShrink(false);
         setValue("");
-        setCurrent(getRandomWord(words, current));
     }
 
     const closeReview = () => {
         resetReview();
         close();
     }
+
+    const keyboardAction = (e) => {
+        if(e.key === 'Enter') {
+            refInput.current.blur();
+
+            if(value === '') {
+                showAnswer()
+            } else if (value !== foreign) {
+                refInput.current.classList.add('incorrect');
+                showAnswer()
+            }
+        }
+    }
+
+    const showAnswer = () => {
+        setValue(' ' + foreign + ' ');
+
+        if (rating !== 0) {
+            updateWord(_id, {
+                rating: 0
+            });
+        }
+
+        setTimeout(() => {
+            setCurrent(getRandomWord(words));
+            resetReview();
+        }, 2500);
+    }
+
 
     return (
         <>
@@ -95,7 +125,7 @@ function Review({ close, words, updateWord }) {
                     value={value}
                     onChange={onChange}
                     onClick={shrinkNative}
-                    // onKeyPress={keyboardAction}
+                    onKeyPress={keyboardAction}
                     autoComplete="off"
                     ref={refInput}
                 />
