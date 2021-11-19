@@ -8,17 +8,22 @@ function Review({ close, words, updateWord }) {
 
     const { native, foreign, rating, _id } = current;
 
-    const getRandomWord = () => {
-        if(words.length === 0) {
+    const getRandomWord = (words, correctWord) => {
+        if (correctWord) {
+            words.splice(words.indexOf(correctWord), 1);
+        }
+
+        if (words.length === 0) {
+            close();
             return { native: "", foreign: "", rating: null, _id: null }
-        } 
-        
+        }
+
         const index = Math.floor(Math.random() * (words.length)) + 0;
         return words[index]
     }
 
     useEffect(() => {
-        setCurrent(getRandomWord())
+        setCurrent(getRandomWord(words))
     }, [])
 
     const shrinkNative = () => {
@@ -37,7 +42,7 @@ function Review({ close, words, updateWord }) {
     }, [])
 
     const checkAnswer = (typedAnswer) => {
-        if(typedAnswer === foreign) {
+        if (typedAnswer === foreign) {
             refInput.current.classList.add('correct');
 
             const newDate = addTime();
@@ -49,7 +54,6 @@ function Review({ close, words, updateWord }) {
 
             setTimeout(() => {
                 resetReview();
-                setCurrent(getRandomWord());
             }, 1000);
 
 
@@ -61,7 +65,7 @@ function Review({ close, words, updateWord }) {
         result.setDate(result.getDate() + 1);
         return result;
     }
- 
+
     const onChange = async (e) => {
         setValue(e.target.value);
         checkAnswer(e.target.value);
@@ -71,17 +75,18 @@ function Review({ close, words, updateWord }) {
         refInput.current.blur();
         setShrink(false);
         setValue("");
+        setCurrent(getRandomWord(words, current));
     }
 
     const closeReview = () => {
         resetReview();
-        close()
+        close();
     }
 
     return (
         <>
             <div className='review' onKeyDown={shrinkNative}>
-                <h1 className={`review-native ${shrink ? ' review-native--small' : ''}`} >{ native }</h1>
+                <h1 className={`review-native ${shrink ? ' review-native--small' : ''}`} >{native}</h1>
                 <input
                     // readOnly={true}
                     autoCapitalize="none"
