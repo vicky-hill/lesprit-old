@@ -1,7 +1,7 @@
 import { updateWord } from 'actions/words';
 import React, { useState, useEffect, useRef } from 'react';
 
-function Review({ close, words, updateWord }) {
+function Review({ close, words, updateWord, review }) {
     const [shrink, setShrink] = useState(false);
     const [value, setValue] = useState("");
     const [current, setCurrent] = useState({});
@@ -14,8 +14,7 @@ function Review({ close, words, updateWord }) {
         }
 
         if (words.length === 0) {
-            close();
-            resetReview();            
+            closeReview();      
             return { native: "", foreign: "", rating: null, _id: null }
         }
 
@@ -35,12 +34,12 @@ function Review({ close, words, updateWord }) {
     const refInput = useRef(null);
 
     useEffect(() => {
-        window.addEventListener('keydown', shrinkNative);
+        review ? window.addEventListener('keydown', shrinkNative) : window.removeEventListener('keydown', shrinkNative);
 
         return () => {
             window.removeEventListener('keydown', shrinkNative);
         };
-    }, [])
+    }, [review])
 
     const checkAnswer = (typedAnswer) => {
         if (typedAnswer === foreign) {
@@ -140,8 +139,10 @@ function Review({ close, words, updateWord }) {
     }
 
     const closeReview = () => {
+        window.removeEventListener('keydown', shrinkNative);
         resetReview();
         close();
+        
     }
 
     const keyboardAction = (e) => {
