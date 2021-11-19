@@ -45,7 +45,7 @@ function Home({
                             <Circle
                                 windowClass={windowClass}
                                 review={review}
-                                onClick={openSlide}
+                                onClick={review.length ? openSlide : null}
                                 count={wordCount}
                             />
 
