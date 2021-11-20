@@ -84,7 +84,7 @@ const Words = ({
             </ScrollContainer>
 
             {/* Slide Form */}
-            <Slide id="word-edit">
+            <Slide>
                 <WordForm refInput={refInput} format="full" />
             </Slide>
         </Container>
