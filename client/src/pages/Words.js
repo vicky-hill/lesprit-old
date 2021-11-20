@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react'
+import React, { useEffect, createRef } from 'react'
 
 
 import { connect } from 'react-redux'
@@ -14,7 +14,6 @@ import ListContainer from 'components/containers/ListContainer';
 
 import Hide from 'components/elements/Hide';
 import Slide from 'components/elements/Slide';
-// import { hideByClick } from 'components/elements/Hide';
 
 import WordForm from 'components/words/WordForm';
 import WordItem from 'components/words/WordItem'
@@ -38,9 +37,6 @@ const Words = ({
     openHide
     }) => {
 
-    // const [hidden, setHidden] = useState(true);    // Half screen form
-
-    // hideByClick(setHidden, 'closing-x');
 
     useEffect(() => {
         loadData();
