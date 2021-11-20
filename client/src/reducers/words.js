@@ -14,7 +14,7 @@ const initialState = {
     form: {
         // create, edit
         id: null,
-        mode: 'create',
+        mode: '',
         data: {
             foreign: '',
             native: ''
