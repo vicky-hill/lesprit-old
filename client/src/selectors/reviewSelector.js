@@ -9,6 +9,8 @@ const getReview = (words) => {
         
         if(due < now) {
             return word
+        } else {
+            return null
         }
     })
 }
