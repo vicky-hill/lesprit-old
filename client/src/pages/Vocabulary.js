@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Container from 'components/containers/Container';
 import ScrollContainer from 'components/containers/ScrollContainer';
@@ -10,7 +10,6 @@ import VocabularyItem from 'components/vocabulary/VocabularyItem';
 import VocabularyForm from 'components/vocabulary/VocabularyForm';
 
 import Hide from 'components/elements/Hide';
-// import { hideByClick } from 'components/elements/Hide';
 
 import { connect } from 'react-redux';
 import { getLists } from 'actions/lists';
@@ -24,10 +23,6 @@ function Vocabulary({ getLists, getWords, count, lists, loading }) {
         getWords();
         // eslint-disable-next-line
     }, [])
-
-    // const [hidden, setHidden] = useState(true);    // Half screen form
-
-    // hideByClick(setHidden, 'closing-x');
 
     return (
         <Container>

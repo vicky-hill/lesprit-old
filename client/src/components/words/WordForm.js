@@ -26,7 +26,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         if(hide) {
             refInput.current.focus();
         }
-    }, [hide])
+    }, [hide]) // eslint-disable-line
 
     const refInput = createRef();
 
