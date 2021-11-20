@@ -49,22 +49,8 @@ const Words = ({
     }
 
     const onCreate = () => {
-        // setHidden(false);
         openHide();
         openCreate();
-    }
-
-    const onEdit = (word) => {
-        openSlide();
-        openEdit(word._id, word.foreign, word.native);
-    }
-
-    const onDelete = (id) => {
-        const c = window.confirm("Delete this word?");
-
-        if (c) {
-            deleteWord(id);
-        }
     }
 
     const refInput = createRef();
@@ -89,8 +75,6 @@ const Words = ({
                                 <WordItem
                                     key={word._id}
                                     word={word}
-                                    onEdit={() => onEdit(word)}
-                                    onDelete={() => onDelete(word._id)}
                                 />
                             ))
                         }
