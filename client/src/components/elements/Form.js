@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 /* Props
 =================================================== */
@@ -18,6 +18,8 @@ import React from 'react';
 
 
 const Form = ({ onSubmit, children, id }) => {
+
+
     return (
         <form onSubmit={onSubmit} id={id}>
             {children}
@@ -41,14 +43,14 @@ export const Heading = ({ children }) => {
     )
 }
 
-export const Input = ({ placeholder, value, onChange, type, name, validation }) => {
+export const Input = forwardRef(({ placeholder, value, onChange, type, name, validation }, ref) => {
     return (
         <div className="input-container">
-            <input id={name} name={name} autoComplete="off" autoCapitalize="none" type={type} placeholder={placeholder} value={value} onChange={onChange} />
+            <input ref={ref} id={name} name={name} autoComplete="off" autoCapitalize="none" type={type} placeholder={placeholder} value={value} onChange={onChange} />
             <small className="invalid">{ validation }</small>
         </div>
     )
-}
+})
 
 export const SubmitButton = ({ title }) => {
     return (
