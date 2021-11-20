@@ -13,12 +13,18 @@ import validate from 'validation/validate';
 import { wordForm as schema } from 'validation/schemas'
 
 
-const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, closeSlide, closeHide }) => {
+const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, closeSlide, closeHide, hide }) => {
 
     const [form, setForm] = useState({
         foreign: '',
         native: '',
     })
+
+    useEffect(() => {
+        if(hide) {
+            refInput.current.focus();
+        }
+    }, [hide])
 
     const refInput = createRef();
 
@@ -121,7 +127,8 @@ const mapStateToProps = state => ({
     list: state.lists.activeList,
     formData: state.words.form.data,
     mode: state.words.form.mode,
-    id: state.words.form.id
+    id: state.words.form.id,
+    hide: state.utils.hide
 })
 
 export default connect(mapStateToProps, { saveWord, updateWord, closeSlide, closeHide })(WordForm);
