@@ -11,7 +11,7 @@ import { Plus, Trash } from 'react-feather';
 =================================================== */
 // openForm: Function
 
-function WordsPanel({ openForm, activeList, loading, history, updateList, deleteList }) {
+function WordsPanel({ openForm, activeList, loading, history, updateList, deleteList, words }) {
 
     const onSubmit = (title) => {
         updateList(activeList._id, { title })
@@ -26,13 +26,21 @@ function WordsPanel({ openForm, activeList, loading, history, updateList, delete
         }
     }
 
+    const getWordCount = (listId) => {
+        const wordsInList = words.filter(word => (
+            word.list._id === listId
+        ))
+
+        return wordsInList.length;
+    }
+
     return (
         loading ? <p>loading</p> : (
             <Card type="panel" radius="medium" >
                 <div className="panel-card_group">
                     <div className="panel-card_group--bundle">
                         <InputText text={activeList.title} onSubmit={onSubmit} />
-                        <p className="panel-card_group--subtitle">Words</p>
+                        <p className="panel-card_group--subtitle">{getWordCount(activeList._id)} Words</p>
                     </div>
                 </div>
                 <div className="panel-card_group higher">
@@ -47,7 +55,8 @@ function WordsPanel({ openForm, activeList, loading, history, updateList, delete
 
 const mapStateToProps = state => ({
     loading: state.lists.loading,
-    activeList: state.lists.activeList
+    activeList: state.lists.activeList,
+    words: state.words.words
 })
 
 export default connect(mapStateToProps, { updateList, deleteList })(WordsPanel);

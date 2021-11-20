@@ -10,7 +10,7 @@ import VocabularyItem from 'components/vocabulary/VocabularyItem';
 import VocabularyForm from 'components/vocabulary/VocabularyForm';
 
 import Hide from 'components/elements/Hide';
-// import { hideByClick } from 'components/elements/Hide';
+
 
 import { connect } from 'react-redux';
 import { getLists } from 'actions/lists';
@@ -18,16 +18,20 @@ import { getWords } from 'actions/words'
 
 
 
-function Vocabulary({ getLists, getWords, count, lists, loading }) {
+function Vocabulary({ getLists, getWords, count, lists, loading, words }) {
     useEffect(() => {
         getLists();
         getWords();
-        // eslint-disable-next-line
-    }, [])
+    }, [])  // eslint-disable-line
 
-    // const [hidden, setHidden] = useState(true);    // Half screen form
+    
+    const getWordCount = (listId) => {
+        const wordsInList = words.filter(word => (
+            word.list._id === listId
+        ))
 
-    // hideByClick(setHidden, 'closing-x');
+        return wordsInList.length;
+    }
 
     return (
         <Container>
@@ -49,7 +53,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading }) {
                                 <ListContainer >
                                     {
                                         lists.map(list => (
-                                            <VocabularyItem key={list._id} title={list.title} slug={list.slug} />
+                                            <VocabularyItem key={list._id} title={list.title} slug={list.slug} count={() => getWordCount(list._id)} />
                                         ))
                                     }
                                 </ListContainer>
@@ -67,7 +71,8 @@ function Vocabulary({ getLists, getWords, count, lists, loading }) {
 const mapStateToProps = (state) => ({
     count: state.words.words.length,
     lists: state.lists.lists,
-    loading: state.lists.loading
+    loading: state.lists.loading,
+    words: state.words.words
 })
 
 const mapDispatchToProps = {
