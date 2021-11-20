@@ -1,4 +1,3 @@
-import { updateWord } from 'actions/words';
 import React, { useState, useEffect, useRef } from 'react';
 
 function Review({ close, words, updateWord, review }) {
@@ -24,7 +23,7 @@ function Review({ close, words, updateWord, review }) {
 
     useEffect(() => {
         setCurrent(getRandomWord(words))
-    }, [])
+    }, []) // eslint-disable-line
 
     const shrinkNative = () => {
         setShrink(true);
