@@ -4,11 +4,13 @@ import {
     OPEN_EDIT,
     OPEN_CREATE,
     UPDATE_WORD, 
-    DELETE_WORD
+    DELETE_WORD,
+    SEARCH_WORDS
 } from 'actions/types';
 
 const initialState = {
     words: [],
+    search: '',
     form: {
         // create, edit
         id: null,
@@ -37,7 +39,7 @@ export default function wordReducer(state = initialState, action) {
         case SAVE_WORD:
             return {
                 ...state,
-                words: [...state.words, payload]
+                words: [payload, ...state.words]
             }
 
         case UPDATE_WORD:  
@@ -80,6 +82,12 @@ export default function wordReducer(state = initialState, action) {
                     id: payload.id,
                     data: payload.data
                 }
+            }
+
+        case SEARCH_WORDS:  
+            return {
+                ...state,
+                search: payload
             }
 
         default:

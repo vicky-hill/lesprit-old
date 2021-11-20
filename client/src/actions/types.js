@@ -26,3 +26,5 @@ export const OPEN_SLIDE = 'OPEN_SLIDE';
 export const CLOSE_SLIDE = 'CLOSE_SLIDE';
 export const OPEN_HIDE = 'OPEN_HIDE';
 export const CLOSE_HIDE = 'CLOSE_HIDE';
+
+export const SEARCH_WORDS = 'SEARCH_WORDS';

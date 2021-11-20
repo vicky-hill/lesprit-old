@@ -9,17 +9,24 @@ import VocabularyPanel from 'components/vocabulary/VocabularyPanel';
 import VocabularyItem from 'components/vocabulary/VocabularyItem';
 import VocabularyForm from 'components/vocabulary/VocabularyForm';
 
+import WordItem from 'components/words/WordItem';
+import Slide from 'components/elements/Slide';
+import WordForm from 'components/words/WordForm';
+
+
 import Hide from 'components/elements/Hide';
 import Spinner from 'components/elements/Spinner';
 
 import { connect } from 'react-redux';
 import { getLists } from 'actions/lists';
 import { getWords } from 'actions/words'
-import { openHide } from 'actions/utils'; 
+import { openHide } from 'actions/utils';
+
+import searchSelector from 'selectors/searchSelector';
 
 
 
-function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide }) {
+function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide, searchResult }) {
 
     useEffect(() => {
         getLists();
@@ -27,7 +34,6 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
     }, [])  // eslint-disable-line
 
 
-    
     const getWordCount = (listId) => {
         const wordsInList = words.filter(word => (
             word.list._id === listId
@@ -35,6 +41,29 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
 
         return wordsInList.length;
     }
+
+    const vocabularyList = (
+        <ListContainer >
+            {
+                lists.map(list => (
+                    <VocabularyItem key={list._id} title={list.title} slug={list.slug} count={() => getWordCount(list._id)} />
+                ))
+            }
+        </ListContainer>
+    )
+
+    const wordList = (
+        <ListContainer flex>
+            {
+                searchResult.map(word => (
+                    <WordItem
+                        key={word._id}
+                        word={word}
+                    />
+                ))
+            }
+        </ListContainer>
+    )
 
     return (
         <Container>
@@ -52,14 +81,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
                                 {/* Header and vocabulary panel */}
                                 <VocabularyPanel count={count} openForm={openHide} />
 
-                                {/* Vocabulary List */}
-                                <ListContainer >
-                                    {
-                                        lists.map(list => (
-                                            <VocabularyItem key={list._id} title={list.title} slug={list.slug} count={() => getWordCount(list._id)} />
-                                        ))
-                                    }
-                                </ListContainer>
+                                {searchResult.length ? wordList : vocabularyList}
 
                             </>
                         )
@@ -67,6 +89,11 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
 
                 </MainContainer>
             </ScrollContainer>
+
+            {/* Slide Form */}
+            <Slide>
+                <WordForm format="full" />
+            </Slide>
         </Container >
     )
 }
@@ -75,7 +102,8 @@ const mapStateToProps = (state) => ({
     count: state.words.words.length,
     lists: state.lists.lists,
     loading: state.lists.loading,
-    words: state.words.words
+    words: state.words.words,
+    searchResult: searchSelector(state)
 })
 
 export default connect(mapStateToProps, { getLists, getWords, openHide })(Vocabulary);

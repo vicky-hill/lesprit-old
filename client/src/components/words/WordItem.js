@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { openSlide } from 'actions/utils'
+import { openEdit, deleteWord } from 'actions/words'; 
 
 /* Props
 =================================================== */
@@ -6,7 +9,7 @@ import React from 'react';
 // word: Object
 
 
-const WordItem = ({ onEdit, onDelete, word }) => {
+const WordItem = ({ word, openSlide, openEdit, deleteWord }) => {
 
     // Toggle edit icons
     const toggleOptions = (e) => {
@@ -34,6 +37,19 @@ const WordItem = ({ onEdit, onDelete, word }) => {
         }
     }
 
+    const onEdit = () => {
+        openSlide();
+        openEdit(word._id, word.foreign, word.native);
+    }
+
+    const onDelete = () => {
+        const c = window.confirm("Delete this word?");
+
+        if (c) {
+            deleteWord(word._id);
+        }
+    }
+
 
     return (
         <div className="word-card" onClick={toggleOptions}>
@@ -49,4 +65,8 @@ const WordItem = ({ onEdit, onDelete, word }) => {
     )
 }
 
-export default WordItem;
+const mapStateToProps = state => ({
+
+})
+
+export default connect(mapStateToProps, { openSlide, openEdit, deleteWord })(WordItem);
