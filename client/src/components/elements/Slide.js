@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { closeSlide } from 'actions/utils'
 
@@ -7,13 +7,7 @@ import { closeSlide } from 'actions/utils'
 // open: state
 // closeSlide: action
 
-function Slide({ open, closeSlide, children, id }) {
-
-    const idRef = useRef(null);
-
-    useEffect(() => {
-        idRef.current = id;
-    }, [id])
+function Slide({ open, closeSlide, children }) {
 
     return (
         <div className={`window slide-container ${open && 'slide-in'}`} id="slide-container">

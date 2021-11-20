@@ -33,7 +33,6 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
         getWords();
     }, [])  // eslint-disable-line
 
-
     const getWordCount = (listId) => {
         const wordsInList = words.filter(word => (
             word.list._id === listId
@@ -46,7 +45,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
         <ListContainer >
             {
                 lists.map(list => (
-                    <VocabularyItem key={list._id} title={list.title} slug={list.slug} count={() => getWordCount(list._id)} />
+                    <VocabularyItem key={list._id} title={list.title} slug={list.slug} count={getWordCount(list._id)} />
                 ))
             }
         </ListContainer>
@@ -74,13 +73,11 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
                         loading ? <Spinner /> : (
                             <>
                                 {/* Hidden form */}
-                                {
-                                    !searchResult.length ? (
-                                        <Hide>
-                                            <VocabularyForm />
-                                        </Hide>
-                                    ) : null
-                                }
+                                <Hide>
+                                    <VocabularyForm />
+                                </Hide>
+
+
 
                                 {/* Header and vocabulary panel */}
                                 <VocabularyPanel count={count} openForm={openHide} />
@@ -95,13 +92,9 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
             </ScrollContainer>
 
             {/* Slide Form */}
-            {
-                searchResult.length ? (
-                    <Slide>
-                        <WordForm format="full" />
-                    </Slide>
-                ) : null
-            }
+            <Slide>
+                <WordForm format="full" />
+            </Slide>
         </Container >
     )
 }

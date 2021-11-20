@@ -6,13 +6,13 @@ import { FormContainer, Heading, Input, SubmitButton } from 'components/elements
 
 import { connect } from 'react-redux'
 import { saveList } from 'actions/lists';
-import { closeHide } from 'actions/utils' 
+import { closeHide, closeSlide } from 'actions/utils'
 
 import validate from 'validation/validate';
 import { vocabularyForm as schema } from 'validation/schemas'
 
 
-const VocabularyForm = ({ saveList, closeHide }) => {
+const VocabularyForm = ({ saveList, closeHide, closeSlide }) => {
 
     const [form, setForm] = useState({
         title: ''
@@ -20,7 +20,7 @@ const VocabularyForm = ({ saveList, closeHide }) => {
 
     useEffect(() => {
         return () => {
-            closeHide();
+            onClose();
         }
     }, [])
 
@@ -32,14 +32,14 @@ const VocabularyForm = ({ saveList, closeHide }) => {
 
     const checkValidation = (errors) => {
         const updatedValidation = {}
-            
+
         for (const prop in errors) {
             updatedValidation[prop] = errors[prop]
         }
 
         return setValidation(updatedValidation)
-    }    
-    
+    }
+
 
     const onChange = (e) => {
         setForm({
@@ -47,16 +47,16 @@ const VocabularyForm = ({ saveList, closeHide }) => {
             [e.target.name]: e.target.value
         })
     }
-    
+
     const onSubmit = (e) => {
         e.preventDefault();
 
         const errors = validate(form, schema);
-        
+
         if (errors) {
             return checkValidation(errors);
         };
-    
+
         saveList(form);
         setForm({
             title: ''
@@ -65,22 +65,29 @@ const VocabularyForm = ({ saveList, closeHide }) => {
             title: ''
         })
 
+        onClose();
+    }
+
+
+    const onClose = () => {
+        closeSlide();
         closeHide();
     }
+
 
     return (
         <Card type="stitched">
             <FormContainer format="half">
                 <Form onSubmit={onSubmit} id="vocabulary-form" >
                     <Heading>Add new list:</Heading>
-                        <Input validation={validation.title} placeholder="List name" name="title" value={title} onChange={onChange} />
-                        <SubmitButton title="Save list" />
+                    <Input validation={validation.title} placeholder="List name" name="title" value={title} onChange={onChange} />
+                    <SubmitButton title="Save list" />
                 </Form>
             </FormContainer>
-            <i className="fas fa-times closing-x" onClick={closeHide}></i>
+            <i className="fas fa-times closing-x" onClick={onClose}></i>
         </Card>
     )
 }
 
 
-export default connect(null, { saveList, closeHide })(VocabularyForm);
+export default connect(null, { saveList, closeHide, closeSlide })(VocabularyForm);
