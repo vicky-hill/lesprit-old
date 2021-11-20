@@ -18,12 +18,22 @@ import { openHide } from 'actions/utils';
 
 
 
-function Vocabulary({ getLists, getWords, count, lists, loading, openHide }) {
+function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide }) {
+
     useEffect(() => {
         getLists();
         getWords();
-        // eslint-disable-next-line
-    }, [])
+    }, [])  // eslint-disable-line
+
+
+    
+    const getWordCount = (listId) => {
+        const wordsInList = words.filter(word => (
+            word.list._id === listId
+        ))
+
+        return wordsInList.length;
+    }
 
     return (
         <Container>
@@ -45,7 +55,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading, openHide }) {
                                 <ListContainer >
                                     {
                                         lists.map(list => (
-                                            <VocabularyItem key={list._id} title={list.title} slug={list.slug} />
+                                            <VocabularyItem key={list._id} title={list.title} slug={list.slug} count={() => getWordCount(list._id)} />
                                         ))
                                     }
                                 </ListContainer>
@@ -63,7 +73,8 @@ function Vocabulary({ getLists, getWords, count, lists, loading, openHide }) {
 const mapStateToProps = (state) => ({
     count: state.words.words.length,
     lists: state.lists.lists,
-    loading: state.lists.loading
+    loading: state.lists.loading,
+    words: state.words.words
 })
 
 export default connect(mapStateToProps, { getLists, getWords, openHide })(Vocabulary);

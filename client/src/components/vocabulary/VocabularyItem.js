@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 // slug: String
 
 
-function VocabularyItem({ title, slug }) {
+function VocabularyItem({ title, count, slug }) {
 
     return (
         <Link to={`/vocabulary/${slug}`}>
@@ -17,7 +17,7 @@ function VocabularyItem({ title, slug }) {
 
                 <div className="vocabulary-card--text">
                     <h3>{title}</h3>
-                    <p>70 Words</p>
+                    <p>{ count } Words</p>
                 </div>
 
 
