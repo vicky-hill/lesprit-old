@@ -10,7 +10,7 @@ import VocabularyItem from 'components/vocabulary/VocabularyItem';
 import VocabularyForm from 'components/vocabulary/VocabularyForm';
 
 import Hide from 'components/elements/Hide';
-import { hideByClick } from 'components/elements/Hide';
+// import { hideByClick } from 'components/elements/Hide';
 
 import { connect } from 'react-redux';
 import { getLists } from 'actions/lists';
@@ -25,9 +25,9 @@ function Vocabulary({ getLists, getWords, count, lists, loading }) {
         // eslint-disable-next-line
     }, [])
 
-    const [hidden, setHidden] = useState(true);    // Half screen form
+    // const [hidden, setHidden] = useState(true);    // Half screen form
 
-    hideByClick(setHidden, 'closing-x');
+    // hideByClick(setHidden, 'closing-x');
 
     return (
         <Container>
@@ -38,12 +38,12 @@ function Vocabulary({ getLists, getWords, count, lists, loading }) {
                         loading ? <p> Loading...</p> : (
                             <>
                                 {/* Hidden form */}
-                                <Hide Hide hidden={hidden}>
+                                <Hide>
                                     <VocabularyForm />
                                 </Hide>
 
                                 {/* Header and vocabulary panel */}
-                                <VocabularyPanel count={count} openForm={() => setHidden(false)} />
+                                <VocabularyPanel count={count} openForm={() => console.log(false)} />
 
                                 {/* Vocabulary List */}
                                 <ListContainer >

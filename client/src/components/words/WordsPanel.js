@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import Button from 'components/elements/Button';
 import Card from 'components/elements/Card';
 import InputText from 'components/elements/InputText';

@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getLists, displayList } from 'actions/lists'
 import { getWords, openEdit, openCreate, deleteWord } from 'actions/words'
-import { openSlide } from 'actions/utils';
+import { openSlide, openHide } from 'actions/utils';
 import wordlistSelector from 'selectors/wordlistSelector'
 
 import Container from 'components/containers/Container';
@@ -14,7 +14,7 @@ import ListContainer from 'components/containers/ListContainer';
 
 import Hide from 'components/elements/Hide';
 import Slide from 'components/elements/Slide';
-import { hideByClick } from 'components/elements/Hide';
+// import { hideByClick } from 'components/elements/Hide';
 
 import WordForm from 'components/words/WordForm';
 import WordItem from 'components/words/WordItem'
@@ -34,12 +34,13 @@ const Words = ({
     openEdit,
     openCreate,
     openSlide,
-    deleteWord
+    deleteWord,
+    openHide
     }) => {
 
-    const [hidden, setHidden] = useState(true);    // Half screen form
+    // const [hidden, setHidden] = useState(true);    // Half screen form
 
-    hideByClick(setHidden, 'closing-x');
+    // hideByClick(setHidden, 'closing-x');
 
     useEffect(() => {
         loadData();
@@ -52,7 +53,8 @@ const Words = ({
     }
 
     const onCreate = () => {
-        setHidden(false);
+        // setHidden(false);
+        openHide();
         openCreate();
     }
 
@@ -77,7 +79,7 @@ const Words = ({
                 <MainContainer>
 
                     {/* Hidden form */}
-                    <Hide hidden={hidden}>
+                    <Hide>
                         <WordForm format="half" />
                     </Hide>
 
@@ -114,4 +116,4 @@ const mapStateToProps = state => ({
     activeList: state.lists.activeList
 })
 
-export default connect(mapStateToProps, { displayList, getLists, getWords, openEdit, openCreate, openSlide, deleteWord })(Words);
+export default connect(mapStateToProps, { displayList, getLists, getWords, openEdit, openCreate, openSlide, openHide, deleteWord })(Words);

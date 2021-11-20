@@ -1,10 +1,13 @@
 import {
     OPEN_SLIDE,
-    CLOSE_SLIDE
+    CLOSE_SLIDE,
+    OPEN_HIDE,
+    CLOSE_HIDE
 } from 'actions/types';
 
 const initialState = {
-    slide: false
+    slide: false,
+    hide: false
 }
 
 export default function utilsReducer (state = initialState, action) {
@@ -22,6 +25,18 @@ export default function utilsReducer (state = initialState, action) {
             return {
                 ...state,
                 slide: false
+            }
+
+        case OPEN_HIDE:  
+            return {
+                ...state,
+                hide: true
+            }
+
+        case CLOSE_HIDE:  
+            return {
+                ...state,
+                hide: false
             }
 
         default:     

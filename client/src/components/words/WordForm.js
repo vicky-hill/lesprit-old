@@ -7,13 +7,13 @@ import { FormContainer, Heading, Input, SubmitButton } from 'components/elements
 
 import { connect } from 'react-redux'
 import { saveWord, updateWord } from 'actions/words';
-import { closeSlide } from 'actions/utils'
+import { closeSlide, closeHide } from 'actions/utils'
 
 import validate from 'validation/validate';
 import { wordForm as schema } from 'validation/schemas'
 
 
-const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, closeSlide }) => {
+const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, closeSlide, closeHide }) => {
 
     const [form, setForm] = useState({
         foreign: '',
@@ -78,6 +78,11 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
         refInput.current.focus();
     }
 
+    const onClose = () => {
+        closeSlide();
+        closeHide();
+    }
+
     const formComponent = (
         <>
             <FormContainer format="half">
@@ -89,7 +94,7 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
                 </Form>
             </FormContainer>
             
-            <i className="fas fa-times closing-x" id="closing-x" onClick={closeSlide}></i>
+            <i className="fas fa-times closing-x" id="closing-x" onClick={onClose}></i>
         </>
     )
 
@@ -119,5 +124,5 @@ const mapStateToProps = state => ({
     id: state.words.form.id
 })
 
-export default connect(mapStateToProps, { saveWord, updateWord, closeSlide })(WordForm);
+export default connect(mapStateToProps, { saveWord, updateWord, closeSlide, closeHide })(WordForm);
 
