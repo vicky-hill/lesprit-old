@@ -104,8 +104,8 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                 <Form onSubmit={onSubmit} id={ mode === 'create' ? 'new-word-form' : 'edit-word-form'} >
                     <Heading>{ mode === 'create' ? 'Add new word:' : 'Update word'}</Heading>
 
-                    <Input validation={validation.foreign} placeholder="Foreign" name="foreign" value={foreign} onChange={onChange} ref={refInput} />
-                    <Input validation={validation.native} placeholder="Native" name="native" value={native} onChange={onChange} />
+                    <Input validation={validation.foreign} placeholder={foreignLanguage} name="foreign" value={foreign} onChange={onChange} ref={refInput} />
+                    <Input validation={validation.native} placeholder={nativeLanguage} name="native" value={native} onChange={onChange} />
 
                     <SubmitButton title="Save word" />
                 </Form>
