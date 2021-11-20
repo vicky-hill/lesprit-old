@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { updateList, deleteList } from 'actions/lists';
 import { Plus, Trash } from 'react-feather';
 
+import Spinner from 'components/elements/Spinner';
+
 
 /* Props
 =================================================== */
@@ -35,7 +37,7 @@ function WordsPanel({ openForm, activeList, loading, history, updateList, delete
     }
 
     return (
-        loading ? <p>loading</p> : (
+        loading ? <Spinner /> : (
             <Card type="panel" radius="medium" >
                 <div className="panel-card_group">
                     <div className="panel-card_group--bundle">
