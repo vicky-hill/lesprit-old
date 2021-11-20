@@ -13,12 +13,29 @@ import validate from 'validation/validate';
 import { wordForm as schema } from 'validation/schemas'
 
 
-const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, closeSlide }) => {
+const WordForm = ({ 
+    saveWord, 
+    list, 
+    languages,
+    format, 
+    formData, 
+    mode, 
+    updateWord, 
+    id, 
+    closeSlide
+}) => {
 
     const [form, setForm] = useState({
         foreign: '',
         native: '',
     })
+
+    function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    } 
+
+    const foreignLanguage = capitalize(languages[0].foreign);
+    const nativeLanguage = capitalize(languages[0].native);
 
     // Load edit data from state
     useEffect(() => {
@@ -79,8 +96,8 @@ const WordForm = ({ saveWord, list, format, formData, mode, updateWord, id, clos
             <FormContainer format="half">
                 <Form onSubmit={onSubmit} id={ mode === 'create' ? 'new-word-form' : 'edit-word-form'} >
                     <Heading>{ mode === 'create' ? 'Add new word:' : 'Update word'}</Heading>
-                    <Input validation={validation.foreign} placeholder="Foreign" name="foreign" value={foreign} onChange={onChange} />
-                    <Input validation={validation.native} placeholder="Native" name="native" value={native} onChange={onChange} />
+                    <Input validation={validation.foreign} placeholder={foreignLanguage} name="foreign" value={foreign} onChange={onChange} />
+                    <Input validation={validation.native} placeholder={nativeLanguage} name="native" value={native} onChange={onChange} />
                     <SubmitButton title="Save word" />
                 </Form>
             </FormContainer>
@@ -111,7 +128,8 @@ const mapStateToProps = state => ({
     list: state.lists.activeList,
     formData: state.words.form.data,
     mode: state.words.form.mode,
-    id: state.words.form.id
+    id: state.words.form.id,
+    languages: state.auth.user.languages
 })
 
 export default connect(mapStateToProps, { saveWord, updateWord, closeSlide })(WordForm);
