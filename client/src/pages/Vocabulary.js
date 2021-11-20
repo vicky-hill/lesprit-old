@@ -14,10 +14,11 @@ import Hide from 'components/elements/Hide';
 import { connect } from 'react-redux';
 import { getLists } from 'actions/lists';
 import { getWords } from 'actions/words'
+import { openHide } from 'actions/utils'; 
 
 
 
-function Vocabulary({ getLists, getWords, count, lists, loading }) {
+function Vocabulary({ getLists, getWords, count, lists, loading, openHide }) {
     useEffect(() => {
         getLists();
         getWords();
@@ -38,7 +39,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading }) {
                                 </Hide>
 
                                 {/* Header and vocabulary panel */}
-                                <VocabularyPanel count={count} openForm={() => console.log(false)} />
+                                <VocabularyPanel count={count} openForm={openHide} />
 
                                 {/* Vocabulary List */}
                                 <ListContainer >
@@ -65,12 +66,7 @@ const mapStateToProps = (state) => ({
     loading: state.lists.loading
 })
 
-const mapDispatchToProps = {
-    getLists, getWords
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Vocabulary);
+export default connect(mapStateToProps, { getLists, getWords, openHide })(Vocabulary);
 
 
 
