@@ -13,7 +13,9 @@ const initialState = {
     isAuthenticated: false,
     loading: true,
     loginCheck: false,
-    user: null
+    user: {
+        languages: [{foreign: "", native: ""}]
+    }
 }
 
 export default function authReducer (state = initialState, action) {

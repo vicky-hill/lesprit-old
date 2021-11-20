@@ -6,8 +6,7 @@ import {
     OPEN_CREATE,
     OPEN_EDIT,
     UPDATE_WORD,
-    DELETE_WORD,
-    SELECT_REVIEW
+    DELETE_WORD
 } from './types';
 
 
