@@ -37,11 +37,6 @@ const Words = ({
     deleteWord
     }) => {
 
-    useEffect(() => {
-        console.log(window.location.pathname);
-        console.log(history)
-    })
-
     const [hidden, setHidden] = useState(true);    // Half screen form
 
     hideByClick(setHidden, 'closing-x');
@@ -119,4 +114,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, { displayList, getLists, getWords, openEdit, openCreate, openSlide, deleteWord })(Words);
-
