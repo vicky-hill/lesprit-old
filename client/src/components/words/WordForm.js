@@ -21,12 +21,17 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         native: '',
     })
 
-
     useEffect(() => {
-        if(hide) {
+        if(hide && mode) {
             refInput.current.focus();
         }
     }, [hide]) // eslint-disable-line
+
+    useEffect(() => {
+        return () => {
+            onClose();
+        }
+    }, [])
 
     const refInput = createRef();
 
@@ -43,6 +48,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
             foreign: formData.foreign,
             native: formData.native,
         });
+
     }, [formData])
 
     const { foreign, native } = form;

@@ -22,6 +22,7 @@ export const DELETE_WORD = 'DELETE_WORD';
 export const OPEN_EDIT = 'OPEN_EDIT';
 export const OPEN_CREATE = 'OPEN_CREATE';
 
+
 export const OPEN_SLIDE = 'OPEN_SLIDE';
 export const CLOSE_SLIDE = 'CLOSE_SLIDE';
 export const OPEN_HIDE = 'OPEN_HIDE';
