@@ -6,7 +6,8 @@ import {
     OPEN_CREATE,
     OPEN_EDIT,
     UPDATE_WORD,
-    DELETE_WORD
+    DELETE_WORD,
+    SEARCH_WORDS
 } from './types';
 
 
@@ -98,21 +99,27 @@ export const openCreate = () => async dispatch => {
    Open Edit
 =================================== */
 export const openEdit = (id, foreign, native) => async dispatch => {
-    try {
-        dispatch({
-            type: OPEN_EDIT,
-            payload: {
-                id,
-                data: {
-                    foreign,
-                    native
-                }
+    dispatch({
+        type: OPEN_EDIT,
+        payload: {
+            id,
+            data: {
+                foreign,
+                native
             }
-        })
+        }
+    })
+}
 
-    } catch (err) {
-        console.log(err.message);
-    }
+
+/* ===================================
+   Search words
+=================================== */
+export const onSearch = (search) => async dispatch => {
+    dispatch({
+        type: SEARCH_WORDS,
+        payload: search
+    })
 }
 
 
