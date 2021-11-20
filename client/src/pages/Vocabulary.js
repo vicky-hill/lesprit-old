@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Container from 'components/containers/Container';
 import ScrollContainer from 'components/containers/ScrollContainer';
@@ -11,18 +11,20 @@ import VocabularyForm from 'components/vocabulary/VocabularyForm';
 
 import Hide from 'components/elements/Hide';
 
-
 import { connect } from 'react-redux';
 import { getLists } from 'actions/lists';
 import { getWords } from 'actions/words'
+import { openHide } from 'actions/utils'; 
 
 
 
-function Vocabulary({ getLists, getWords, count, lists, loading, words }) {
+function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide }) {
+
     useEffect(() => {
         getLists();
         getWords();
     }, [])  // eslint-disable-line
+
 
     
     const getWordCount = (listId) => {
@@ -47,7 +49,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words }) {
                                 </Hide>
 
                                 {/* Header and vocabulary panel */}
-                                <VocabularyPanel count={count} openForm={() => console.log(false)} />
+                                <VocabularyPanel count={count} openForm={openHide} />
 
                                 {/* Vocabulary List */}
                                 <ListContainer >
@@ -75,12 +77,7 @@ const mapStateToProps = (state) => ({
     words: state.words.words
 })
 
-const mapDispatchToProps = {
-    getLists, getWords
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Vocabulary);
+export default connect(mapStateToProps, { getLists, getWords, openHide })(Vocabulary);
 
 
 
