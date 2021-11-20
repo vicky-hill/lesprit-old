@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { Route } from 'react-router-dom'
 
 import { connect } from 'react-redux'
@@ -43,9 +43,8 @@ const Words = ({
 
     useEffect(() => {
         loadData();
-        // eslint-disable-next-line
-    }, [])
-
+    }, []) // eslint-disable-line
+ 
     const loadData = async () => {
         await getWords();
         await getLists();
@@ -69,6 +68,8 @@ const Words = ({
             deleteWord(id);
         }
     }
+
+    const refInput = createRef();
 
     return (
         <Container>
@@ -102,7 +103,7 @@ const Words = ({
 
             {/* Slide Form */}
             <Slide>
-                <WordForm format="full" />
+                <WordForm refInput={refInput} format="full" />
             </Slide>
         </Container>
     )
