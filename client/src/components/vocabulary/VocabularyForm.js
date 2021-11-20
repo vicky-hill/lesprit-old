@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Form from 'components/elements/Form'
 import Card from 'components/elements/Card'
@@ -17,6 +17,12 @@ const VocabularyForm = ({ saveList, closeHide }) => {
     const [form, setForm] = useState({
         title: ''
     })
+
+    useEffect(() => {
+        return () => {
+            closeHide();
+        }
+    }, [])
 
     const { title } = form;
 

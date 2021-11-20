@@ -74,9 +74,13 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
                         loading ? <Spinner /> : (
                             <>
                                 {/* Hidden form */}
-                                <Hide>
-                                    <VocabularyForm />
-                                </Hide>
+                                {
+                                    !searchResult.length ? (
+                                        <Hide>
+                                            <VocabularyForm />
+                                        </Hide>
+                                    ) : null
+                                }
 
                                 {/* Header and vocabulary panel */}
                                 <VocabularyPanel count={count} openForm={openHide} />
@@ -91,9 +95,13 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
             </ScrollContainer>
 
             {/* Slide Form */}
-            <Slide>
-                <WordForm format="full" />
-            </Slide>
+            {
+                searchResult.length ? (
+                    <Slide>
+                        <WordForm format="full" />
+                    </Slide>
+                ) : null
+            }
         </Container >
     )
 }
