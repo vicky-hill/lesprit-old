@@ -10,6 +10,7 @@ import VocabularyItem from 'components/vocabulary/VocabularyItem';
 import VocabularyForm from 'components/vocabulary/VocabularyForm';
 
 import Hide from 'components/elements/Hide';
+import Spinner from 'components/elements/Spinner';
 
 import { connect } from 'react-redux';
 import { getLists } from 'actions/lists';
@@ -41,7 +42,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
                 <MainContainer>
 
                     {
-                        loading ? <p> Loading...</p> : (
+                        loading ? <Spinner /> : (
                             <>
                                 {/* Hidden form */}
                                 <Hide>

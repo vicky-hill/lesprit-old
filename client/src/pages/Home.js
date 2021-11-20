@@ -10,6 +10,7 @@ import speechbubble from '../assets/iconsImg/speechbubble-icon.png';
 import book from '../assets/iconsImg/book-icon.png';
 import Footer from '../components/elements/Footer';
 import Container from '../components/containers/Container';
+import Spinner from 'components/elements/Spinner';
 
 import { connect } from 'react-redux';
 import { getWords, updateWord } from 'actions/words';
@@ -50,7 +51,7 @@ function Home({
     return (
         <Container>
             {
-                loading ? <p>Loading...</p> : (
+                loading ? <Spinner /> : (
                     <>
                         {/* Landing page */}
                         <div className={windowClass + '-home'}>
