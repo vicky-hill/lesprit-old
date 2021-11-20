@@ -6,12 +6,13 @@ import { FormContainer, Heading, Input, SubmitButton } from 'components/elements
 
 import { connect } from 'react-redux'
 import { saveList } from 'actions/lists';
+import { closeHide } from 'actions/utils' 
 
 import validate from 'validation/validate';
 import { vocabularyForm as schema } from 'validation/schemas'
 
 
-const VocabularyForm = ({ saveList }) => {
+const VocabularyForm = ({ saveList, closeHide }) => {
 
     const [form, setForm] = useState({
         title: ''
@@ -57,6 +58,8 @@ const VocabularyForm = ({ saveList }) => {
         setValidation({
             title: ''
         })
+
+        closeHide();
     }
 
     return (
@@ -68,10 +71,10 @@ const VocabularyForm = ({ saveList }) => {
                         <SubmitButton title="Save list" />
                 </Form>
             </FormContainer>
-            <i className="fas fa-times closing-x" id="closing-x"></i>
+            <i className="fas fa-times closing-x" onClick={closeHide}></i>
         </Card>
     )
 }
 
 
-export default connect(null, { saveList })(VocabularyForm);
+export default connect(null, { saveList, closeHide })(VocabularyForm);
