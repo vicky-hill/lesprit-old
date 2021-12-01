@@ -6,12 +6,9 @@
     z-index: 100;
     width: 22rem;
 
+    &.full,
     &.half {
-        width: 29rem;
-    }
-
-    &.full {
-        width: 22rem;
+        width: auto;
     }
 }
 
@@ -99,6 +96,16 @@ input[type=text], input[type=password] {
 
 // Desktop
 @media only screen and (min-width : $desktop) {
+
+    .form-container {    
+        &.half {
+            width: 29rem;
+        }
+    
+        &.full {
+            width: 22rem;
+        }
+    }
 
     form {
         input[type=text], input[type=password] {
