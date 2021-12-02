@@ -6,5 +6,6 @@ export const vocabularyForm = {
 
 export const wordForm = {
     foreign: Joi.string().required().label('Foreign word'),
-    native: Joi.string().required().label('Native word')
+    native: Joi.string().required().label('Native word'),
+    phrases: Joi.array()
 }

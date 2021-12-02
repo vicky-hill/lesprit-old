@@ -3,7 +3,7 @@ import React, { useState, useEffect, createRef } from 'react'
 import Form from 'components/elements/Form'
 import Card from 'components/elements/Card'
 import MainContainer from 'components/containers/MainContainer'
-import { FormContainer, Heading, Input, SubmitButton } from 'components/elements/Form'
+import { FormContainer, Heading, Input, TextArea, SubmitButton } from 'components/elements/Form'
 
 import { connect } from 'react-redux'
 import { saveWord, updateWord } from 'actions/words';
@@ -19,6 +19,10 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
     const [form, setForm] = useState({
         foreign: '',
         native: '',
+        phrases: [{
+            phrase: '',
+            highlight: ''
+        }]
     })
 
     useEffect(() => {
@@ -47,11 +51,14 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         setForm({
             foreign: formData.foreign,
             native: formData.native,
+            phrases: formData.phrases
         });
 
     }, [formData])
 
-    const { foreign, native } = form;
+    const { foreign, native, phrases } = form;
+
+
 
     const [validation, setValidation] = useState({
         foreign: '', native: ''
@@ -67,11 +74,20 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         return setValidation(updatedValidation)
     }
 
-    const onChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
+    const onChange = (e, i) => {
+        if(e.target.tagName === 'TEXTAREA') {
+            let newPhrases = [...phrases];
+            newPhrases[i].phrase = e.target.value;
+            setForm({
+                ...form,
+                phrases: newPhrases
+            });
+        } else {
+            setForm({
+                ...form,
+                [e.target.name]: e.target.value
+            })
+        }
     }
 
 
@@ -93,7 +109,11 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
 
         setForm({
             foreign: '',
-            native: ''
+            native: '',
+            phrases: [{
+                phrase: '',
+                highlight: ''
+            }]
         })
 
         refInput.current.focus();
@@ -104,14 +124,54 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         closeHide();
     }
 
+    const getHighlight = (i) => {
+        const highlight = window.getSelection().toString();
+        
+        if (highlight) {
+            let newPhrases = [...phrases];
+            newPhrases[i].highlight = highlight
+    
+            setForm({
+                ...form,
+                phrases: newPhrases
+            });
+        }
+    }
+    
+
     const formComponent = (
         <>
             <FormContainer format="half">
                 <Form onSubmit={onSubmit} id={ mode === 'create' ? 'new-word-form' : 'edit-word-form'} >
                     <Heading>{ mode === 'create' ? 'Add new word:' : 'Update word'}</Heading>
 
-                    <Input validation={validation.foreign} placeholder={foreignLanguage} name="foreign" value={foreign} onChange={onChange} ref={refInput} />
-                    <Input validation={validation.native} placeholder={nativeLanguage} name="native" value={native} onChange={onChange} />
+                    {/* Foreign input */}
+                    <Input 
+                        validation={validation.foreign} 
+                        placeholder={foreignLanguage} 
+                        name="foreign" 
+                        value={foreign} 
+                        onChange={onChange} 
+                        ref={refInput}
+                    />
+                    
+                    {/* Native input */}
+                    <Input 
+                        validation={validation.native} 
+                        placeholder={nativeLanguage} 
+                        name="native" value={native} 
+                        onChange={onChange} 
+                    />
+                    
+                    {/* Phrase textarea */}
+                    <TextArea 
+                        name="phrase" 
+                        placeholder="Phrase" 
+                        value={form.phrases[0].phrase} 
+                        onChange={(e) => onChange(e, 0)} 
+                        onMouseUp={() => getHighlight(0)} 
+                        small={phrases[0].highlight && `Highlighted: ${phrases[0].highlight}`}
+                    />
 
                     <SubmitButton title="Save word" />
                 </Form>
