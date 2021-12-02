@@ -9,6 +9,9 @@ const WordSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    phrases: {
+        type: Array
+    },
     list: {
         type: mongoose.Schema.ObjectId,
         ref: 'List',
