@@ -20,10 +20,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
     const [form, setForm] = useState({
         foreign: '',
         native: '',
-        phrases: [{
-            phrase: '',
-            highlight: ''
-        }]
+        phrases: []
     })
 
     useEffect(() => {
@@ -148,7 +145,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
             ]
         });
     }
-    
+
 
 
     const formComponent = (
@@ -177,25 +174,38 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
 
                     {/* Phrase textarea */}
                     {
-                        phrases.map((phrase, i) => (
-                            <>
-                                <TextArea
-                                    name="phrase"
-                                    placeholder="Phrase"
-                                    value={phrases[i].phrase}
-                                    onChange={(e) => onChange(e, i)}
-                                    onMouseUp={() => getHighlight(i)}
-                                    small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
-                                />
-                                {
-                                    i === phrases.length -1 && phrases[i].phrase &&
+                        !phrases.length ?
+                            <div className="add-textarea" onClick={addPhrase}>
+                                <PlusCircle size={19} /> <span>Add Phrase</span>
+                            </div> :
+
+                            phrases.map((phrase, i) => (
+                                <>
+                                    {
+                                        phrases.length === 0 ?
+                                            <div className="add-textarea" onClick={addPhrase}>
+                                                <PlusCircle size={19} /> <span>Add Phrase</span>
+                                            </div> :
+                                            <TextArea
+                                                name="phrase"
+                                                placeholder="Phrase"
+                                                value={phrases[i].phrase}
+                                                onChange={(e) => onChange(e, i)}
+                                                onMouseUp={() => getHighlight(i)}
+                                                small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
+                                            />
+                                    }
+
+                                    {
+                                        i === phrases.length - 1 && phrases[i].phrase &&
                                         <div className="add-textarea" onClick={addPhrase}>
                                             <PlusCircle size={19} /> <span>Add Phrase</span>
                                         </div>
-                                }
-                               
-                            </>
-                        ))
+                                    }
+
+
+                                </>
+                            ))
                     }
 
 

@@ -18,10 +18,7 @@ const initialState = {
         data: {
             foreign: '',
             native: '',
-            phrases: [{
-                phrase: "",
-                highlight: ""
-            }]
+            phrases: []
         }
     },
     loading: true,
@@ -74,10 +71,7 @@ export default function wordReducer(state = initialState, action) {
                     data: {
                         foreign: '',
                         native: '',
-                        phrases: [{
-                            phrase: "",
-                            highlight: ""
-                        }]
+                        phrases: []
                     }
                 }
             }

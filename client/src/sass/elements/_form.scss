@@ -90,8 +90,6 @@ input[type=text], input[type=password], textarea {
     } 
 
     .add-textarea {
-        position: relative;
-        top: -8px;
         border: 1px dashed #dddddd;
         border-radius: 5px;
         padding: 7px;
@@ -101,6 +99,7 @@ input[type=text], input[type=password], textarea {
         cursor: pointer;
         transition: all .2s;
         color: #dddddd;
+        margin-bottom: 10px;
 
         &:hover {
             color: $grey-dark;
