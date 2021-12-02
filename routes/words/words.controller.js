@@ -57,6 +57,7 @@ async function saveWord (req, res) {
         const reqWord = {
             foreign: req.body.foreign,
             native: req.body.native,
+            phrases: req.body.phrases,
             list: req.body.list,
             user: req.user.id
         }
