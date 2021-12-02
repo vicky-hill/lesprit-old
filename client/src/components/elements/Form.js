@@ -52,6 +52,15 @@ export const Input = forwardRef(({ placeholder, value, onChange, type, name, val
     )
 })
 
+export const TextArea = ({ value, name, placeholder, onChange, onMouseUp, small }) => {
+    return (
+        <div className="input-container">
+            <textarea value={value} name={name} id={name} onChange={onChange} placeholder={placeholder} onMouseUp={onMouseUp} cols="30" rows="4"></textarea>
+            <small>{ small }</small>
+        </div>
+    )
+}
+
 export const SubmitButton = ({ title }) => {
     return (
         <button type="submit">{title}</button>
