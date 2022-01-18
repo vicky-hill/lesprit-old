@@ -11,7 +11,7 @@ import { closeSlide, closeHide } from 'actions/utils'
 
 import validate from 'validation/validate';
 import { wordForm as schema } from 'validation/schemas'
-import { PlusCircle } from 'react-feather';
+import { PlusCircle, MinusCircle } from 'react-feather';
 
 
 
@@ -136,6 +136,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         }
     }
 
+    // Add Phrase
     const addPhrase = () => {
         setForm({
             ...form,
@@ -145,6 +146,18 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
             ]
         });
     }
+
+    // Remove Phrase
+    const removePhrase = (index) => {
+        const updatedPhrases = [...form.phrases];
+        updatedPhrases.splice(index, 1);
+
+        setForm({
+            ...form,
+            phrases: updatedPhrases
+        })
+    }
+    
 
 
 
@@ -159,6 +172,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                         validation={validation.foreign}
                         placeholder={foreignLanguage}
                         name="foreign"
+                        id="foreign"
                         value={foreign}
                         onChange={onChange}
                         ref={refInput}
@@ -168,7 +182,9 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                     <Input
                         validation={validation.native}
                         placeholder={nativeLanguage}
-                        name="native" value={native}
+                        name="native"
+                        id="native"
+                        value={native}
                         onChange={onChange}
                     />
 
@@ -180,20 +196,24 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                             </div> :
 
                             phrases.map((phrase, i) => (
-                                <>
+                                <div key={i}>
                                     {
                                         phrases.length === 0 ?
                                             <div className="add-textarea" onClick={addPhrase}>
                                                 <PlusCircle size={19} /> <span>Add Phrase</span>
                                             </div> :
-                                            <TextArea
-                                                name="phrase"
-                                                placeholder="Phrase"
-                                                value={phrases[i].phrase}
-                                                onChange={(e) => onChange(e, i)}
-                                                onMouseUp={() => getHighlight(i)}
-                                                small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
-                                            />
+                                            <div className='pos-relative'>
+                                                <TextArea
+                                                    name="phrase"
+                                                    id="phrase"
+                                                    placeholder="Phrase"
+                                                    value={phrases[i].phrase}
+                                                    onChange={(e) => onChange(e, i)}
+                                                    onMouseUp={() => getHighlight(i)}
+                                                    small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
+                                                />
+                                                <MinusCircle className='remove-phrase' size={19} onClick={() => removePhrase(i)} />
+                                            </div>
                                     }
 
                                     {
@@ -204,7 +224,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                                     }
 
 
-                                </>
+                                </div>
                             ))
                     }
 

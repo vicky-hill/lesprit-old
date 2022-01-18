@@ -80,7 +80,7 @@ const VocabularyForm = ({ saveList, closeHide, closeSlide }) => {
             <FormContainer format="half">
                 <Form onSubmit={onSubmit} id="vocabulary-form" >
                     <Heading>Add new list:</Heading>
-                    <Input validation={validation.title} placeholder="List name" name="title" value={title} onChange={onChange} />
+                    <Input validation={validation.title} placeholder="List name" name="title" id="title" value={title} onChange={onChange} />
                     <SubmitButton title="Save list" />
                 </Form>
             </FormContainer>

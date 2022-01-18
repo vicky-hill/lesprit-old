@@ -115,7 +115,19 @@ input[type=text], input[type=password], textarea {
     textarea {
         margin-bottom: 15px !important;
     }
+}
 
+.remove-phrase {
+    position: absolute;
+    position: absolute;
+    top: 34px;
+    cursor: pointer;
+    right: -30px;
+    color: #dddddd;
+
+    &:hover {
+        color: $grey-dark;
+    }
 }
 
 
