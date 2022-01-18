@@ -98,14 +98,20 @@ export const openCreate = () => async dispatch => {
 /* ===================================
    Open Edit
 =================================== */
-export const openEdit = (id, foreign, native) => async dispatch => {
+export const openEdit = (id, foreign, native, phrases) => async dispatch => {
+
+    if (!phrases.length) {
+        phrases.push({ phrase: '', highlight: '' })
+    }
+
     dispatch({
         type: OPEN_EDIT,
         payload: {
             id,
             data: {
                 foreign,
-                native
+                native,
+                phrases
             }
         }
     })
