@@ -136,6 +136,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         }
     }
 
+    // Add Phrase
     const addPhrase = () => {
         setForm({
             ...form,
@@ -145,6 +146,18 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
             ]
         });
     }
+
+    // Remove Phrase
+    const removePhrase = (index) => {
+        const updatedPhrases = [...form.phrases];
+        updatedPhrases.splice(index, 1);
+
+        setForm({
+            ...form,
+            phrases: updatedPhrases
+        })
+    }
+    
 
 
 
@@ -183,7 +196,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                             </div> :
 
                             phrases.map((phrase, i) => (
-                                <>
+                                <div key={i}>
                                     {
                                         phrases.length === 0 ?
                                             <div className="add-textarea" onClick={addPhrase}>
@@ -199,7 +212,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                                                     onMouseUp={() => getHighlight(i)}
                                                     small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
                                                 />
-                                                <MinusCircle className='remove-phrase' size={19} />
+                                                <MinusCircle className='remove-phrase' size={19} onClick={() => removePhrase(i)} />
                                             </div>
                                     }
 
@@ -211,7 +224,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                                     }
 
 
-                                </>
+                                </div>
                             ))
                     }
 
