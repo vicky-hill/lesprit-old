@@ -43,20 +43,20 @@ export const Heading = ({ children }) => {
     )
 }
 
-export const Input = forwardRef(({ placeholder, value, onChange, type, name, validation }, ref) => {
+export const Input = forwardRef((props, ref) => {
     return (
         <div className="input-container">
-            <input ref={ref} id={name} name={name} autoComplete="off" autoCapitalize="none" type={type} placeholder={placeholder} value={value} onChange={onChange} />
-            <small className="invalid">{ validation }</small>
+            <input {...props} ref={ref} />
+            <small className="invalid">{ props.validation }</small>
         </div>
     )
 })
 
-export const TextArea = ({ value, name, placeholder, onChange, onMouseUp, small }) => {
+export const TextArea = (props) => {
     return (
         <div className="input-container">
-            <textarea value={value} name={name} id={name} onChange={onChange} placeholder={placeholder} onMouseUp={onMouseUp} cols="30" rows="4"></textarea>
-            <small>{ small }</small>
+            <textarea  {...props} cols="30" rows="4"></textarea>
+            <small>{ props.small }</small>
         </div>
     )
 }
