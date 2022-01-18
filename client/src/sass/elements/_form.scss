@@ -80,7 +80,7 @@ input[type=text], input[type=password], textarea {
 
     small {
         position: relative;
-        top: -20px;
+        top: -25px;
         left: 5px;
         color: $grey-dark;
     }
@@ -88,6 +88,33 @@ input[type=text], input[type=password], textarea {
     .invalid {
         color: #DD3444;
     } 
+
+    .add-textarea {
+        border: 1px dashed #dddddd;
+        border-radius: 5px;
+        padding: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all .2s;
+        color: #dddddd;
+        margin-bottom: 10px;
+
+        &:hover {
+            color: $grey-dark;
+            border-color: $grey-dark;
+        }
+
+        span {
+            margin-left: 5px;
+            font-size: 13px;
+        }
+    }
+
+    textarea {
+        margin-bottom: 15px !important;
+    }
 
 }
 
