@@ -73,9 +73,9 @@ function Register({
                 <Heading>Create a new account</Heading>
                     { error && <Alert message={error} type='danger' /> }
                     <Form onSubmit={onSubmit}>
-                        <Input name="name" placeholder="Username" value={name} onChange={onChange} />
-                        <Input name="password" placeholder="Password" value={password} onChange={onChange} type='password'  />
-                        <Input name="password2" placeholder="Confirm Password" value={password2}  onChange={onChange} type='password' />
+                        <Input name="name" id="name" placeholder="Username" value={name} onChange={onChange} />
+                        <Input name="password" id="password" placeholder="Password" value={password} onChange={onChange} type='password'  />
+                        <Input name="password2" id="password2" placeholder="Confirm Password" value={password2}  onChange={onChange} type='password' />
                         <SubmitButton title="Sign Up" />
                     </Form>
                 </Card>

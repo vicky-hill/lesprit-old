@@ -64,8 +64,8 @@ function Login({
                 <Heading>Sign into your account</Heading>
                 { error && <Alert message={error} type='danger' /> }
                     <Form onSubmit={onSubmit}>
-                        <Input placeholder="Username" name="name" value={name} onChange={onChange} />
-                        <Input placeholder="Password" name="password" value={password} onChange={onChange} type="password" />
+                        <Input placeholder="Username" name="name" id="name" value={name} onChange={onChange} />
+                        <Input placeholder="Password" name="password" id="password" value={password} onChange={onChange} type="password" />
                        
                         <SubmitButton title="Log In" />
                     </Form>
