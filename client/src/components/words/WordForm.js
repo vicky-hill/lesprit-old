@@ -11,6 +11,7 @@ import { closeSlide, closeHide } from 'actions/utils'
 
 import validate from 'validation/validate';
 import { wordForm as schema } from 'validation/schemas'
+import { PlusCircle } from 'react-feather';
 
 
 
@@ -19,14 +20,11 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
     const [form, setForm] = useState({
         foreign: '',
         native: '',
-        phrases: [{
-            phrase: '',
-            highlight: ''
-        }]
+        phrases: []
     })
 
     useEffect(() => {
-        if(hide && mode) {
+        if (hide && mode) {
             refInput.current.focus();
         }
     }, [hide]) // eslint-disable-line
@@ -41,7 +39,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
 
     function capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
-    } 
+    }
 
     const foreignLanguage = capitalize(languages[0].foreign);
     const nativeLanguage = capitalize(languages[0].native);
@@ -75,7 +73,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
     }
 
     const onChange = (e, i) => {
-        if(e.target.tagName === 'TEXTAREA') {
+        if (e.target.tagName === 'TEXTAREA') {
             let newPhrases = [...phrases];
             newPhrases[i].phrase = e.target.value;
             setForm({
@@ -126,57 +124,95 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
 
     const getHighlight = (i) => {
         const highlight = window.getSelection().toString();
-        
+
         if (highlight) {
             let newPhrases = [...phrases];
             newPhrases[i].highlight = highlight
-    
+
             setForm({
                 ...form,
                 phrases: newPhrases
             });
         }
     }
-    
+
+    const addPhrase = () => {
+        setForm({
+            ...form,
+            phrases: [
+                ...phrases,
+                { phrase: '', highlight: '' }
+            ]
+        });
+    }
+
+
 
     const formComponent = (
         <>
             <FormContainer format="half">
-                <Form onSubmit={onSubmit} id={ mode === 'create' ? 'new-word-form' : 'edit-word-form'} >
-                    <Heading>{ mode === 'create' ? 'Add new word:' : 'Update word'}</Heading>
+                <Form onSubmit={onSubmit} id={mode === 'create' ? 'new-word-form' : 'edit-word-form'} >
+                    <Heading>{mode === 'create' ? 'Add new word:' : 'Update word'}</Heading>
 
                     {/* Foreign input */}
-                    <Input 
-                        validation={validation.foreign} 
-                        placeholder={foreignLanguage} 
-                        name="foreign" 
-                        value={foreign} 
-                        onChange={onChange} 
+                    <Input
+                        validation={validation.foreign}
+                        placeholder={foreignLanguage}
+                        name="foreign"
+                        value={foreign}
+                        onChange={onChange}
                         ref={refInput}
                     />
-                    
+
                     {/* Native input */}
-                    <Input 
-                        validation={validation.native} 
-                        placeholder={nativeLanguage} 
-                        name="native" value={native} 
-                        onChange={onChange} 
+                    <Input
+                        validation={validation.native}
+                        placeholder={nativeLanguage}
+                        name="native" value={native}
+                        onChange={onChange}
                     />
-                    
+
                     {/* Phrase textarea */}
-                    <TextArea 
-                        name="phrase" 
-                        placeholder="Phrase" 
-                        value={form.phrases[0].phrase} 
-                        onChange={(e) => onChange(e, 0)} 
-                        onMouseUp={() => getHighlight(0)} 
-                        small={phrases[0].highlight && `Highlighted: ${phrases[0].highlight}`}
-                    />
+                    {
+                        !phrases.length ?
+                            <div className="add-textarea" onClick={addPhrase}>
+                                <PlusCircle size={19} /> <span>Add Phrase</span>
+                            </div> :
+
+                            phrases.map((phrase, i) => (
+                                <>
+                                    {
+                                        phrases.length === 0 ?
+                                            <div className="add-textarea" onClick={addPhrase}>
+                                                <PlusCircle size={19} /> <span>Add Phrase</span>
+                                            </div> :
+                                            <TextArea
+                                                name="phrase"
+                                                placeholder="Phrase"
+                                                value={phrases[i].phrase}
+                                                onChange={(e) => onChange(e, i)}
+                                                onMouseUp={() => getHighlight(i)}
+                                                small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
+                                            />
+                                    }
+
+                                    {
+                                        i === phrases.length - 1 && phrases[i].phrase &&
+                                        <div className="add-textarea" onClick={addPhrase}>
+                                            <PlusCircle size={19} /> <span>Add Phrase</span>
+                                        </div>
+                                    }
+
+
+                                </>
+                            ))
+                    }
+
 
                     <SubmitButton title="Save word" />
                 </Form>
             </FormContainer>
-            
+
             <i className="fas fa-times closing-x" id="closing-x" onClick={onClose}></i>
         </>
     )
