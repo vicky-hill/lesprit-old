@@ -1,8 +1,9 @@
 import axios from 'axios'
+import env from './env';
 
 const fetch = () => {
     const defaultOptions = {
-      baseURL: 'http://localhost:5000/',
+      baseURL: env.baseUrl,
       headers: {
         'Content-Type': 'application/json',
       },
