@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Level1 from 'components/review/Level1';
+import Level2 from 'components/review/Level2';
 import Level10 from 'components/review/Level10';
 
 function Review({ close, words, updateWord, review }) {
@@ -94,7 +95,8 @@ function Review({ close, words, updateWord, review }) {
 
     return (
         rating === 0 ? <Level1 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
-        rating === 10 ? <Level10 current={current} setCurrent={setCurrent} getRandomWord={getRandomWord} review={review} updateWord={updateWord} close={close} words={words} /> :
+        rating === 1 ? <Level2 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
+        rating === 10 ? <Level10 addTime={addTime} current={current} setCurrent={setCurrent} getRandomWord={getRandomWord} review={review} updateWord={updateWord} close={close} words={words} /> :
         <div></div>
         
     )

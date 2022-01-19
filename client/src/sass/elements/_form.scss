@@ -23,30 +23,44 @@
 form {
     width: 100%;
 
-& .invisible {
-    display: none;
-}   
+    & .invisible {
+        display: none;
+    }   
 
-& button {
-    width: 100%;
-    border: none;
-    background-color: $gold-primary;
-    color: white;
-    font-weight: 700;
-    padding: 1.4rem;
-    border-radius: 9px;
-    margin-top: 1.5rem;
-    border: 2px solid white;
+    & button {
+        width: 100%;
+        border: none;
+        background-color: $gold-primary;
+        color: white;
+        font-weight: 700;
+        padding: 1.4rem;
+        border-radius: 9px;
+        margin-top: 1.5rem;
+        border: 2px solid white;
 
-    &:hover {
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active, &:focus {
+            outline: none;
+            border: 2px solid  #fdedbf;
+        }   
+    }
+
+    .remove-phrase {
+        position: absolute;
+        position: absolute;
+        top: 34px;
         cursor: pointer;
+        right: -30px;
+        color: #dddddd;
+
+        &:hover {
+            color: $grey-dark;
+        }
     }
 
-    &:active, &:focus {
-        outline: none;
-        border: 2px solid  #fdedbf;
-    }
-}
 
 input[type=text], input[type=password], textarea {
     font-size: 1.4rem;
@@ -116,20 +130,6 @@ input[type=text], input[type=password], textarea {
         margin-bottom: 15px !important;
     }
 }
-
-.remove-phrase {
-    position: absolute;
-    position: absolute;
-    top: 34px;
-    cursor: pointer;
-    right: -30px;
-    color: #dddddd;
-
-    &:hover {
-        color: $grey-dark;
-    }
-}
-
 
 
 
