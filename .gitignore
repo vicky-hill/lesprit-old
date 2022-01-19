@@ -4,4 +4,7 @@ Icon?
 .DS_Store
 config.js
 .env
+env.js
 .expo/
+client/build/
+
