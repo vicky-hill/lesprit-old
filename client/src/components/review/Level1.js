@@ -1,18 +1,30 @@
-import React, { useRef, useState, createRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '../elements/Button';
 
-function Level1 ({ current, closeReview }) {
+function Level1 ({ current, setCurrent, closeReview, updateWord, getRandomWord, addTime, words }) {
     
     const [button, setButton] = useState('Show Phrase')
 
     const refPhrase = useRef(null);
-    const refButton = createRef();
 
-    const { foreign, phrases } = current;
+    const { foreign, phrases, rating, _id } = current;
     
     const showPhrase = () => {
-        refPhrase.current.classList.remove('review_phrase--hide');
-        setButton("Next")
+        if(button === 'Show Phrase') {
+            refPhrase.current.classList.remove('review_phrase--hide');
+            setButton("Next");
+        } else if (button === 'Next'){
+            const newDate = addTime(rating);
+
+            updateWord(_id, {
+                rating: rating + 1,
+                dueDate: newDate
+            });
+    
+            setCurrent(getRandomWord(words, current));
+            setButton("Show Phrase");
+            refPhrase.current.classList.add('review_phrase--hide');
+        }
     }
 
     return (
@@ -21,7 +33,7 @@ function Level1 ({ current, closeReview }) {
             <div className="review_phrase review_phrase--hide" ref={refPhrase}>
                 <p>{phrases && phrases[0].phrase}</p>
             </div>
-            <Button ref={refButton} classes="w-250" id="show-phrase" onClick={showPhrase}>{button}</Button>
+            <Button classes="w-250" id="show-phrase" onClick={showPhrase}>{button}</Button>
             <i className="review-close fas fa-times" onClick={closeReview}></i>
         </div>
     );
