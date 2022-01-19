@@ -39,7 +39,7 @@ const WordItem = ({ word, openSlide, openEdit, deleteWord }) => {
 
     const onEdit = () => {
         openSlide();
-        openEdit(word._id, word.foreign, word.native);
+        openEdit(word._id, word.foreign, word.native, word.phrases);
     }
 
     const onDelete = () => {

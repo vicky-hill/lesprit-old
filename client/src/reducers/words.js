@@ -17,7 +17,8 @@ const initialState = {
         mode: '',
         data: {
             foreign: '',
-            native: ''
+            native: '',
+            phrases: []
         }
     },
     loading: true,
@@ -69,7 +70,8 @@ export default function wordReducer(state = initialState, action) {
                     id: null,
                     data: {
                         foreign: '',
-                        native: ''
+                        native: '',
+                        phrases: []
                     }
                 }
             }
