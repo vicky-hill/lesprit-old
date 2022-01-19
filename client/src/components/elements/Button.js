@@ -9,13 +9,15 @@ import React from 'react';
 
 
 
-function Button({ children, type, onClick, id }) {
+const Button = React.forwardRef((props, ref) => {
+    const { children, type, classes } = props;
+
     return (
-        <button id={id} className={`${type}-btn`} onClick={onClick}>
+        <button { ...props } ref={ref} className={`${type}-btn ${classes}`} >
             { children }
         </button>
     )
-}
+})
 
 Button.defaultProps = {    
     type: "regular",

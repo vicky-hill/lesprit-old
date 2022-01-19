@@ -13,8 +13,8 @@ const initialState = {
     search: '',
     form: {
         // create, edit
-        id: null,
         mode: '',
+        id: null,
         data: {
             foreign: '',
             native: '',

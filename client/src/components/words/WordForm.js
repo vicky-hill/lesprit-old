@@ -23,6 +23,8 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         phrases: []
     })
 
+    console.log(form.phrases)
+
     useEffect(() => {
         if (hide && mode) {
             refInput.current.focus();
@@ -33,7 +35,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         return () => {
             onClose();
         }
-    }, [])
+    }, []) // eslint-disable-line
 
     const refInput = createRef();
 
@@ -108,10 +110,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         setForm({
             foreign: '',
             native: '',
-            phrases: [{
-                phrase: '',
-                highlight: ''
-            }]
+            phrases: []
         })
 
         refInput.current.focus();
