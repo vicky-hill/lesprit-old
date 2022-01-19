@@ -19,7 +19,7 @@
     }
 
     &_phrase {
-        height: 20rem;
+        height: 17rem;
         transform: translateY(-20px);
         width: 28rem;
         text-align: center;
@@ -76,8 +76,29 @@
     /* ===================================
        Levels
     ==================================== */
+    &.review_level-2,
     &.review_level-1 {
         padding-top: 20vh;
+
+        input[type=text], input[type=password], textarea {
+            font-size: 1.4rem;
+            width: 28rem;
+            font-family: inherit;
+            margin-bottom: 2.5rem;
+            border: 1px solid #dddddd;
+            padding: 1.1rem 1.5rem;
+            border-radius: 5px;
+            -webkit-appearance: none;
+        
+                &:focus {
+                    outline: none;
+                    border: 1px solid   #d1d0d0;
+                }
+        
+                &::placeholder {
+                    color: #d1cfcf;
+                }          
+        }
     }
 
     &.review_level-10 {
