@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import Level1 from 'components/review/Level1';
+import Level2 from 'components/review/Level2';
+import Level3 from 'components/review/Level3';
+import Level10 from 'components/review/Level10';
 
 function Review({ close, words, updateWord, review }) {
-    const [shrink, setShrink] = useState(false);
-    const [value, setValue] = useState("");
     const [current, setCurrent] = useState({});
 
-    const { native, foreign, rating, _id } = current;
+    const { rating, phrases } = current;
 
     const getRandomWord = (words, correctWord) => {
         if (correctWord) {
@@ -13,7 +15,7 @@ function Review({ close, words, updateWord, review }) {
         }
 
         if (words.length === 0) {
-            closeReview();      
+            close();
             return { native: "", foreign: "", rating: null, _id: null }
         }
 
@@ -21,44 +23,7 @@ function Review({ close, words, updateWord, review }) {
         return words[index]
     }
 
-    useEffect(() => {
-        setCurrent(getRandomWord(words))
-    }, []) // eslint-disable-line
-
-    const shrinkNative = () => {
-        setShrink(true);
-        refInput.current.focus();
-    }
-
-    const refInput = useRef(null);
-
-    useEffect(() => {
-        review ? window.addEventListener('keydown', shrinkNative) : window.removeEventListener('keydown', shrinkNative);
-
-        return () => {
-            window.removeEventListener('keydown', shrinkNative);
-        };
-    }, [review])
-
-    const checkAnswer = (typedAnswer) => {
-        if (typedAnswer === foreign) {
-            refInput.current.classList.add('correct');
-
-            const newDate = addTime();
-
-            updateWord(_id, {
-                rating: rating + 1,
-                dueDate: newDate
-            })
-
-            setTimeout(() => {
-                resetReview();
-                setCurrent(getRandomWord(words, current));
-            }, 1000);
-        }
-    }
-
-    const addTime = () => {
+    const addTime = (rating) => {
         let result = new Date();
         switch (rating) {
             case 0:
@@ -124,73 +89,18 @@ function Review({ close, words, updateWord, review }) {
         return result;
     }
 
-    const onChange = async (e) => {
-        setValue(e.target.value);
-        checkAnswer(e.target.value);
-    }
-
-    const resetReview = () => {
-        refInput.current.blur();
-        refInput.current.classList.remove('incorrect');
-        refInput.current.classList.remove('correct');
-        setShrink(false);
-        setValue("");
-    }
-
-    const closeReview = () => {
-        window.removeEventListener('keydown', shrinkNative);
-        resetReview();
-        close();
-        
-    }
-
-    const keyboardAction = (e) => {
-        if(e.key === 'Enter') {
-            refInput.current.blur();
-
-            if(value === '') {
-                showAnswer()
-            } else if (value !== foreign) {
-                refInput.current.classList.add('incorrect');
-                showAnswer()
-            }
-        }
-    }
-
-    const showAnswer = () => {
-        setValue(' ' + foreign + ' ');
-
-        if (rating !== 0) {
-            updateWord(_id, {
-                rating: 0
-            });
-        }
-
-        setTimeout(() => {
-            setCurrent(getRandomWord(words));
-            resetReview();
-        }, 2500);
-    }
+    useEffect(() => {
+        setCurrent(getRandomWord(words))
+    }, []) // eslint-disable-line
 
 
     return (
-        <>
-            <div className='review' onKeyDown={shrinkNative}>
-                <h1 className={`review-native ${shrink ? ' review-native--small' : ''}`} >{native}</h1>
-                <input
-                    autoCapitalize="none"
-                    className="review-input"
-                    id="foreign" type="text"
-                    value={value}
-                    onChange={onChange}
-                    onClick={shrinkNative}
-                    onKeyPress={keyboardAction}
-                    autoComplete="off"
-                    ref={refInput}
-                />
-                <i className="review-close fas fa-times" onClick={closeReview}></i>
-            </div>
-        </>
+        rating === 0 ?   <Level1 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
+        rating === 1 && phrases[0] ?  <Level2 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
+        rating === 2 && phrases[0].highlight ? <Level3 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
+        
+        <Level10 addTime={addTime} current={current} setCurrent={setCurrent} getRandomWord={getRandomWord} review={review} updateWord={updateWord} close={close} words={words} /> 
+        
     )
 }
 

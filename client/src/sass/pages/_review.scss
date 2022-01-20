@@ -1,0 +1,123 @@
+.review {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 87vh;
+
+    &_title {
+        margin-bottom: 5rem;
+        font-weight: 600;
+        font-size: 2.8rem;
+        z-index: 10;
+        transition: all 0.4s;
+        width: 90vw;
+        text-align: center;
+    }
+
+    &_phrase {
+        height: 17rem;
+        transform: translateY(-20px);
+        width: 28rem;
+        text-align: center;
+        color: $grey-dark;
+
+        p {
+            top: - 5rem;
+        }
+    
+        &--hide {
+            visibility: hidden;
+        }
+
+        &--covered {
+            color: transparent;
+            text-shadow: 0 0 6px rgba(0,0,0,0.4);
+            padding: 5px 10px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            border: $grey-light 1px solid;
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+    }
+
+    &_title--small {
+        font-size: 1.8rem;
+        color: $grey-medium;
+        transform: translateY(-2rem);
+        font-weight: 400;
+    }
+
+    &-input {
+        position: relative;
+        border: none;
+        text-align: center;
+        font-size: 2.8rem;
+        font-weight: 700;
+        padding: 10rem 2rem;
+        top: -30%;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &-close {
+        position: absolute;
+        top:5rem;
+        right: 5rem;
+        cursor: pointer;
+        font-size: 2rem;
+        color: grey;
+    }
+
+    .correct {
+        color: #B8F18B;
+    }
+
+    .incorrect {
+        color: #F86A79;
+    }
+
+    /* ===================================
+       Levels
+    ==================================== */
+    &.review_level-2,
+    &.review_level-1 {
+        padding-top: 20vh;
+
+        input[type=text], input[type=password], textarea {
+            font-size: 1.4rem;
+            width: 28rem;
+            font-family: inherit;
+            margin-bottom: 2.5rem;
+            border: 1px solid #dddddd;
+            padding: 1.1rem 1.5rem;
+            border-radius: 5px;
+            -webkit-appearance: none;
+        
+                &:focus {
+                    outline: none;
+                    border: 1px solid   #d1d0d0;
+                }
+        
+                &::placeholder {
+                    color: #d1cfcf;
+                }          
+        }
+    }
+
+    &.review_level-10 {
+        padding-top: 30vh;
+    }
+}
+
+.review-input:focus {
+    border: none !important;
+}
