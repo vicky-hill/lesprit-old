@@ -123,5 +123,3 @@ export const onSearch = (search) => async dispatch => {
         payload: search
     })
 }
-
-
