@@ -13,8 +13,8 @@ const initialState = {
     search: '',
     form: {
         // create, edit
-        id: null,
         mode: '',
+        id: null,
         data: {
             foreign: '',
             native: '',
@@ -43,7 +43,7 @@ export default function wordReducer(state = initialState, action) {
                 words: [payload, ...state.words]
             }
 
-        case UPDATE_WORD:  
+        case UPDATE_WORD: 
             return {
                 ...state,
                 words: state.words.map(word => {

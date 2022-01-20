@@ -22,7 +22,7 @@ const VocabularyForm = ({ saveList, closeHide, closeSlide }) => {
         return () => {
             onClose();
         }
-    }, [])
+    }, []) // eslint-disable-line
 
     const { title } = form;
 
