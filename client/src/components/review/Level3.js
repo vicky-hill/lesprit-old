@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 
-function Level2({ current, setCurrent, closeReview, updateWord, getRandomWord, addTime, words }) {
+function Level3({ current, setCurrent, closeReview, updateWord, getRandomWord, addTime, words }) {
 
     const [value, setValue] = useState("");
 
     const refInput = useRef(null);
 
-    const { native, foreign, phrases, rating, _id } = current;
+    const { native, foreign, phrases, rating, _id, highlight } = current;
     const nativeOptions = native.split(', ');
 
     const onChange = async (e) => {
@@ -15,7 +15,7 @@ function Level2({ current, setCurrent, closeReview, updateWord, getRandomWord, a
     }
 
     const checkAnswer = (typedAnswer) => {
-        if (nativeOptions.includes(typedAnswer)) {
+        if (typedAnswer === foreign) {
             refInput.current.classList.add('correct');
             refInput.current.blur();
 
@@ -60,17 +60,23 @@ function Level2({ current, setCurrent, closeReview, updateWord, getRandomWord, a
     }
 
     const resetReview = () => {
-        refInput.current.blur();
         refInput.current.classList.remove('incorrect');
         refInput.current.classList.remove('correct');
         setValue("");
     }
 
+    const phraseArray = phrases[0].phrase.split(phrases[0].highlight);
+    const phraseSegment1 = phraseArray[0];
+    const phraseSegment2 = phraseArray[1];
+
+    console.log(highlight)
+
     return (
         <div className='review review_level-2'>
-            <h1 className='review_title'>{foreign}</h1>
-            <div className="review_phrase">
-                <p>{phrases && phrases[0].phrase}</p>
+            <h1 className='review_title'>{native}</h1>
+            <div className='review_phrase'>
+                {/* <p>{phrases && phrases[0].phrase}</p> */}
+                <p>{phraseSegment1} <span className='review_phrase--covered'>{phrases[0].highlight}</span> {phraseSegment2}</p>
             </div>
             <input
                 autoCapitalize="none"
@@ -84,10 +90,9 @@ function Level2({ current, setCurrent, closeReview, updateWord, getRandomWord, a
                 onKeyPress={keyboardAction}
             />
 
-
             <i className="review-close fas fa-times" onClick={closeReview}></i>
         </div>
     );
 };
 
-export default Level2;
+export default Level3;

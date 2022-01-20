@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Level1 from 'components/review/Level1';
 import Level2 from 'components/review/Level2';
+import Level3 from 'components/review/Level3';
 import Level10 from 'components/review/Level10';
 
 function Review({ close, words, updateWord, review }) {
     const [current, setCurrent] = useState({});
 
-    const { rating } = current;
+    const { rating, phrases } = current;
 
     const getRandomWord = (words, correctWord) => {
         if (correctWord) {
@@ -94,10 +95,11 @@ function Review({ close, words, updateWord, review }) {
 
 
     return (
-        rating === 0 ? <Level1 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
-        rating === 1 ? <Level2 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
-        rating === 10 ? <Level10 addTime={addTime} current={current} setCurrent={setCurrent} getRandomWord={getRandomWord} review={review} updateWord={updateWord} close={close} words={words} /> :
-        <div></div>
+        rating === 0 ?   <Level1 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
+        rating === 1 && phrases[0] ?  <Level2 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
+        rating === 2 && phrases[0].highlight ? <Level3 addTime={addTime} words={words} current={current} setCurrent={setCurrent} closeReview={close} updateWord={updateWord} getRandomWord={getRandomWord}  /> :
+        
+        <Level10 addTime={addTime} current={current} setCurrent={setCurrent} getRandomWord={getRandomWord} review={review} updateWord={updateWord} close={close} words={words} /> 
         
     )
 }
