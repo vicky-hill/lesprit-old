@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const WordSchema = new mongoose.Schema({
+    language: {
+        type: String,
+        required: true,
+        default: 'Spanish'
+    },
     foreign: {
         type: String,
         required: true

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const uri = process.env.NODE_ENV === 'development' ? process.env.DB_URI : process.env.DB_TEST_URI;
+const uri = process.env.NODE_ENV === 'production' ? process.env.DB_PROD_URI : process.env.NODE_ENV === 'development' ? process.env.DB_URI : process.env.DB_TEST_URI;
 
 const connectDB = async () => {
     const conn = await mongoose.connect(uri, {
