@@ -26,7 +26,7 @@ import searchSelector from 'selectors/searchSelector';
 
 
 
-function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide, searchResult }) {
+function Vocabulary({ getLists, getWords, count, lists, loadingLists, loadingWords, words, openHide, searchResult }) {
 
     useEffect(() => {
         getLists();
@@ -70,7 +70,7 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
                 <MainContainer>
 
                     {
-                        loading ? <Spinner /> : (
+                        loadingLists || loadingWords ? <Spinner /> : (
                             <>
                                 {/* Hidden form */}
                                 <Hide>
@@ -102,7 +102,8 @@ function Vocabulary({ getLists, getWords, count, lists, loading, words, openHide
 const mapStateToProps = (state) => ({
     count: state.words.words.length,
     lists: state.lists.lists,
-    loading: state.lists.loading,
+    loadingLists: state.lists.loading,
+    loadingWords: state.words.loading,
     words: state.words.words,
     searchResult: searchSelector(state)
 })
