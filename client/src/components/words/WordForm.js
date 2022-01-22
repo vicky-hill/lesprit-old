@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react'
+import React, { useState, useEffect, createRef, useRef } from 'react'
 
 import Form from 'components/elements/Form'
 import Card from 'components/elements/Card'
@@ -20,10 +20,33 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
     const [form, setForm] = useState({
         foreign: '',
         native: '',
-        phrases: []
+        phrases: [{
+            phrase: '',
+            highlight: ''
+        }]
     })
 
-    console.log(form.phrases)
+    const containerRef = useRef(null);
+    const backdropRef = useRef(null);
+    const highlightsRef = useRef(null);
+    const textareaRef = useRef(null);
+    const refInput = createRef();
+
+
+    // Load edit data from state
+    useEffect(() => {
+        setForm({
+            foreign: formData.foreign,
+            native: formData.native,
+            phrases: formData.phrases
+        });
+    }, [formData])
+
+    const { foreign, native, phrases } = form;
+
+    useEffect(() => {
+        handleInput(0);
+    }, [foreign]) // eslint-disable-line
 
     useEffect(() => {
         if (hide && mode) {
@@ -37,7 +60,29 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         }
     }, []) // eslint-disable-line
 
-    const refInput = createRef();
+
+    function handleInput(i) {
+        if (phrases[i]) {
+            const highlightedText = applyHighlights(phrases[i].phrase, phrases[i].highlight);
+            highlightsRef.current.innerHTML = highlightedText;
+        } else {
+            return
+        }
+    }
+
+    function applyHighlights(text, highlight) {
+        const seg1 = text.split(highlight)[0];
+        const seg2 = text.split(highlight)[1];
+
+        text = `${seg1}<mark>${highlight}</mark>${seg2}`;
+
+        return text;
+    }
+
+    function handleScroll() {
+        const scrollTop = textareaRef.current.scrollTop;
+        backdropRef.current.scrollTop = scrollTop;
+    }
 
     function capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -45,19 +90,6 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
 
     const foreignLanguage = capitalize(languages[0].foreign);
     const nativeLanguage = capitalize(languages[0].native);
-
-    // Load edit data from state
-    useEffect(() => {
-        setForm({
-            foreign: formData.foreign,
-            native: formData.native,
-            phrases: formData.phrases
-        });
-
-    }, [formData])
-
-    const { foreign, native, phrases } = form;
-
 
 
     const [validation, setValidation] = useState({
@@ -122,7 +154,7 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
     }
 
     const getHighlight = (i) => {
-        const highlight = window.getSelection().toString();
+        const highlight = window.getSelection().toString().trim();
 
         if (highlight) {
             let newPhrases = [...phrases];
@@ -133,6 +165,8 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                 phrases: newPhrases
             });
         }
+
+        handleInput(i);
     }
 
     // Add Phrase
@@ -156,8 +190,6 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
             phrases: updatedPhrases
         })
     }
-    
-
 
 
     const formComponent = (
@@ -201,8 +233,13 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                                             <div className="add-textarea" onClick={addPhrase}>
                                                 <PlusCircle size={19} /> <span>Add Phrase</span>
                                             </div> :
-                                            <div className='pos-relative'>
-                                                <TextArea
+                                            <div className='phrase-edit_container' ref={containerRef}>
+                                                <div className="phrase-edit_backdrop" ref={backdropRef}>
+                                                    <div className="phrase-edit_highlights" ref={highlightsRef}></div>
+                                                </div>
+                                                <textarea
+                                                    ref={textareaRef}
+                                                    className='phrase-edit_textarea'
                                                     name="phrase"
                                                     id="phrase"
                                                     placeholder="Phrase"
@@ -210,16 +247,17 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
                                                     onChange={(e) => onChange(e, i)}
                                                     onMouseUp={() => getHighlight(i)}
                                                     small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
+                                                    onScroll={handleScroll}
                                                 />
                                                 <MinusCircle className='remove-phrase' size={19} onClick={() => removePhrase(i)} />
                                             </div>
                                     }
 
                                     {
-                                        i === phrases.length - 1 && phrases[i].phrase &&
-                                        <div className="add-textarea" onClick={addPhrase}>
-                                            <PlusCircle size={19} /> <span>Add Phrase</span>
-                                        </div>
+                                        // i === phrases.length - 1 && phrases[i].phrase &&
+                                        // <div className="add-textarea" onClick={addPhrase}>
+                                        //     <PlusCircle size={19} /> <span>Add Phrase</span>
+                                        // </div>
                                     }
 
 
