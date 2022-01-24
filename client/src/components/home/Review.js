@@ -6,11 +6,7 @@ function Review({ close, words, updateWord, review }) {
     const [current, setCurrent] = useState({ phrases: [{ phrase: '', highlight: ''}]});
     const [shrink, setShrink] = useState(false);
     const [button, setButton] = useState('Show Phrase');
-    const [value, setValue] = useState("");
-
-    const [highlight, setHiglight] = useState('');
-    const [seg1, setSeg1] = useState('');
-    const [seg2, setSeg2] = useState('');
+    const [value, setValue] = useState('');
 
     const inputRef = useRef(null);
 
@@ -21,7 +17,6 @@ function Review({ close, words, updateWord, review }) {
     useEffect(() => {
         setCurrent(getRandomWord(words));
     }, []) // eslint-disable-line
-
 
     useEffect(() => {
         review ? window.addEventListener('keydown', shrinkNative) : window.removeEventListener('keydown', shrinkNative);
@@ -102,7 +97,7 @@ function Review({ close, words, updateWord, review }) {
 
     // Show answer
     const showAnswer = () => {
-        if (rating === 1 || rating === 2) {
+        if (rating === 1 && phrases[0] || rating === 2 && phrases[0]) {
             setValue(' ' + native + ' ');
         } else {
             setValue(' ' + foreign + ' ');
@@ -219,7 +214,9 @@ function Review({ close, words, updateWord, review }) {
         <div className='review review_level-1'>
             <h1 className='review_title'>{foreign}</h1>
             <div className="review_phrase review_phrase--hide" ref={inputRef}>
-                <Phrase phrase={current.phrases[0].phrase} highlight={current.phrases[0].highlight } />
+                <Phrase 
+                    word={current}
+                />
             </div>
             <Button classes="w-250" id="show-phrase" onClick={showPhrase}>{button}</Button>
             <i className="review-close fas fa-times" onClick={close}></i>
@@ -230,7 +227,9 @@ function Review({ close, words, updateWord, review }) {
         <div className='review review_level-2'>
             <h1 className='review_title'>{foreign}</h1>
             <div className="review_phrase">
-                {/* <p>{phrases && phrases[0].phrase}</p> */}
+                <Phrase 
+                    word={current}
+                />
             </div>
             <input
                 autoCapitalize="none"
@@ -252,7 +251,10 @@ function Review({ close, words, updateWord, review }) {
         <div className='review review_level-2'>
             <h1 className='review_title'>{native}</h1>
             <div className='review_phrase'>
-                {/* <p>{seg1} <span className='review_phrase--covered'>{highlight}</span> {seg2}</p> */}
+                <Phrase 
+                    blur
+                    word={current}
+                />
             </div>
             <input
                 autoCapitalize="none"
