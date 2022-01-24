@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from 'components/elements/Button';
+import Phrase from 'components/review/Phrase';
 
 function Review({ close, words, updateWord, review }) {
-    const [current, setCurrent] = useState({});
+    const [current, setCurrent] = useState({ phrases: [{ phrase: '', highlight: ''}]});
     const [shrink, setShrink] = useState(false);
     const [button, setButton] = useState('Show Phrase');
     const [value, setValue] = useState("");
 
-    const inputRef = useRef(null)
+    const [highlight, setHiglight] = useState('');
+    const [seg1, setSeg1] = useState('');
+    const [seg2, setSeg2] = useState('');
+
+    const inputRef = useRef(null);
 
     // Current word
     const { foreign, native, rating, phrases, _id } = current;
     const nativeOptions = native && native.split(', ');
 
-    // Get segments for blurred words
-    const highlight = phrases && phrases[0].highlight;
-    const seg1 = phrases && phrases[0].phrase.split(phrases[0].highlight)[0];
-    const seg2 = phrases && phrases[0].phrase.split(phrases[0].highlight)[1];
-
     useEffect(() => {
         setCurrent(getRandomWord(words));
     }, []) // eslint-disable-line
+
 
     useEffect(() => {
         review ? window.addEventListener('keydown', shrinkNative) : window.removeEventListener('keydown', shrinkNative);
@@ -218,7 +219,7 @@ function Review({ close, words, updateWord, review }) {
         <div className='review review_level-1'>
             <h1 className='review_title'>{foreign}</h1>
             <div className="review_phrase review_phrase--hide" ref={inputRef}>
-                <p>{phrases && phrases[0].phrase}</p>
+                <Phrase phrase={current.phrases[0].phrase} highlight={current.phrases[0].highlight } />
             </div>
             <Button classes="w-250" id="show-phrase" onClick={showPhrase}>{button}</Button>
             <i className="review-close fas fa-times" onClick={close}></i>
@@ -229,7 +230,7 @@ function Review({ close, words, updateWord, review }) {
         <div className='review review_level-2'>
             <h1 className='review_title'>{foreign}</h1>
             <div className="review_phrase">
-                <p>{phrases && phrases[0].phrase}</p>
+                {/* <p>{phrases && phrases[0].phrase}</p> */}
             </div>
             <input
                 autoCapitalize="none"
@@ -251,7 +252,7 @@ function Review({ close, words, updateWord, review }) {
         <div className='review review_level-2'>
             <h1 className='review_title'>{native}</h1>
             <div className='review_phrase'>
-                <p>{seg1} <span className='review_phrase--covered'>{highlight}</span> {seg2}</p>
+                {/* <p>{seg1} <span className='review_phrase--covered'>{highlight}</span> {seg2}</p> */}
             </div>
             <input
                 autoCapitalize="none"
@@ -289,9 +290,9 @@ function Review({ close, words, updateWord, review }) {
 
 
     return (
-        rating === 0 ? compLevel1 :
+        rating === 0 && phrases[0] ? compLevel1 :
             rating === 1 && phrases[0] ? compLevel2 :
-                rating === 2 && phrases[0].highlight ? compLevel3 :compLevel10
+                rating === 2 && phrases[0].highlight ? compLevel3 : compLevel10
 
     )
 }
