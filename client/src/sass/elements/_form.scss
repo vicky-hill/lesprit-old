@@ -51,7 +51,7 @@ form {
     .remove-phrase {
         position: absolute;
         position: absolute;
-        top: 34px;
+        top: 53px;
         cursor: pointer;
         right: -30px;
         color: #dddddd;
@@ -104,6 +104,7 @@ input[type=text], input[type=password], textarea {
     } 
 
     .add-textarea {
+        margin-top: 20px;
         border: 1px dashed #dddddd;
         border-radius: 5px;
         padding: 7px;
@@ -128,6 +129,7 @@ input[type=text], input[type=password], textarea {
 
     textarea {
         margin-bottom: 15px !important;
+        resize: none;
     }
 }
 
