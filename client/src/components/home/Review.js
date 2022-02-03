@@ -34,7 +34,7 @@ function Review({ close, words, updateWord, review }) {
 
         if (words.length === 0) {
             close();
-            return { native: "", foreign: "", rating: null, _id: null }
+            return { native: "", foreign: "", phrases: [{phrase: '', highlight: ''}], rating: null, _id: null }
         }
 
         const index = Math.floor(Math.random() * (words.length)) + 0;
@@ -212,7 +212,9 @@ function Review({ close, words, updateWord, review }) {
     =================================== */
     const compLevel1 = (
         <div className='review review_level-1'>
+                 <p>Level 1</p>
             <h1 className='review_title'>{foreign}</h1>
+            
             <div className="review_phrase review_phrase--hide" ref={inputRef}>
                 <Phrase 
                     word={current}
@@ -225,6 +227,7 @@ function Review({ close, words, updateWord, review }) {
 
     const compLevel2 = (
         <div className='review review_level-2'>
+            <p>Level 2</p>
             <h1 className='review_title'>{foreign}</h1>
             <div className="review_phrase">
                 <Phrase 
@@ -249,6 +252,7 @@ function Review({ close, words, updateWord, review }) {
 
     const compLevel3 = (
         <div className='review review_level-2'>
+            <p>Level 3</p>
             <h1 className='review_title'>{native}</h1>
             <div className='review_phrase'>
                 <Phrase 
@@ -290,11 +294,23 @@ function Review({ close, words, updateWord, review }) {
         </div>
     )
 
+    let phraseCheck = false;
+    let highlightCheck = false;
+
+
+    if(phrases[0].phrase !== '') {
+        phraseCheck = true
+    } 
+
+    if(phrases[0].highlight !== '') {
+        highlightCheck = true;
+    }
+ 
 
     return (
-        rating === 0 && phrases[0] ? compLevel1 :
-            rating === 1 && phrases[0] ? compLevel2 :
-                rating === 2 && phrases[0].highlight ? compLevel3 : compLevel10
+        rating === 0 && phraseCheck ? compLevel1 :
+            rating === 1 && phraseCheck ? compLevel2 :
+                rating === 2 && highlightCheck ? compLevel3 : compLevel10
 
     )
 }

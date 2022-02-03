@@ -35,6 +35,11 @@ export const getWords = () => async dispatch => {
 
 export const saveWord = (data) => async dispatch => {
     try {
+        if(!data.phrases.length) {
+            data.phrases = [{phrase: '', highlight: ''}];
+        }
+
+        console.log(data);
         const res = await api.post('/api/words', data);
 
         dispatch({

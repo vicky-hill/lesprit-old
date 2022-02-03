@@ -132,8 +132,19 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
             return checkValidation(errors);
         };
 
+
+
         if (mode === 'edit') {
-            updateWord(id, { ...form });
+            let data = {};
+
+            // Check if there is a phrase array, if not, add default phrase array
+            if(!form.phrases.length) {
+                data = { ...form, phrases: [{ phrase: '', highlight: '' }]}
+            } else {
+                data = { ...form }
+            }
+
+            updateWord(id, data);
             closeSlide();
         } else {
             saveWord({ ...form, list: list._id });
@@ -142,7 +153,10 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
         setForm({
             foreign: '',
             native: '',
-            phrases: []
+            phrases: [{
+                phrase: '',
+                highlight: ''
+            }]
         })
 
         refInput.current.focus();
