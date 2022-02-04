@@ -97,7 +97,7 @@ function Review({ close, words, updateWord, review }) {
 
     // Show answer
     const showAnswer = () => {
-        if (rating === 1 && phrases[0] || rating === 2 && phrases[0]) {
+        if (rating === 1) {
             setValue(' ' + native + ' ');
         } else {
             setValue(' ' + foreign + ' ');
