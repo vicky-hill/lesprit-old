@@ -18,8 +18,6 @@ function Phrase({ word, blur }) {
 
     }, [blur, word])
 
-    console.log(data)
-
     return (
         data ? <p>{ data.seg1} <span className={classes}>{ data.highlight}</span> { data.seg2 }</p> : <div></div>
     );
