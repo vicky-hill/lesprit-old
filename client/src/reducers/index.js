@@ -4,11 +4,13 @@ import words from './words';
 import alerts from './alerts';
 import lists from './lists';
 import utils from './utils';
+import review from './review';
 
 export default combineReducers({
     auth,
     words,
     alerts,
     lists,
-    utils
+    utils,
+    review
 });

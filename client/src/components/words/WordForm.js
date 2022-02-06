@@ -3,7 +3,7 @@ import React, { useState, useEffect, createRef, useRef } from 'react'
 import Form from 'components/elements/Form'
 import Card from 'components/elements/Card'
 import MainContainer from 'components/containers/MainContainer'
-import { FormContainer, Heading, Input, TextArea, SubmitButton } from 'components/elements/Form'
+import { FormContainer, Heading, Input, SubmitButton } from 'components/elements/Form'
 
 import { connect } from 'react-redux'
 import { saveWord, updateWord } from 'actions/words';
@@ -13,18 +13,13 @@ import validate from 'validation/validate';
 import { wordForm as schema } from 'validation/schemas'
 import { PlusCircle, MinusCircle } from 'react-feather';
 
+import { defaultWord } from 'utils/default';
+
 
 
 const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWord, id, closeSlide, closeHide, hide }) => {
 
-    const [form, setForm] = useState({
-        foreign: '',
-        native: '',
-        phrases: [{
-            phrase: '',
-            highlight: ''
-        }]
-    })
+    const [form, setForm] = useState(defaultWord);
 
     const containerRef = useRef(null);
     const backdropRef = useRef(null);

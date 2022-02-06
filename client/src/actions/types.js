@@ -29,3 +29,8 @@ export const OPEN_HIDE = 'OPEN_HIDE';
 export const CLOSE_HIDE = 'CLOSE_HIDE';
 
 export const SEARCH_WORDS = 'SEARCH_WORDS';
+
+export const START_REVIEW = 'START_REVIEW';
+export const CLOSE_REVIEW = 'CLOSE_REVIEW';
+export const GET_RANDOM_WORD = 'GET_RANDOM_WORD';
+export const UPDATE_WRONG_WORD = 'UPDATE_WRONG_WORD';
