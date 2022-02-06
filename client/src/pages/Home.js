@@ -3,7 +3,7 @@ import Circle from '../components/home/Circle';
 import { Link } from 'react-router-dom';
 import MenuCard from '../components/home/MenuCard';
 import Slide from '../components/elements/Slide';
-import Review from './Review';
+import Review from 'components/home/Review';
 import reviewSelector from 'selectors/reviewSelector'
 
 import speechbubble from '../assets/iconsImg/speechbubble-icon.png';
