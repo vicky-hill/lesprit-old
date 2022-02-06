@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Circle from '../components/home/Circle';
 import { Link } from 'react-router-dom';
 import MenuCard from '../components/home/MenuCard';
 import Slide from '../components/elements/Slide';
-import Review from '../components/home/Review';
+import Review from 'components/home/Review';
 import reviewSelector from 'selectors/reviewSelector'
 
 import speechbubble from '../assets/iconsImg/speechbubble-icon.png';
@@ -15,6 +15,7 @@ import Spinner from 'components/elements/Spinner';
 import { connect } from 'react-redux';
 import { getWords, updateWord } from 'actions/words';
 import { getLists } from 'actions/lists';
+import { startReview } from 'actions/review'; 
 import { openSlide, closeSlide } from 'actions/utils'
 
 function Home({
@@ -25,7 +26,8 @@ function Home({
     closeSlide,
     loading,
     wordCount,
-    review
+    review,
+    startReview
 }) {
 
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
@@ -35,18 +37,6 @@ function Home({
         getLists();
         // eslint-disable-next-line
     }, [])
-
-    const [reviewMode, setReviewMode] = useState(false);
-
-    const openReview = () => {
-        setReviewMode(true);
-        openSlide();
-    }
-
-    const closeReview = () => {
-        setReviewMode(false);
-        closeSlide();
-    }
 
     return (
         <Container>
@@ -58,7 +48,7 @@ function Home({
                             <Circle
                                 windowClass={windowClass}
                                 review={review}
-                                onClick={review.length ? openReview : null}
+                                onClick={review.length ? () => startReview(review) : null}
                                 count={wordCount}
                             />
 
@@ -82,7 +72,7 @@ function Home({
 
                         {/* Review Page */}
                         <Slide >
-                            <Review review={reviewMode} updateWord={updateWord} words={review} close={closeReview} />
+                            <Review words={review} />
                         </Slide>
                     </>
                 )
@@ -99,4 +89,13 @@ const mapStateToProps = state => ({
     review: reviewSelector(state)
 })
 
-export default connect(mapStateToProps, { getWords, getLists, openSlide, closeSlide, updateWord })(Home);
+const mapDispatchToProps = {
+    getWords,
+    getLists,
+    openSlide,
+    closeSlide,
+    updateWord, 
+    startReview
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
