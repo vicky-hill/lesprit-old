@@ -49,6 +49,11 @@
     color: $gold-primary;
     font-weight: bold;
 }
+
+.table tbody tr:hover {
+    color: $gold-primary;
+    cursor: pointer;
+}
  
 // .table tbody tr:nth-of-type(even) {
 //     background-color: #f3f3f3;

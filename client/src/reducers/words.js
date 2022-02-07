@@ -5,7 +5,9 @@ import {
     OPEN_CREATE,
     UPDATE_WORD, 
     DELETE_WORD,
-    SEARCH_WORDS
+    SEARCH_WORDS,
+    SORT_BY_DATE,
+    SORT_BY_RATING,
 } from 'actions/types';
 
 const initialState = {
@@ -22,6 +24,7 @@ const initialState = {
         }
     },
     loading: true,
+    rerender: false,
     error: {}
 }
 
@@ -90,6 +93,20 @@ export default function wordReducer(state = initialState, action) {
             return {
                 ...state,
                 search: payload
+            }
+
+        case SORT_BY_DATE:
+            return {
+                ...state,
+                words: state.words.sort((a, b) => a.dueDate - b.dueDate),
+                rerender: !state.rerender
+            }
+
+        case SORT_BY_RATING:
+            return {
+                ...state,
+                words: state.words.sort((a, b) => a.rating - b.rating),
+                rerender: !state.rerender
             }
 
         default:
