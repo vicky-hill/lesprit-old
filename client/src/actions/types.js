@@ -18,6 +18,8 @@ export const GET_WORDS = 'GET_WORDS';
 export const SAVE_WORD = 'SAVE_WORD';
 export const UPDATE_WORD = 'UPDATE_WORD';
 export const DELETE_WORD = 'DELETE_WORD';
+export const SORT_BY_RATING = 'SORT_BY_RATING';
+export const SORT_BY_DATE = 'SORT_BY_DATE';
 
 export const OPEN_EDIT = 'OPEN_EDIT';
 export const OPEN_CREATE = 'OPEN_CREATE';
