@@ -91,10 +91,10 @@ function Review({
 
     // Show answer
     const showAnswer = () => {
-        if ((checkLevel === 2 && checkPhrase) || (checkLevel === 3 && checkPhrase)) {
-            setValue(' ' + native + ' ');
+        if (checkLevel === 1 && checkPhrase) {
+            setValue(' ' + native + ' '); // english
         } else {
-            setValue(' ' + foreign + ' ');
+            setValue(' ' + foreign + ' '); // spanish
         }
 
         setTimeout(() => {
@@ -116,7 +116,7 @@ function Review({
     /* ===================================
        Level Components
     =================================== */
-    const compLevel1 = (
+    const compLevel0 = (
         <div className='review review_level-1'>
             <h1 className='review_title'>{foreign}</h1>
             <div className="review_phrase review_phrase--hide" ref={inputRef}>
@@ -129,7 +129,7 @@ function Review({
         </div>
     );
 
-    const compLevel2 = (
+    const compLevel1 = (
         <div className='review review_level-2'>
             <h1 className='review_title'>{foreign}</h1>
             <div className="review_phrase">
@@ -153,7 +153,7 @@ function Review({
         </div>
     )
 
-    const compLevel3 = (
+    const compLevel2 = (
         <div className='review review_level-2'>
             <h1 className='review_title'>{native}</h1>
             <div className='review_phrase'>
@@ -202,12 +202,9 @@ function Review({
 
     return (
         !loading &&
-            checkLevel === 1 && checkPhrase ? compLevel1 : compLevel10
-
-        // rating === 0 && phrases[0] ? compLevel1 :
-        //     rating === 1 && phrases[0] ? compLevel2 :
-        //         rating === 2 && phrases[0].highlight ? compLevel3 : compLevel10
-
+            checkLevel === 0 && checkPhrase ? compLevel0 : 
+                checkLevel === 1 && checkPhrase ? compLevel1 :
+                    checkLevel === 2 && checkHighlight ? compLevel2 : compLevel10
     )
 }
 

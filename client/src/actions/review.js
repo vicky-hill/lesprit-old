@@ -85,11 +85,11 @@ function checkOptions(word) {
     const { rating } = word;
 
     if (rating === 0) {
-        options.level = 1;
+        options.level = 0;
     } else if (rating === 1) {
-        options.level = 2;
+        options.level = 1;
     } else if (rating === 2) {
-        options.level = 3;
+        options.level = 2;
     } else {
         options.level = 10;
     }
