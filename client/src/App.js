@@ -13,6 +13,7 @@ import Words from './pages/Words';
 import PrivateRoute from './components/elements/PrivateRoute';
 import { getUser, loginCheck, logout } from 'actions/auth'; 
 import { store } from './store';
+import Overview from 'pages/Overview';
 
 
 function App({ isAuthenticated, token }) {
@@ -34,6 +35,7 @@ function App({ isAuthenticated, token }) {
             <Route exact path='/vocabulary/:title' component={Words} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
+            <Route exact path='/overview' component={Overview} />
           </Switch>
         </div>
       </Router>
