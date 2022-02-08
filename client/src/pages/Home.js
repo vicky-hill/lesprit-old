@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { getWords, updateWord } from 'actions/words';
 import { getLists } from 'actions/lists';
 import { startReview } from 'actions/review'; 
-import { openSlide, closeSlide } from 'actions/utils'
+import { openSlide, closeSlide } from 'actions/utils';
 
 function Home({
     getWords,
@@ -29,7 +29,7 @@ function Home({
     review,
     startReview
 }) {
-
+    
     const windowClass = window.innerWidth < 1100 ? 'mobile' : 'desktop';
 
     useEffect(() => {

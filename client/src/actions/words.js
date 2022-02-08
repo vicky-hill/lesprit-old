@@ -7,7 +7,9 @@ import {
     OPEN_EDIT,
     UPDATE_WORD,
     DELETE_WORD,
-    SEARCH_WORDS
+    SEARCH_WORDS,
+    SORT_BY_RATING,
+    SORT_BY_DATE
 } from './types';
 
 
@@ -35,8 +37,8 @@ export const getWords = () => async dispatch => {
 
 export const saveWord = (data) => async dispatch => {
     try {
-        if(!data.phrases.length) {
-            data.phrases = [{phrase: '', highlight: ''}];
+        if (!data.phrases.length) {
+            data.phrases = [{ phrase: '', highlight: '' }];
         }
 
         console.log(data);
@@ -127,4 +129,18 @@ export const onSearch = (search) => async dispatch => {
         type: SEARCH_WORDS,
         payload: search
     })
+}
+
+
+/* ===================================
+   Sort Words
+=================================== */
+
+export const sortWords = (sortBy) => async dispatch => {
+    if(sortBy === 'rating') {
+        dispatch({ type: SORT_BY_RATING })
+    } else if (sortBy === 'date') {
+        dispatch({ type: SORT_BY_DATE })
+    }
+
 }
