@@ -58,8 +58,8 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
 
     function handleInput(i) {
         if (phrases[i]) {
-            const highlightedText = applyHighlights(phrases[i].phrase, phrases[i].highlight);
-            highlightsRef.current.innerHTML = highlightedText;
+            // const highlightedText = applyHighlights(phrases[i].phrase, phrases[i].highlight);
+            // highlightsRef.current.innerHTML = highlightedText;
         } else {
             return
         }
@@ -133,8 +133,8 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
             let data = {};
 
             // Check if there is a phrase array, if not, add default phrase array
-            if(!form.phrases.length) {
-                data = { ...form, phrases: [{ phrase: '', highlight: '' }]}
+            if (!form.phrases.length) {
+                data = { ...form, phrases: [{ phrase: '', highlight: '' }] }
             } else {
                 data = { ...form }
             }
@@ -230,49 +230,41 @@ const WordForm = ({ saveWord, languages, list, format, formData, mode, updateWor
 
                     {/* Phrase textarea */}
                     {
-                        !phrases.length ?
-                            <div className="add-textarea" onClick={addPhrase}>
-                                <PlusCircle size={19} /> <span>Add Phrase</span>
-                            </div> :
+                        // !phrases.length ?
+                        //     <div className="add-textarea" onClick={addPhrase}>
+                        //         <PlusCircle size={19} /> <span>Add Phrase</span>
+                        //     </div> :
 
-                            phrases.map((phrase, i) => (
-                                <div key={i}>
-                                    {
-                                        phrases.length === 0 ?
-                                            <div className="add-textarea" onClick={addPhrase}>
-                                                <PlusCircle size={19} /> <span>Add Phrase</span>
-                                            </div> :
-                                            <div className='phrase-edit_container' ref={containerRef}>
-                                                <div className="phrase-edit_backdrop" ref={backdropRef}>
-                                                    <div className="phrase-edit_highlights" ref={highlightsRef}></div>
-                                                </div>
-                                                <textarea
-                                                    ref={textareaRef}
-                                                    className='phrase-edit_textarea'
-                                                    name="phrase"
-                                                    id="phrase"
-                                                    placeholder="Phrase"
-                                                    value={phrases[i].phrase}
-                                                    onChange={(e) => onChange(e, i)}
-                                                    onMouseUp={() => getHighlight(i)}
-                                                    small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
-                                                    onScroll={handleScroll}
-                                                />
-                                                <MinusCircle className='remove-phrase' size={19} onClick={() => removePhrase(i)} />
-                                            </div>
-                                    }
+                        //     phrases.map((phrase, i) => (
+                        //         <div key={i}>
+                        //             {
+                        //                 phrases.length === 0 ?
+                        //                     <div className="add-textarea" onClick={addPhrase}>
+                        //                         <PlusCircle size={19} /> <span>Add Phrase</span>
+                        //                     </div> :
+                        //                     <div className='phrase-edit_container' ref={containerRef}>
+                        //                         <div className="phrase-edit_backdrop" ref={backdropRef}>
+                        //                             <div className="phrase-edit_highlights" ref={highlightsRef}></div>
+                        //                         </div>
+                        //                         <textarea
+                        //                             ref={textareaRef}
+                        //                             className='phrase-edit_textarea'
+                        //                             name="phrase"
+                        //                             id="phrase"
+                        //                             placeholder="Phrase"
+                        //                             value={phrases[i].phrase}
+                        //                             onChange={(e) => onChange(e, i)}
+                        //                             onMouseUp={() => getHighlight(i)}
+                        //                             small={phrases[i].highlight && `Highlighted: ${phrases[i].highlight}`}
+                        //                             onScroll={handleScroll}
+                        //                         />
+                        //                         <MinusCircle className='remove-phrase' size={19} onClick={() => removePhrase(i)} />
+                        //                     </div>
+                        //             }
 
-                                    {
-                                        // i === phrases.length - 1 && phrases[i].phrase &&
-                                        // <div className="add-textarea" onClick={addPhrase}>
-                                        //     <PlusCircle size={19} /> <span>Add Phrase</span>
-                                        // </div>
-                                    }
-
-
-                                </div>
-                            ))
-                    }
+                        //         </div>
+                        //     ))
+                        }
 
 
                     <SubmitButton title="Save word" />

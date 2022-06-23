@@ -25,11 +25,11 @@ function Navbar({ authenticated, username, logout }) {
     }
 
     // Hide logout when clicking anywhere
-    document.addEventListener('click', function (e) {
-        if (!e.target.classList.contains('nav-link--user') && authenticated) {
-            document.getElementById('logout').classList.remove('show-logout');
-        }
-    });
+    // document.addEventListener('click', function (e) {
+    //     if (!e.target.classList.contains('nav-link--user') && authenticated) {
+    //         document.getElementById('logout').classList.remove('show-logout');
+    //     }
+    // });
 
     // Mobile drawer
     function toggleDrawer() {
